@@ -6,7 +6,7 @@
 /*   By: hvan-hov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 14:50:42 by hvan-hov          #+#    #+#             */
-/*   Updated: 2021/10/27 21:51:14 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2021/10/27 22:00:34 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ char **ft_split(char const *s, char c)
 			s++;
 		else
 		{
-			// write word function
+			// write word function  
 
 			len = 0;
 			while (s[len] != c && s[len] != '\0')
