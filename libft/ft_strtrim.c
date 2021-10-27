@@ -6,7 +6,7 @@
 /*   By: hvan-hov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:08:53 by hvan-hov          #+#    #+#             */
-/*   Updated: 2021/10/25 13:18:28 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2021/10/25 14:45:21 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,17 @@ static size_t	*get_start_end(char const *s1, char const *set)
 {
 	size_t	i;
 	size_t	j;
-	size_t	out[2];
+	size_t	*out;
 	size_t	len;
 
+	out = (size_t *)malloc(2 * sizeof(size_t));
+	if (out == NULL)
+		return (NULL);
 	len = ft_strlen(s1);
 	i = 0;
 	while (in_set(s1[i], set))
 		i++;
+	j = 0;
 	while (in_set(s1[len - j - 1], set))
 		j++;
 	out[0] = i;
@@ -60,15 +64,16 @@ char	*ft_strtrim(char const *s1, char const *set)
 	char		*trimmed;
 	char		*trim_return;
 	size_t		len;
-	size_t		out[2];
+	size_t		*out;
 
 	len = ft_strlen(s1);
 	if (*s1 == '\0' || *set == '\0' || s1 == NULL || set == NULL)
 		return ((char *)s1);
-	out = get_start_end(char const *s1, char const *set);
+	out = get_start_end(s1, set);
 	if (len < (out[0] + out[1]))
 		return ("");
-	if (!trimmed = (char *)malloc((len - out[0] - out[1]) * sizeof(char)))
+	trimmed = (char *)malloc((len - out[0] - out[1]) * sizeof(char));
+	if (trimmed == NULL)
 		return (NULL);
 	trim_return = trimmed;
 	while (s1[out[0] + out[1]])
@@ -81,6 +86,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	return (trim_return);
 }
 
+/*
 int	main(void)
 {
 	char s1[] = "   xxxtest";
@@ -103,3 +109,4 @@ int	main(void)
 	printf("The trimmed string is: %s\n", ft_strtrim(s1, set2));
 	printf("The trimmed string is: %s\n", ft_strtrim(s6, set2));
 }
+*/
