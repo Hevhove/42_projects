@@ -6,13 +6,11 @@
 /*   By: hvan-hov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 15:47:38 by hvan-hov          #+#    #+#             */
-/*   Updated: 2021/10/22 16:19:43 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2021/10/29 16:14:51 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
-#include <stdlib.h>
-#include <stdio.h>
+#include "libft.h"
 
 size_t	ft_strlen(const char *str)
 {

@@ -6,27 +6,13 @@
 /*   By: hvan-hov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:08:53 by hvan-hov          #+#    #+#             */
-/*   Updated: 2021/10/25 14:45:21 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2021/10/31 15:00:31 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
+#include "libft.h"
 
-static size_t	ft_strlen(const char *str)
-{
-	size_t	len;
-
-	len = 0;
-	while (*str != '\0')
-	{
-		len++;
-		str++;
-	}
-	return (len);
-}
-
-static int	in_set(char c, char const *set)
+static int	ft_in_set(char c, char const *set)
 {
 	while (*set)
 	{
@@ -37,59 +23,33 @@ static int	in_set(char c, char const *set)
 	return (0);
 }
 
-static size_t	*get_start_end(char const *s1, char const *set)
-{
-	size_t	i;
-	size_t	j;
-	size_t	*out;
-	size_t	len;
-
-	out = (size_t *)malloc(2 * sizeof(size_t));
-	if (out == NULL)
-		return (NULL);
-	len = ft_strlen(s1);
-	i = 0;
-	while (in_set(s1[i], set))
-		i++;
-	j = 0;
-	while (in_set(s1[len - j - 1], set))
-		j++;
-	out[0] = i;
-	out[1] = j;
-	return (out);
-}
-
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	char		*trimmed;
-	char		*trim_return;
-	size_t		len;
-	size_t		*out;
+	char	*trim;
+	size_t	i;
+	size_t	start;
+	size_t	end;
 
-	len = ft_strlen(s1);
-	if (*s1 == '\0' || *set == '\0' || s1 == NULL || set == NULL)
-		return ((char *)s1);
-	out = get_start_end(s1, set);
-	if (len < (out[0] + out[1]))
-		return ("");
-	trimmed = (char *)malloc((len - out[0] - out[1]) * sizeof(char));
-	if (trimmed == NULL)
+	start = 0;
+	while (s1[start] && ft_in_set(s1[start], set))
+		start++;
+	end = ft_strlen(s1);
+	while (end > start && ft_in_set(s1[end - 1], set))
+		end--;
+	trim = (char *)malloc((end - start + 1) * sizeof(char));
+	if (!trim)
 		return (NULL);
-	trim_return = trimmed;
-	while (s1[out[0] + out[1]])
-	{
-		*trimmed = s1[out[0]];
-		trimmed++;
-		s1++;
-	}
-	*trimmed = '\0';
-	return (trim_return);
+	i = 0;
+	while (start < end)
+		trim[i++] = s1[start++];
+	trim[i] = '\0';
+	return (trim);
 }
 
 /*
 int	main(void)
 {
-	char s1[] = "   xxxtest";
+	char s1[] = "tripouille   xxx";
 	char s2[] = "testxxx ";
 	char s3[] = "   x  x xxxxtexstxx  x ";
 	char s4[] = "hello :)";

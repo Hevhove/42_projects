@@ -6,13 +6,11 @@
 /*   By: hvan-hov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 17:42:30 by hvan-hov          #+#    #+#             */
-/*   Updated: 2021/10/19 15:23:55 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2021/10/30 17:22:14 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
+#include "libft.h"
 
 void	*ft_memmove(void *dst, void *src, size_t n)
 {
@@ -37,6 +35,10 @@ void	*ft_memmove(void *dst, void *src, size_t n)
 }
 
 /*
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
 int	main(void)
 {
 	char src1[] = "Hello";

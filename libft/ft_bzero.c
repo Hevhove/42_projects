@@ -6,12 +6,11 @@
 /*   By: hvan-hov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 16:42:41 by hvan-hov          #+#    #+#             */
-/*   Updated: 2021/10/19 15:13:57 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2021/10/29 15:56:57 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
-#include <stdio.h>
+#include "libft.h"
 
 void	ft_bzero(void *s, size_t n)
 {

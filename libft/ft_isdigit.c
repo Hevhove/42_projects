@@ -6,12 +6,9 @@
 /*   By: hvan-hov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 09:44:52 by hvan-hov          #+#    #+#             */
-/*   Updated: 2021/10/18 10:43:13 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2021/10/29 16:00:05 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <stdio.h>
-#include <ctype.h>
 
 int	ft_isdigit(int c)
 {

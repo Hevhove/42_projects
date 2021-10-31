@@ -6,12 +6,11 @@
 /*   By: hvan-hov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 15:20:47 by hvan-hov          #+#    #+#             */
-/*   Updated: 2021/10/28 16:58:57 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2021/10/31 15:47:40 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
+#include "libft.h"
 
 static int	int_len(int i)
 {
@@ -48,7 +47,7 @@ char	*ft_itoa(int n)
 	offset = 0;
 	if (n < 0)
 		offset = 1;
-	result = (char *)malloc((len + offset) * sizeof(char));
+	result = (char *)malloc((len + offset + 1) * sizeof(char));
 	if (n == -2147483648)
 	{
 		result[1] = '2';
@@ -60,23 +59,26 @@ char	*ft_itoa(int n)
 		n = n * -1;
 	}
 	result = itoa_write(result, n, len, offset);
+	result[len + offset] = '\0';
 	return (result);
 }
-
 /*
 int	main(void)
 {
-	int	i = 1234;
+
+	int	i = 0;
 	int j = -1234;
-	int k = 0;
+	int k = 42;
 	int l = 2147483647;
 	int m = -2147483648;
 
-	printf("The result of %d in itoa is: %s\n",i ,ft_itoa(i));
-	printf("The result of %d in itoa is: %s\n",j ,ft_itoa(j));
-	printf("The result of %d in itoa is: %s\n",k ,ft_itoa(k));
-	printf("The result of %d in itoa is: %s\n",l ,ft_itoa(l));
-	printf("The result of %d in itoa is: %s\n",m ,ft_itoa(m));
+	for (int z = 0; z < 5; z++)
+		printf("The result for %d is: %c\n", i, ft_itoa(i)[z]);
+	//printf("The result of %d in itoa is: %s\n",i ,ft_itoa(i));
+	//printf("The result of %d in itoa is: %s\n",j ,ft_itoa(j));
+	//printf("The result of %d in itoa is: %s\n",k ,ft_itoa(k));
+	//printf("The result of %d in itoa is: %s\n",l ,ft_itoa(l));
+	//printf("The result of %d in itoa is: %s\n",m ,ft_itoa(m));
 
 }
 */

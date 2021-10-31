@@ -6,34 +6,41 @@
 /*   By: hvan-hov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 15:47:01 by hvan-hov          #+#    #+#             */
-/*   Updated: 2021/10/19 17:32:41 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2021/10/30 19:08:27 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <string.h>
+#include "libft.h"
 
 int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	char	*p1;
-	char	*p2;
+	const unsigned char	*p1;
+	const unsigned char	*p2;
 
-	p1 = (char *)s1;
-	p2 = (char *)s2;
-	while (n-- && *p1 == *p2)
+	if (s1 == s2 || n == 0)
+		return (0);
+	p1 = (const unsigned char *)s1;
+	p2 = (const unsigned char *)s2;
+	while (n--)
 	{
-		p1++;
-		p2++;
+		if (*p1 != *p2)
+			return (*p1 - *p2);
+		if (n != 0)
+		{
+			p1++;
+			p2++;
+		}
 	}
-	return (*p1 - *p2);
+	return (0);
 }
 
 /*
 int	main(void)
 {
-	char str1[] = "test1";
-	char str2[] = "test5";
+	char str1[] = {-128, 0, 127, 0};
+	char str2[] = {0, 0, 127, 0};
 
-	printf("The memcmp is: %d\n", memcmp(str1, str2, 5));
+	printf("OUR VERS: %d\n", ft_memcmp(str1, str2, 4));
+	printf("OFF VERS: %d\n", memcmp(str1, str2, 4));
 }
 */

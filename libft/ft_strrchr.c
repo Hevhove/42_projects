@@ -6,28 +6,27 @@
 /*   By: hvan-hov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 11:11:27 by hvan-hov          #+#    #+#             */
-/*   Updated: 2021/10/18 15:29:34 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2021/10/30 20:16:13 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <ctype.h>
-#include <string.h>
+#include "libft.h"
 
-char	*ft_strrchr(char *s, int c)
+char	*ft_strrchr(const char *s, int c)
 {
-	char	*ptr;
+	int	len;
 
-	ptr = NULL;
-	while (*s != '\0')
+	if (!s)
+		return (NULL);
+	if (c > 255)
+		return ((char *)s);
+	len = ft_strlen(s) + 1;
+	while (len--)
 	{
-		if (c == *s)
-		{
-			ptr = s;
-		}
-		s++;
+		if (s[len] == c)
+			return ((char *)&s[len]);
 	}
-	return (ptr);
+	return (NULL);
 }
 
 /*
@@ -44,7 +43,7 @@ int main(void)
 	printf("OUR VERS: addr of '%c' in '%s' at: %p\n", a, s1, ft_strrchr(s1, a));
 	printf("OFF VERS: addr of '%c' in '%s' at: %p\n", a, s1, strrchr(s1, a));
 	printf("----\n");
-
+	
 	printf("OUR VERS: addr of '%c' in '%s' at: %p\n", a, s2, ft_strrchr(s2, a));
 	printf("OFF VERS: addr of '%c' in '%s' at: %p\n", a, s2, strrchr(s2, a));
 	printf("----\n");

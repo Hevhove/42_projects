@@ -6,7 +6,7 @@
 /*   By: hvan-hov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 11:11:27 by hvan-hov          #+#    #+#             */
-/*   Updated: 2021/10/18 15:38:05 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2021/10/30 20:29:26 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,18 @@
 
 int	ft_strncmp(char *s1, char *s2, size_t n)
 {
-	int	i;
+	size_t	i;
 
+	if (n == 0)
+		return (0);
 	i = 0;
-	while (*s1 != '\0' && *s2 != '\0' && *s1 == *s2 && i < (int) n)
+	while ((s1[i] || s2[i]) && i < n)
 	{
-		s1++;
-		s2++;
+		if (s1[i] != s2[i])
+			return (s1[i] - s2[i]);
 		i++;
-	}	
-	return (*s1 - *s2);
+	}
+	return (0);
 }
 
 /*

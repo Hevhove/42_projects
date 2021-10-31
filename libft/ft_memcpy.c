@@ -6,12 +6,11 @@
 /*   By: hvan-hov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 17:42:30 by hvan-hov          #+#    #+#             */
-/*   Updated: 2021/10/22 16:07:49 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2021/10/30 17:20:31 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <string.h>
+#include "libft.h"
 
 void	*ft_memcpy(void *dst, const void *src, size_t n)
 {

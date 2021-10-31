@@ -6,12 +6,11 @@
 /*   By: hvan-hov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 14:50:42 by hvan-hov          #+#    #+#             */
-/*   Updated: 2021/10/28 15:20:27 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2021/10/31 17:04:16 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
+#include "libft.h"
 
 static int	free_mem(char **split, int len)
 {
@@ -24,6 +23,10 @@ static size_t	word_count(const char *str, char c)
 {
 	size_t	count;
 
+	if (!str || *str == '\0')
+		return (0);
+	else if (c == '\0')
+		return (1);
 	count = 0;
 	while (*str != '\0')
 	{
@@ -86,6 +89,8 @@ char	**ft_split(char const *s, char c)
 	char	**split;
 	size_t	wc;
 
+	if (!s)
+		return (NULL);
 	wc = word_count(s, c);
 	split = (char **)malloc((wc + 1) * sizeof(char *));
 	if (split == NULL)
@@ -99,11 +104,12 @@ char	**ft_split(char const *s, char c)
 /*
 int main(void)
 {
-	char	str1[] = "___hello_there__dude___";
+
+	char	str1[] = "";
 	char	str2[] = "**Hello*there**friend**!!!";
 	char	str3[] = "____";
 	char	str4[] = "";
-	char	c1 = '_';
+	char	c1 = 0;
 	char	c2 = '*';
 
 	printf("TESTING...\n");
@@ -123,4 +129,5 @@ int main(void)
 	for (int i = 0; i < 2; i++)
 		printf("splitted[%d] is: %s\n", i, ft_split(str4, c1)[i]);
 	printf("---\n");
-}*/
+}
+*/
