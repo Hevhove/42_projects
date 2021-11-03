@@ -6,7 +6,7 @@
 /*   By: hvan-hov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 17:42:30 by hvan-hov          #+#    #+#             */
-/*   Updated: 2021/10/30 17:22:14 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2021/11/01 15:37:34 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	*ft_memmove(void *dst, void *src, size_t n)
 	char	*lasts;
 	char	*lastd;
 
+	if (!dst && !src)
+		return (NULL);
 	d = (char *)dst;
 	s = (char *)src;
 	if (d < s)
@@ -35,10 +37,6 @@ void	*ft_memmove(void *dst, void *src, size_t n)
 }
 
 /*
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-
 int	main(void)
 {
 	char src1[] = "Hello";

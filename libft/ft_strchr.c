@@ -6,7 +6,7 @@
 /*   By: hvan-hov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 11:11:27 by hvan-hov          #+#    #+#             */
-/*   Updated: 2021/10/30 20:04:24 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2021/11/01 17:34:33 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,18 @@
 
 char	*ft_strchr(const char *s, int c)
 {
-	int	i;
+	int		i;
+	char	c2;
 
-	if (!s)
-		return (NULL);
-	if (c > 127)
-		return ((char *)s);
+	c2 = c;
 	i = 0;
 	while (s[i])
 	{
-		if (s[i] == (char)c)
+		if (s[i] == c2)
 			return ((char *)(s + i));
 		i++;
 	}
-	if (s[i] == (char)c)
+	if (s[i] == c2)
 		return ((char *)(s + i));
 	return (NULL);
 }

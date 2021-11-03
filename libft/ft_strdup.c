@@ -6,24 +6,11 @@
 /*   By: hvan-hov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 15:47:38 by hvan-hov          #+#    #+#             */
-/*   Updated: 2021/10/29 16:14:51 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2021/11/01 20:34:28 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-size_t	ft_strlen(const char *str)
-{
-	size_t	len;
-
-	len = 0;
-	while (*str != '\0')
-	{
-		len++;
-		str++;
-	}
-	return (len);
-}
 
 char	*ft_strdup(const char *s1)
 {

@@ -6,7 +6,7 @@
 /*   By: hvan-hov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:08:53 by hvan-hov          #+#    #+#             */
-/*   Updated: 2021/10/31 15:00:31 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2021/11/01 15:36:30 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ char	*ft_strtrim(char const *s1, char const *set)
 	size_t	start;
 	size_t	end;
 
+	if (!s1)
+		return (NULL);
 	start = 0;
 	while (s1[start] && ft_in_set(s1[start], set))
 		start++;

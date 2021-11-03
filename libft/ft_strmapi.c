@@ -6,25 +6,11 @@
 /*   By: hvan-hov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 16:59:25 by hvan-hov          #+#    #+#             */
-/*   Updated: 2021/10/29 14:07:00 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2021/11/01 15:43:22 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <stdio.h>
-
-static size_t	ft_strlen(const char *str)
-{
-	size_t	len;
-
-	len = 0;
-	while (*str != '\0')
-	{
-		len++;
-		str++;
-	}
-	return (len);
-}
+#include "libft.h"
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {

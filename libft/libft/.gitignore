@@ -1,6 +1,0 @@
-# Ignore Mac system files
-.DS_store
-
-# Ignore Libft Tester
-/LibftTester
-/libft-unit-test

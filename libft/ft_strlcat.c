@@ -6,25 +6,11 @@
 /*   By: hvan-hov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 10:39:41 by hvan-hov          #+#    #+#             */
-/*   Updated: 2021/10/22 14:23:29 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2021/10/31 17:22:40 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <string.h>
-
-size_t	ft_strlen(const char *str)
-{
-	size_t	len;
-
-	len = 0;
-	while (*str != '\0')
-	{
-		len++;
-		str++;
-	}
-	return (len);
-}
+#include "libft.h"
 
 size_t	ft_strlcat(char *dest, const char *src, size_t size)
 {

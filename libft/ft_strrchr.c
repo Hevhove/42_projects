@@ -6,7 +6,7 @@
 /*   By: hvan-hov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 11:11:27 by hvan-hov          #+#    #+#             */
-/*   Updated: 2021/10/30 20:16:13 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2021/11/01 15:16:59 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,14 @@
 
 char	*ft_strrchr(const char *s, int c)
 {
-	int	len;
+	int		len;
+	char	c2;
 
-	if (!s)
-		return (NULL);
-	if (c > 255)
-		return ((char *)s);
+	c2 = c;
 	len = ft_strlen(s) + 1;
 	while (len--)
 	{
-		if (s[len] == c)
+		if (s[len] == c2)
 			return ((char *)&s[len]);
 	}
 	return (NULL);

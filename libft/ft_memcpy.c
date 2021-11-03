@@ -6,7 +6,7 @@
 /*   By: hvan-hov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 17:42:30 by hvan-hov          #+#    #+#             */
-/*   Updated: 2021/10/30 17:20:31 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2021/11/01 15:02:34 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 	char	*dstptr;
 	char	*srcptr;
 
+	if (!dst && !src)
+		return (NULL);
 	i = 0;
 	dstptr = (char *)dst;
 	srcptr = (char *)src;
