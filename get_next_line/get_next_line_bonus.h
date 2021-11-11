@@ -6,12 +6,12 @@
 /*   By: hvan-hov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 11:33:27 by hvan-hov          #+#    #+#             */
-/*   Updated: 2021/11/11 14:35:12 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2021/11/11 14:37:19 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>

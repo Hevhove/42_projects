@@ -6,7 +6,7 @@
 /*   By: hvan-hov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 11:27:16 by hvan-hov          #+#    #+#             */
-/*   Updated: 2021/11/11 14:36:57 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2021/11/11 14:27:02 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static int	rd_nx(char **result, char buf[][BUFFER_SIZE + 1],
 
 char	*get_next_line(int fd)
 {
-	static char	store[BUFFER_SIZE + 1];
+	static char	store[1024][BUFFER_SIZE + 1];
 	char		buffer[BUFFER_SIZE + 1];
 	char		*result;
 	int			check;
@@ -69,10 +69,10 @@ char	*get_next_line(int fd)
 	result = (char *)malloc((BUFFER_SIZE + 1) * sizeof(result));
 	if (!result)
 		return (NULL);
-	add_store(&result, &store);
+	add_store(&result, &(store[fd]));
 	while (!ft_strchr(result, '\n'))
 	{
-		check = rd_nx(&result, &buffer, &store, fd);
+		check = rd_nx(&result, &buffer, &(store[fd]), fd);
 		if (check == 0)
 			return (result);
 		if (check == -1)
