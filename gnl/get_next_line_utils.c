@@ -6,7 +6,7 @@
 /*   By: hvan-hov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 13:54:46 by hvan-hov          #+#    #+#             */
-/*   Updated: 2021/11/10 18:30:15 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2021/11/11 12:06:03 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,38 +28,8 @@ size_t	ft_strlen(const char *str)
 	return (len);
 }
 
-void	ft_putchar_fd(char c, int fd)
+char	*ft_strnjoin(const char *s1, char s2[][BUFFER_SIZE + 1], struct s_i it)
 {
-	write(fd, &c, 1);
-}
-
-void	ft_putendl_fd(char *s, int fd)
-{
-	if (!s)
-		return ;
-	ft_putstr_fd(s, fd);
-	ft_putchar_fd('\n', fd);
-}
-
-void	ft_putstr_fd(char *s, int fd)
-{
-	int	i;
-
-	i = 0;
-	if (!s)
-		return ;
-	while (s[i])
-	{
-		ft_putchar_fd(s[i], fd);
-		i++;
-	}
-}
-
-char	*ft_strnjoin(const char *s1, char s2[][BUFFER_SIZE + 1], char c)
-{
-	int		i;
-	int 	j;
-	int		k;
 	char	*join;
 
 	if (!s1 || !s2)
@@ -67,38 +37,23 @@ char	*ft_strnjoin(const char *s1, char s2[][BUFFER_SIZE + 1], char c)
 	join = (char *)malloc((ft_strlen(s1) + ft_strlen(*s2) + 1) * sizeof(char));
 	if (!join)
 		return (NULL);
-	i = 0;
-	j = 0;
-	while (s1[i] != '\0')
+	while (s1[++(it.i)] != '\0')
+		join[(it.i)] = s1[(it.i)];
+	while ((*s2)[++(it.j)] != '\0')
 	{
-		join[i] = s1[i];
-		i++;
-	}
-	while ((*s2)[j] != '\0')
-	{
-		if ((*s2)[j] == c)
+		if ((*s2)[(it.j)] == '\n')
 		{
-			join[i] = c;
-			i++;
-			join[i] = '\0'; // aaxxx
-			j++;
-			k = 0;
-			while ((*s2)[j] != '\0')
-			{
-				(*s2)[k] = (*s2)[j];
-				k++;
-				j++;
-			}
-			(*s2)[k] = '\0';
+			join[(it.i)++] = '\n';
+			join[(it.i)] = '\0';
+			while ((*s2)[++(it.j)] != '\0')
+				(*s2)[(it.k)++] = (*s2)[(it.j)];
+			(*s2)[it.k] = '\0';
 			break ;
 		}
-		// if we dont encounter the char yet, we keep iterating and adding in the join
-		join[i] = (*s2)[j];
-		(*s2)[j] = '\0';
-		i++;
-		j++;
+		join[(it.i)++] = (*s2)[(it.j)];
+		(*s2)[(it.j)] = '\0';
 	}
-	join[i] = '\0';
+	join[(it.i)] = '\0';
 	return (join);
 }
 
@@ -138,4 +93,3 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 	}
 	return (dst);
 }
-
