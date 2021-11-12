@@ -6,14 +6,11 @@
 /*   By: hvan-hov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 13:54:46 by hvan-hov          #+#    #+#             */
-/*   Updated: 2021/11/11 12:06:03 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2021/11/11 14:42:44 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#ifndef BUFFER_SIZE
-# define BUFFER_SIZE 42
-#endif
 
 size_t	ft_strlen(const char *str)
 {

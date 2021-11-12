@@ -1,19 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hvan-hov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/10 13:54:46 by hvan-hov          #+#    #+#             */
-/*   Updated: 2021/11/11 12:06:03 by hvan-hov         ###   ########.fr       */
+/*   Created: 2021/11/12 15:01:35 by hvan-hov          #+#    #+#             */
+/*   Updated: 2021/11/12 15:01:37 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
-#ifndef BUFFER_SIZE
-# define BUFFER_SIZE 42
-#endif
+#include "get_next_line_bonus.h"
 
 size_t	ft_strlen(const char *str)
 {
