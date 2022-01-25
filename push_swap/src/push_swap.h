@@ -6,7 +6,7 @@
 /*   By: Hendrik <Hendrik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 15:42:44 by Hendrik           #+#    #+#             */
-/*   Updated: 2022/01/14 17:18:03 by Hendrik          ###   ########.fr       */
+/*   Updated: 2022/01/21 18:40:45 by Hendrik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,17 @@ typedef struct s_stack
 }	t_stack;
 
 // SETUP
-int		arg_check(char **argv);
-int		fill_stack(int *st, char **argv, int argc);
+int	ft_check_entries(char **argv);
+int ft_check_dupls(int argc, char **argv);
 
 // STACK FUNCTIONS
+t_stack **ft_stcinit(t_stack **st);
+int ft_stcadd_back(t_stack **stc, int num);
+void ft_swap(t_stack **stc);
+int	ft_stcsize(t_stack **stc);
+void ft_stcadd_front(t_stack **stc, t_stack *node);
+void	ft_stcprint(t_stack **st);
+void	ft_push(t_stack **send, t_stack **receiv);
 
 
 // SORTING FUNCTIONS
@@ -37,8 +44,6 @@ int		search_replace(int *check, int left, int right, int key);
 int		*build_lis(int *a, int *index, int lis_len, int len);
 int		launch_checker(int *index, int *check, int *a, int len);
 int		find_lis(int *a, int *b, int len);
-int		push_swap(char **argv, int argc);
-
-
+int		push_swap(char **argv, int argc, t_stack **s_a, t_stack **s_b);
 
 #endif
