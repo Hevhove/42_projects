@@ -6,7 +6,7 @@
 /*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 15:42:44 by Hendrik           #+#    #+#             */
-/*   Updated: 2022/01/25 19:57:54 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2022/01/25 13:31:30 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ int ft_stcadd_back(t_stack **stc, int num);
 int	ft_stcsize(t_stack **stc);
 void ft_stcadd_front(t_stack **stc, t_stack *node);
 void	ft_stcprint(t_stack **st);
+
+
 
 // SORTING FUNCTIONS
 void	fill_lis_index(int *check, int *index, int *a, int len);
