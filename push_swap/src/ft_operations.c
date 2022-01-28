@@ -6,11 +6,11 @@
 /*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 11:42:01 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/01/25 16:43:15 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2022/01/27 17:45:36 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../inc/push_swap.h"
 
 void ft_swap(t_stack **stc)
 {

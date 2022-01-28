@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   argcheck.c                                         :+:      :+:    :+:   */
+/*   ft_argcheck.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 18:19:10 by Hendrik           #+#    #+#             */
-/*   Updated: 2022/01/25 13:32:03 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2022/01/27 17:57:48 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../inc/push_swap.h"
 
-t_stack **ft_stcinit(t_stack **st)
-{
-	st = (t_stack **)malloc(sizeof(st));
-	if (!st)
-		return (NULL);
-	return (st);
-}
+// t_stack **ft_stcinit(t_stack **st)
+// {
+// 	st = (t_stack **)malloc(sizeof(st));
+// 	if (!st)
+// 		return (NULL);
+// 	return (st);
+// }
 
 int	ft_check_entries(char **argv)
 {

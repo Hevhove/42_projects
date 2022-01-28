@@ -6,11 +6,11 @@
 /*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 17:05:27 by Hendrik           #+#    #+#             */
-/*   Updated: 2022/01/25 13:56:03 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2022/01/27 16:03:49 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../inc/push_swap.h"
 
 t_stack *ft_stcnew(int num)
 {
@@ -40,14 +40,16 @@ void	ft_stcprint(t_stack **st)
 int	ft_stcsize(t_stack **stc)
 {
 	int size;
+	t_stack *tmp;
 
+	tmp = *stc;
 	size = 0;
-	if (*stc)
+	if (tmp)
 	{
-		while((*stc)->next != NULL)
+		while(tmp->next != NULL)
 		{
 			size++;
-			*stc = (*stc)->next;
+			tmp = tmp->next;
 		}
 		size++;
 	}
