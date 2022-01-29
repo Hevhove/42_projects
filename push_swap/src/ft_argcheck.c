@@ -6,19 +6,11 @@
 /*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 18:19:10 by Hendrik           #+#    #+#             */
-/*   Updated: 2022/01/27 17:57:48 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2022/01/29 20:52:10 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
-
-// t_stack **ft_stcinit(t_stack **st)
-// {
-// 	st = (t_stack **)malloc(sizeof(st));
-// 	if (!st)
-// 		return (NULL);
-// 	return (st);
-// }
 
 int	ft_check_entries(char **argv)
 {
@@ -44,10 +36,10 @@ int	ft_check_entries(char **argv)
 	return (0);
 }
 
-int ft_check_dupls(int argc, char **argv)
+int	ft_check_dupls(int argc, char **argv)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	argv++;
 	i = 0;
@@ -60,6 +52,17 @@ int ft_check_dupls(int argc, char **argv)
 				return (1);
 		}
 		i++;
+	}
+	return (0);
+}
+
+int	ft_fillstack(char **argv, t_stack **s_a)
+{
+	while (*argv)
+	{
+		if (ft_stcadd_back(s_a, (int)ft_atoi(*argv)))
+			return (ERROR_CODE);
+		argv++;
 	}
 	return (0);
 }
