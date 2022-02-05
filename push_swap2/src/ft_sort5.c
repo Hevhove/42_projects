@@ -6,7 +6,7 @@
 /*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 18:32:35 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/02/05 12:45:30 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2022/02/05 12:59:02 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,15 +161,15 @@ int	ft_calc_lowest_cost(int *cost_a, int *cost_b, int len)
 	i = 0;
 	while (i < len)
 	{
-		printf("cost_a[%d] is: %d\n", i, cost_a[i]);
-		printf("cost_b[%d] is: %d\n", i, cost_b[i]);
+		// printf("cost_a[%d] is: %d\n", i, cost_a[i]);
+		// printf("cost_b[%d] is: %d\n", i, cost_b[i]);
 		if (cost_a[i] > 0 && cost_b[i] > 0)
 			cost_tot[i] = get_max(cost_a[i], cost_b[i]);
 		else if (cost_a[i] < 0 && cost_b[i] < 0)
 			cost_tot[i] = ft_abs(get_min(cost_a[i], cost_b[i]));
 		else
 			cost_tot[i] = ft_abs(cost_a[i]) + ft_abs(cost_b[i]);
-		printf("cost_tot[%d] is: %d\n", i, cost_tot[i]);
+		// printf("cost_tot[%d] is: %d\n", i, cost_tot[i]);
 		i++;
 	}
 	min_cost = MAX_INT;
@@ -236,10 +236,10 @@ void	ft_sort5(t_stack **s_a, t_stack **s_b, char **comms)
 		// 	printf("cost_a[%d] is: %d\n", i, cost_a[i]);
 		best_index = ft_calc_lowest_cost(cost_a, cost_b, len); // select minimum cost element
 		ft_exec_moves(s_a, s_b, cost_a[best_index], cost_b[best_index], comms);
-		printf("stack A is: \n");
-		ft_stcprint(s_a);
-		printf("stack B is: \n");
-		ft_stcprint(s_b);		
+		// printf("stack A is: \n");
+		// ft_stcprint(s_a);
+		// printf("stack B is: \n");
+		// ft_stcprint(s_b);		
 		// printf("----\n");
 		free(cost_a);
 		free(cost_b);
@@ -251,6 +251,6 @@ void	ft_sort5(t_stack **s_a, t_stack **s_b, char **comms)
 		else
 			ft_exec_oper_rr(s_a, s_b, "rra", comms);
 	}
-	ft_stcprint(s_a);
+	// ft_stcprint(s_a);
 	// printf("comms is now: %s\n", *comms);
 }
