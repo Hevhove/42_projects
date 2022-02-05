@@ -6,7 +6,7 @@
 /*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 15:51:56 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/02/04 10:54:06 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2022/02/05 12:48:46 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,17 +52,20 @@ void	free_all(t_stack **s_a, t_stack **s_b, char *comms)
 	free(comms);
 }
 
-void	push_swap(t_stack **s_a, t_stack **s_b, char **comms)
+int	push_swap(t_stack **s_a, t_stack **s_b, char **comms)
 {
 	int	len;
 
+	if (ft_is_sorted(s_a))
+		return (1);
 	len = ft_stcsize(s_a);
 	if (len <= 3)
 		ft_sort3(s_a, s_b, comms);
-	else if (len <= 10)
+	else
 		ft_sort5(s_a, s_b, comms);
 	// else
 	// 	ft_sortmore(s_a, s_b, &comms);
+	return (0);
 }
 
 int	main(int argc, char **argv)
@@ -85,7 +88,11 @@ int	main(int argc, char **argv)
 		free_all(s_a, s_b, comms);
 		return (1);
 	}
-	push_swap(s_a, s_b, &comms);
+	if (push_swap(s_a, s_b, &comms))
+	{
+		free_all(s_a, s_b, comms);
+		return (0);
+	}
 	ft_putstr_fd(comms, 1);
 	free_all(s_a, s_b, comms);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 18:32:35 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/02/04 12:12:02 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2022/02/05 12:45:30 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,12 @@ int	get_min_el(t_stack **s_a)
 
 	tmp = *s_a;
 	min = MAX_INT;
-	while (tmp->next != NULL)
+	while (tmp!= NULL)
 	{
 		if (tmp->num < min)
 			min = tmp->num;
 		tmp = tmp->next;
 	}
-	if (tmp->num < min)
-		min = tmp->num;
 	return (min);
 }
 
@@ -71,6 +69,29 @@ int	refactor_index(int best_index, int len)
 		return (best_index - len);
 }
 
+int	get_min_index(t_stack **s_a)
+{
+	t_stack	*tmp;
+	int		min;
+	int		i;
+	int		min_index;
+
+	tmp = *s_a;
+	min = MAX_INT;
+	i = 0;
+	while (tmp != NULL)
+	{
+		if (tmp->num < min)
+		{
+			min = tmp->num;
+			min_index = i;
+		}
+		tmp = tmp->next;
+		i++;
+	}
+	return (min_index);
+}
+
 void	ft_calc_costs_a(t_stack **s_a, t_stack **s_b, int *cost_a)
 {
 	t_stack *tmp1;
@@ -90,7 +111,7 @@ void	ft_calc_costs_a(t_stack **s_a, t_stack **s_b, int *cost_a)
 		while (tmp2 != NULL)
 		{
 			if (tmp1->num < get_min_el(s_a) || tmp1->num > get_max_el(s_a))
-				best_index = 0;
+				best_index = get_min_index(s_a); // when smaller / bigger than all, need to push on top of the smallest element
 			else if (tmp1->num - tmp2->num > diff && tmp1->num - tmp2->num < 0)
 			{
 				diff = tmp1->num - tmp2->num;
@@ -140,6 +161,8 @@ int	ft_calc_lowest_cost(int *cost_a, int *cost_b, int len)
 	i = 0;
 	while (i < len)
 	{
+		printf("cost_a[%d] is: %d\n", i, cost_a[i]);
+		printf("cost_b[%d] is: %d\n", i, cost_b[i]);
 		if (cost_a[i] > 0 && cost_b[i] > 0)
 			cost_tot[i] = get_max(cost_a[i], cost_b[i]);
 		else if (cost_a[i] < 0 && cost_b[i] < 0)
@@ -166,14 +189,26 @@ int	ft_calc_lowest_cost(int *cost_a, int *cost_b, int len)
 
 void	ft_exec_moves(t_stack **s_a, t_stack **s_b, int a, int b, char **comms)
 {
-	while (a-- > 0)
+	while (a > 0)
+	{
 		ft_exec_oper_r(s_a, s_b, "ra", comms);
-	while (a++ < 0)
+		a--;
+	}
+	while (a < 0)
+	{
 		ft_exec_oper_rr(s_a, s_b, "rra", comms);
-	while (b-- > 0)
+		a++;
+	}
+	while (b > 0)
+	{
 		ft_exec_oper_r(s_a, s_b, "rb", comms);
-	while (b++ < 0)
+		b--;
+	}
+	while (b < 0)
+	{
 		ft_exec_oper_rr(s_a, s_b, "rrb", comms);
+		b++;
+	}
 	ft_exec_oper_p(s_a, s_b, "pa", comms);
 }
 
@@ -192,18 +227,30 @@ void	ft_sort5(t_stack **s_a, t_stack **s_b, char **comms)
 		len = ft_stcsize(s_b);
 		cost_a = (int *)malloc(len * sizeof(int));
 		cost_b = (int *)malloc(len * sizeof(int)); // check the returns of mallocs
-		printf("len is: %d\n", len);
+		// printf("len is: %d\n", len);
 		ft_calc_costs_b(cost_b, len);
-		for (int i = 0; i < len; i++)
-			printf("cost_b[%d] is: %d\n", i, cost_b[i]);
+		// for (int i = 0; i < len; i++)
+		// 	printf("cost_b[%d] is: %d\n", i, cost_b[i]);
 		ft_calc_costs_a(s_a, s_b, cost_a);
-		for (int i = 0; i < len; i++)
-			printf("cost_a[%d] is: %d\n", i, cost_a[i]);
+		// for (int i = 0; i < len; i++)
+		// 	printf("cost_a[%d] is: %d\n", i, cost_a[i]);
 		best_index = ft_calc_lowest_cost(cost_a, cost_b, len); // select minimum cost element
 		ft_exec_moves(s_a, s_b, cost_a[best_index], cost_b[best_index], comms);
-		printf("----\n");
+		printf("stack A is: \n");
+		ft_stcprint(s_a);
+		printf("stack B is: \n");
+		ft_stcprint(s_b);		
+		// printf("----\n");
 		free(cost_a);
 		free(cost_b);
 	}
+	while (!ft_is_sorted(s_a))
+	{
+		if (get_min_index(s_a) < (ft_stcsize(s_a) / 2) + 1)
+			ft_exec_oper_r(s_a, s_b, "ra", comms);
+		else
+			ft_exec_oper_rr(s_a, s_b, "rra", comms);
+	}
+	ft_stcprint(s_a);
 	// printf("comms is now: %s\n", *comms);
 }
