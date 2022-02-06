@@ -6,7 +6,7 @@
 /*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 15:51:56 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/02/05 12:58:29 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2022/02/06 15:41:16 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,16 +62,9 @@ int	push_swap(t_stack **s_a, t_stack **s_b, char **comms)
 	if (len <= 3)
 		ft_sort3(s_a, s_b, comms);
 	else
-		ft_sort5(s_a, s_b, comms);
-	// else
-	// 	ft_sortmore(s_a, s_b, &comms);
+		ft_sortmore(s_a, s_b, comms);
 	return (0);
 }
-
-// void	ft_optimize_comms(char **comms)
-// {
-// 	while
-// }
 
 int	main(int argc, char **argv)
 {
@@ -98,7 +91,6 @@ int	main(int argc, char **argv)
 		free_all(s_a, s_b, comms);
 		return (0);
 	}
-	// ft_optimize_comms(&comms);
 	ft_putstr_fd(comms, 1);
 	free_all(s_a, s_b, comms);
 	return (0);

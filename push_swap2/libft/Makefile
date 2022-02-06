@@ -6,12 +6,13 @@
 #    By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/29 10:33:15 by hvan-hov          #+#    #+#              #
-#    Updated: 2022/02/02 20:17:15 by hvan-hov         ###   ########.fr        #
+#    Updated: 2022/02/06 15:33:22 by hvan-hov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS =	./ft_atoi.c		\
 	./ft_atol.c 		\
+	./ft_abs.c			\
 	./ft_isalnum.c		\
   	./ft_isprint.c		\
 	./ft_memcpy.c		\

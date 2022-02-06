@@ -6,7 +6,7 @@
 #    By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/02 15:49:47 by hvan-hov          #+#    #+#              #
-#    Updated: 2022/02/04 11:52:48 by hvan-hov         ###   ########.fr        #
+#    Updated: 2022/02/06 15:27:57 by hvan-hov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,10 @@ SRCS = 	src/push_swap.c 	\
 		src/ft_argcheck.c	\
 		src/ft_opers.c		\
 		src/ft_exec_opers.c	\
+		src/ft_sortutils.c	\
+		src/ft_costs.c		\
 		src/ft_sort3.c		\
-		src/ft_sort5.c
+		src/ft_sortmore.c
 
 NAME	= push_swap
 INCS	= inc/push_swap.h
@@ -44,7 +46,7 @@ debug: $(LIBFT)
 	$(CC) -g $(CFLAGS) -I$(INCS) $(LIBFT) $(SRCS) -o $(NAME)
 
 valgrind: 
-	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) 3 1 7 4 5 8 2 6
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) 25 36 52 85 79 654 254 -125 4521 -5425
 
 clean:
 	$(RM) $(OBJS)

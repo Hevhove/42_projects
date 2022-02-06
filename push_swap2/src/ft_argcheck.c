@@ -6,7 +6,7 @@
 /*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 16:16:07 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/02/03 16:16:24 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2022/02/06 15:35:27 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	ft_check_duplicates(char **argv)
 {
 	int	i;
 	int	j;
-	
+
 	i = 0;
 	while (argv[i])
 	{
@@ -35,8 +35,8 @@ int	ft_check_duplicates(char **argv)
 int	ft_argcheck(char **argv)
 {
 	int	i;
-	int j;
-	
+	int	j;
+
 	i = 0;
 	while (argv[i])
 	{

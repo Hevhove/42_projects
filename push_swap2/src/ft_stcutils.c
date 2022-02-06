@@ -6,29 +6,15 @@
 /*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 16:15:44 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/02/03 16:45:17 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2022/02/06 15:41:03 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
 
-int	ft_is_sorted(t_stack **stc)
-{
-	t_stack	*tmp;
-
-	tmp = *stc;
-	while (tmp->next != NULL)
-	{
-		if (tmp->num > tmp->next->num)
-			return (0);
-		tmp = tmp->next;
-	}
-	return (1);
-}
-
 t_stack	*ft_stcnewnode(int num)
 {
-	t_stack *new;
+	t_stack	*new;
 
 	new = (t_stack *)malloc(sizeof(t_stack));
 	if (!new)
@@ -40,7 +26,7 @@ t_stack	*ft_stcnewnode(int num)
 
 void	ft_stcadd_back(t_stack **stc, t_stack *new)
 {
-	t_stack *tmp;
+	t_stack	*tmp;
 
 	if (stc)
 	{
@@ -85,7 +71,7 @@ void	ft_stcprint(t_stack **st)
 	t_stack	*tmp;
 
 	if (!(*st))
-		return ; 
+		return ;
 	tmp = *st;
 	printf("-----\n");
 	while (tmp != NULL)

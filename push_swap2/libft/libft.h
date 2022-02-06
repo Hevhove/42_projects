@@ -6,7 +6,7 @@
 /*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 14:07:06 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/02/02 18:43:01 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2022/02/06 15:33:10 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
+int	ft_abs(int x);
 int		ft_atoi(const char *str);
 long	ft_atol(const char *str);
 void	ft_bzero(void *s, size_t n);
