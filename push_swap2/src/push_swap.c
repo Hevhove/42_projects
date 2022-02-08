@@ -6,7 +6,7 @@
 /*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 15:51:56 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/02/08 12:40:30 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2022/02/08 15:57:02 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,9 @@ int	push_swap(t_stack **s_a, t_stack **s_b, char **comms)
 	if (ft_is_sorted(s_a))
 		return (0);
 	len = ft_stcsize(s_a);
-	if (len <= 3)
+	if (len == 2)
+		ft_ex_op_s(s_a, s_b, "sa", comms);
+	else if (len == 3)
 		ft_sort3(s_a, s_b, comms);
 	else
 		ft_sortmore(s_a, s_b, comms);
