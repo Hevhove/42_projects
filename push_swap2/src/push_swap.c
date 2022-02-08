@@ -6,7 +6,7 @@
 /*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 15:51:56 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/02/06 15:41:16 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2022/02/08 12:40:30 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	push_swap(t_stack **s_a, t_stack **s_b, char **comms)
 	int	len;
 
 	if (ft_is_sorted(s_a))
-		return (1);
+		return (0);
 	len = ft_stcsize(s_a);
 	if (len <= 3)
 		ft_sort3(s_a, s_b, comms);
@@ -72,26 +72,24 @@ int	main(int argc, char **argv)
 	t_stack	**s_b;
 	char	*comms;
 
-	(void)argc;
-	s_a = (t_stack **)malloc((1) * sizeof(t_stack **));
-	s_b = (t_stack **)malloc((1) * sizeof(t_stack **));
-	if (!s_a || !s_b)
-		return (1);
-	*s_a = NULL;
-	*s_b = NULL;
-	comms = ft_strdup("");
-	if (!ft_argcheck(argv + 1) || !ft_fillstack(s_a, argv + 1))
+	if (argc > 1)
 	{
-		ft_putendl_fd("Error", 1);
+		s_a = (t_stack **)malloc((1) * sizeof(t_stack **));
+		s_b = (t_stack **)malloc((1) * sizeof(t_stack **));
+		if (!s_a || !s_b)
+			return (1);
+		*s_a = NULL;
+		*s_b = NULL;
+		comms = ft_strdup("");
+		if (!ft_argcheck(argv + 1) || !ft_fillstack(s_a, argv + 1))
+		{
+			ft_putendl_fd("Error", 1);
+			free_all(s_a, s_b, comms);
+			return (1);
+		}
+		push_swap(s_a, s_b, &comms);
+		ft_putstr_fd(comms, 1);
 		free_all(s_a, s_b, comms);
-		return (1);
 	}
-	if (push_swap(s_a, s_b, &comms))
-	{
-		free_all(s_a, s_b, comms);
-		return (0);
-	}
-	ft_putstr_fd(comms, 1);
-	free_all(s_a, s_b, comms);
 	return (0);
 }

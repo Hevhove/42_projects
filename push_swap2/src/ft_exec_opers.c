@@ -6,13 +6,13 @@
 /*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 17:34:26 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/02/06 15:37:53 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2022/02/08 15:40:15 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
 
-void	ft_exec_oper_s(t_stack **s_a, t_stack **s_b, const char *op, char **c)
+void	ft_ex_op_s(t_stack **s_a, t_stack **s_b, const char *op, char **c)
 {
 	char	*tmp;
 
@@ -38,7 +38,7 @@ void	ft_exec_oper_s(t_stack **s_a, t_stack **s_b, const char *op, char **c)
 	}
 }
 
-void	ft_exec_oper_p(t_stack **s_a, t_stack **s_b, const char *op, char **c)
+void	ft_ex_op_p(t_stack **s_a, t_stack **s_b, const char *op, char **c)
 {
 	char	*tmp;
 
@@ -57,7 +57,7 @@ void	ft_exec_oper_p(t_stack **s_a, t_stack **s_b, const char *op, char **c)
 	}
 }
 
-void	ft_exec_oper_r(t_stack **s_a, t_stack **s_b, const char *op, char **c)
+void	ft_ex_op_r(t_stack **s_a, t_stack **s_b, const char *op, char **c)
 {
 	char	*tmp;
 
@@ -81,7 +81,7 @@ void	ft_exec_oper_r(t_stack **s_a, t_stack **s_b, const char *op, char **c)
 	free(tmp);
 }
 
-void	ft_exec_oper_rr(t_stack **s_a, t_stack **s_b, const char *op, char **c)
+void	ft_ex_op_rr(t_stack **s_a, t_stack **s_b, const char *op, char **c)
 {
 	char	*tmp;
 

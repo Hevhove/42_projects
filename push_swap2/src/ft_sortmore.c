@@ -6,7 +6,7 @@
 /*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 18:32:35 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/02/06 15:39:57 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2022/02/08 15:40:15 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,25 +53,25 @@ void	ft_exec_moves(t_stack **s_a, t_stack **s_b, t_costs cost, char **comms)
 {
 	while (cost.a > 0)
 	{
-		ft_exec_oper_r(s_a, s_b, "ra", comms);
+		ft_ex_op_r(s_a, s_b, "ra", comms);
 		cost.a--;
 	}
 	while (cost.a < 0)
 	{
-		ft_exec_oper_rr(s_a, s_b, "rra", comms);
+		ft_ex_op_rr(s_a, s_b, "rra", comms);
 		cost.a++;
 	}
 	while (cost.b > 0)
 	{
-		ft_exec_oper_r(s_a, s_b, "rb", comms);
+		ft_ex_op_r(s_a, s_b, "rb", comms);
 		cost.b--;
 	}
 	while (cost.b < 0)
 	{
-		ft_exec_oper_rr(s_a, s_b, "rrb", comms);
+		ft_ex_op_rr(s_a, s_b, "rrb", comms);
 		cost.b++;
 	}
-	ft_exec_oper_p(s_a, s_b, "pa", comms);
+	ft_ex_op_p(s_a, s_b, "pa", comms);
 }
 
 void	ft_finalsort(t_stack **s_a, t_stack **s_b, char **comms)
@@ -79,9 +79,9 @@ void	ft_finalsort(t_stack **s_a, t_stack **s_b, char **comms)
 	while (!ft_is_sorted(s_a))
 	{
 		if (get_min_index(s_a) < (ft_stcsize(s_a) / 2) + 1)
-			ft_exec_oper_r(s_a, s_b, "ra", comms);
+			ft_ex_op_r(s_a, s_b, "ra", comms);
 		else
-			ft_exec_oper_rr(s_a, s_b, "rra", comms);
+			ft_ex_op_rr(s_a, s_b, "rra", comms);
 	}
 }
 
@@ -94,7 +94,7 @@ void	ft_sortmore(t_stack **s_a, t_stack **s_b, char **comms)
 	t_costs	cost_index;
 
 	while (ft_stcsize(s_a) != 3)
-		ft_exec_oper_p(s_a, s_b, "pb", comms);
+		ft_ex_op_p(s_a, s_b, "pb", comms);
 	ft_sort3(s_a, s_b, comms);
 	while (ft_stcsize(s_b) != 0)
 	{
