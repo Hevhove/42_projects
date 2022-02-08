@@ -6,7 +6,7 @@
 /*   By: hvan-hov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 11:27:16 by hvan-hov          #+#    #+#             */
-/*   Updated: 2021/11/27 12:19:13 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2021/12/16 12:26:42 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,19 +78,18 @@ char	*get_next_line(int fd)
 	return (result);
 }
 
-/*
 int	main(void)
 {
-	int		fd;
-	char	*line1;
-	char	*line2;
+	//int		fd;
+	//char	*line1;
+	//char	*line2;
 
 	//char	str1[] = "hel\nlo"; // hell\0 --> o\nth\0 --> hello\n\0 || th\0
 	//char	str2[] = "the\nre";
 	//char	str3[] = "babies";
 
 	// open a file and enter contents into it
-	fd = open("gnlTester/files/alternate_line_nl_with_nl", O_RDWR | O_CREAT);
+	//fd = open("gnlTester/files/41_no_nl", O_RDWR | O_CREAT);
 	//ft_putendl_fd(str1, fd);
 	//ft_putendl_fd(str2, fd);
 	//ft_putendl_fd(str3, fd);
@@ -106,16 +105,16 @@ int	main(void)
 	while ((line = get_next_line(0)) != NULL)
 		printf("%s", line);
 
-	printf("result is: %s", get_next_line(fd));
-	printf("result is: %s", get_next_line(fd));
-	printf("result is: %s", get_next_line(fd));
-	printf("result is: %s", get_next_line(fd));	
-	printf("result is: %s", get_next_line(fd));
-	printf("result is: %s", get_next_line(fd));
-	printf("result is: %s", get_next_line(fd));	
-	printf("result is: %s", get_next_line(fd));
-	printf("result is: %s", get_next_line(fd));
-	printf("result is: %s", get_next_line(fd));
+	//while ((line1 = get_next_line(0)) != NULL)
+	//	printf("%s", line1);
+	/*	
+	printf("result is: %s\n", get_next_line(fd));
+	printf("result is: %s\n", get_next_line(fd));
+	printf("result is: %s\n", get_next_line(fd));
+	printf("result is: %s\n", get_next_line(fd));
+	printf("result is: %s\n", get_next_line(fd));
+	printf("result is: %s\n", get_next_line(fd));
+	printf("result is: %s\n", get_next_line(fd));
 	close(fd);
+	*/
 }
-*/

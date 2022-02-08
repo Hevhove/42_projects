@@ -2,7 +2,6 @@ SRCS 	=	./ft_printf.c		\
 			./ft_printf_utils.c \
 			./ft_printf_utils2.c
 
-LFTOBJ	= $(LSRCS:.c=.o)
 OBJS 	= $(SRCS:c=o)
 NAME	= libftprintf.a
 CC		= gcc
