@@ -6,12 +6,20 @@
 /*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 14:20:39 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/02/18 17:45:01 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2022/02/21 17:58:12 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_BONUS_H
 # define PIPEX_BONUS_H
+
+// gnl struct
+struct s_i
+{
+	long long	i;
+	long long	j;
+	long long	k;
+};
 
 // Add printf library header
 # include "../printf/ft_printf.h"
@@ -33,5 +41,12 @@ void	ft_putstr_fd(char *s, int fd);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	**ft_split(const char *s, char c);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
+char	*get_next_line(int fd);
+void	ft_putchar_fd(char c, int fd);
+void	ft_putendl_fd(char *s, int fd);
+void	ft_putstr_fd(char *s, int fd);
+char	*ft_strnjoin(const char *s1, char *s2, struct s_i i);
+void	*ft_memcpy(void *dst, const void *src, long long n);
+char	*ft_strchr(const char *s, int c);
 
 #endif

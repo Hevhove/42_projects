@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   pipex_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 10:29:49 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/02/19 18:26:23 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2022/02/21 17:43:49 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/pipex.h"
+#include "../inc/pipex_bonus.h"
 
 void	pipex(int f1, int f2, char **argv, char **envp)
 {
@@ -23,6 +23,28 @@ void	pipex(int f1, int f2, char **argv, char **envp)
 		perror("Error: ");
 		exit(4);
 	}
+	while (smaller than amount of commands)
+	{
+		// all below in child function?
+		pid1 = fork();
+		if (pid1 == 0)
+		{
+			// dup2 change infile becomes stdin, stdout becomes write into pipe
+		}
+		else if (we are at the end of commands)
+		{
+			// dup2 change stdin to read from pipe, stdout to outfile
+		}
+		else (we are in the middle of commands)
+		{
+			// dup2 change stdin to read from pipe, stdout to pipe write if we are not at the end of the commands
+		}
+		// close the unneeded pipes
+		// build paths
+		// build cmdargs
+		// paths[++i] function
+	}
+
 	pid1 = fork();
 	if (pid1 < 0)
 		return (perror("Fork error: "));
@@ -60,20 +82,38 @@ int	file_permission_check(char *f1_name, int mode)
 	return (0);
 }
 
+void	get_infile(char **argv)
+{
+	if (!ft_strncmp("here_doc", argv[1], 9))
+		here_doc(argv[2], );
+	else
+	{
+		
+	}
+}
+
 int	main(int argc, char **argv, char **envp)
 {
 	int		f1;
 	int		f2;
+	int		cmd_num;
+	int		here_doc;
+	char	*line;
 
-	if (argc != 5)
+	if (argc < 5)
 	{
-		ft_printf("Usage : ./pipex infile cmd1 cmd2 outfile");
+		ft_printf("Usage : ./pipex [here_doc] infile cmd1 cmd2 ... cmdn outfile");
 		return (1);
 	}
-	file_permission_check(argv[1], 0);
-	f1 = open(argv[1], O_RDONLY);
-	if (!file_permission_check(argv[4], 1))
-		f2 = open(argv[4], O_CREAT | O_RDWR | O_TRUNC, 0644);
+	if (ft_strncmp(argv[1], "here_doc", 9) == 0)
+		here_doc = 1;
+	else
+		here_doc = 0;
+	cmd_num = argc - 3 - here_doc;
+	file_permission_checks(argv[1 + here_doc], 0);
+	f1 = open(argv[1 + here_doc], O_RDONLY);
+	if (!file_permission_check(argv[argc - 1], 1))
+		f2 = open(argv[argc - 1], O_CREAT | O_RDWR | O_TRUNC, 0644);
 	if (f1 < 0 || f2 < 0)
 		return (3);
 	pipex(f1, f2, argv, envp);
@@ -81,3 +121,7 @@ int	main(int argc, char **argv, char **envp)
 	close(f2);
 	return (0);
 }
+
+// if we are in "here_doc" mode, we basically don't use an infile
+// but we use the STDIN until we find a delimiter
+// get_next_line?
