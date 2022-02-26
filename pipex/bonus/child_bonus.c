@@ -5,72 +5,76 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/18 17:38:34 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/02/18 17:45:38 by hvan-hov         ###   ########.fr       */
+/*   Created: 2022/02/26 16:16:09 by hvan-hov          #+#    #+#             */
+/*   Updated: 2022/02/26 19:57:32 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/pipex_bonus.h"
 
-char	*find_path(char **envp)
+void	free_children(t_ppx *pipex)
 {
-	while (ft_strncmp("PATH", *envp, 4))
-		envp++;
-	return (*envp + 5);
+	int	i;
+
+	i = 0;
+	while (pipex->cmd_args[i])
+	{
+		free(pipex->cmd_args[i]);
+		i++;
+	}
+	free(pipex->cmd_args);
+	free(pipex->cmd);
 }
 
-void	child1(int f1, char *cmd_in, int fd[2], char **envp)
+char	*get_cmd(char **paths, char *cmd)
 {
-	char	**paths;
-	char	**cmdargs;
-	char	*cmd_path;
-	char	*inter;
 	int		i;
+	char	*inter;
+	char	*cmd_path;
 
-	dup2(f1, STDIN_FILENO);
-	dup2(fd[1], STDOUT_FILENO);
-	close(fd[0]);
-	close(f1);
-	paths = ft_split(find_path(envp), ':');
-	cmdargs = ft_split(cmd_in, ' ');
-	i = -1;
-	while (paths[++i])
+	i = 0;
+	while (paths[i])
 	{
 		inter = ft_strjoin(paths[i], "/");
-		cmd_path = ft_strjoin(inter, cmdargs[0]);
-		if (!cmd_path || !inter)
-			exit(1);
-		if (access(cmd_path, F_OK | X_OK) == 0)
-			execve(cmd_path, cmdargs, envp);
+		cmd_path = ft_strjoin(inter, cmd);
+		free(inter);
+		if (access(cmd_path, F_OK) == 0)
+			return (cmd_path);
+		free(cmd_path);
+		i++;
 	}
-	perror("error");
-	exit(2);
+	return (NULL);
 }
 
-void	child2(int f2, char *cmd_in, int fd[2], char **envp)
-{
-	char	**paths;
-	char	**cmdargs;
-	char	*cmd_path;
-	char	*inter;
-	int		i;
+// fd[0] // fd[2] // fd[4] --> reading from the prev pipe
+// fd[3] // fd[5] // fd[7] --> writing to the next pipe
 
-	dup2(fd[0], STDIN_FILENO);
-	dup2(f2, STDOUT_FILENO);
-	close(fd[1]);
-	close(f2);
-	paths = ft_split(find_path(envp), ':');
-	cmdargs = ft_split(cmd_in, ' ');
-	i = -1;
-	while (paths[++i])
+void	new_dup2(int i, int j)
+{
+	dup2(i, 0);
+	dup2(j, 1);
+}
+
+void	child(t_ppx *ppx, char **argv, char **envp, int i)
+{
+	ppx->pid = fork();
+	if (!ppx->pid)
 	{
-		inter = ft_strjoin(paths[i], "/");
-		cmd_path = ft_strjoin(inter, cmdargs[0]);
-		if (!cmd_path || !inter)
+		if (i == 0)
+			new_dup2(ppx->infile, ppx->fd[1]);
+		else if (i == ppx->cmd_num - 1)
+			new_dup2(ppx->fd[2 * i - 2], ppx->outfile);
+		else
+			new_dup2(ppx->fd[2 * i - 2], ppx->fd[2 * i + 1]);
+		close_pipes(ppx);
+		ppx->cmd_args = ft_split(argv[2 + ppx->heredoc + i], ' ');
+		ppx->cmd = get_cmd(ppx->paths, ppx->cmd_args[0]);
+		if (!ppx->cmd)
+		{
+			perror("error ");
+			free_children(ppx);
 			exit(1);
-		if (access(cmd_path, F_OK | X_OK) == 0)
-			execve(cmd_path, cmdargs, envp);
+		}
+		execve(ppx->cmd, ppx->cmd_args, envp);
 	}
-	perror("error");
-	exit(2);
 }

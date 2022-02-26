@@ -6,15 +6,13 @@
 /*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 11:27:16 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/02/21 18:06:32 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2022/02/26 19:46:46 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/pipex_bonus.h"
-#include <sys/types.h>
-#include <fcntl.h>
 
-static void	add_store(char **result, char *buffer)
+void	add_store(char **result, char *buffer)
 {
 	char		*temp;
 	struct s_i	iter;
@@ -31,7 +29,7 @@ static void	add_store(char **result, char *buffer)
 	}
 }
 
-static int	rd_nx(char **result, char *buf, int fd)
+int	rd_nx(char **result, char *buf, int fd)
 {
 	int			ret;
 	char		*temp;
@@ -77,7 +75,6 @@ char	*get_next_line(int fd)
 	}
 	return (result);
 }
-
 /*
 int	main(void)
 {

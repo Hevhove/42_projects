@@ -1,21 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl_fd_bonus.c                              :+:      :+:    :+:   */
+/*   pipes_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/01 16:21:56 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/02/18 12:38:37 by hvan-hov         ###   ########.fr       */
+/*   Created: 2022/02/26 19:40:37 by hvan-hov          #+#    #+#             */
+/*   Updated: 2022/02/26 19:54:05 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/pipex_bonus.h"
 
-void	ft_putendl_fd(char *s, int fd)
+void	create_pipes(t_ppx *ppx)
 {
-	if (!s)
-		return ;
-	ft_putstr_fd(s, fd);
-	ft_putchar_fd('\n', fd);
+	int	i;
+
+	i = 0;
+	while (i < ppx->cmd_num - 1)
+	{
+		if (pipe(ppx->fd + 2 * i) < 0)
+			free_parent(ppx);
+		i++;
+	}
+}
+
+void	close_pipes(t_ppx *ppx)
+{
+	int	i;
+
+	i = 0;
+	while (i < (ppx->pipe_num))
+	{
+		close(ppx->fd[i]);
+		i++;
+	}
 }

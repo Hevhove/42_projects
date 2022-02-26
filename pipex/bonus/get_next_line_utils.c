@@ -6,24 +6,11 @@
 /*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 13:54:46 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/02/21 18:05:55 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2022/02/26 19:06:16 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/pipex_bonus.h"
-
-size_t	ft_strlen(const char *str)
-{
-	size_t	len;
-
-	len = 0;
-	while (*str != '\0')
-	{
-		len++;
-		str++;
-	}
-	return (len);
-}
 
 char	*ft_strnjoin(const char *s1, char *s2, struct s_i it)
 {
