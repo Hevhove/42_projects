@@ -6,7 +6,7 @@
 /*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 10:47:12 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/03/16 16:47:51 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2022/03/17 20:12:15 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	check_top_bot(char *line)
 	}
 }
 
-void	line_check(char *line, char *prev_line, t_map *map)
+void	line_check(char *line, char *prev_line, t_map *map, int line_count)
 {
 	int	i;
 
@@ -43,7 +43,11 @@ void	line_check(char *line, char *prev_line, t_map *map)
 		else if (line[i] == 'C')
 			map->c_count++;
 		else if (line[i] == 'P')
+		{
 			map->p_count++;
+			map->p_x = i;
+			map->p_y = line_count;
+		}
 		else if (line[i] != '0' && line[i] != '1')
 			error_message("middle line middle problem\n", 2, line, prev_line);
 		i++;
@@ -54,7 +58,9 @@ void	rect_check(int fd, t_map *map)
 {
 	char	*line;
 	char	*prev_line;
+	int		line_count;
 
+	line_count = 1;
 	line = get_next_line(fd);
 	check_top_bot(line);
 	map->width = ft_strlen(line) - 1;
@@ -64,7 +70,10 @@ void	rect_check(int fd, t_map *map)
 		free(line);
 		line = get_next_line(fd);
 		if (line != NULL)
-			line_check(line, prev_line, map);
+		{
+			line_count++;
+			line_check(line, prev_line, map, line_count);
+		}
 		else
 		{
 			check_top_bot(prev_line);
@@ -96,5 +105,6 @@ void	map_check(char *path, t_data *data)
 		|| data->map.e_count < 1 || data->map.c_count < 1)
 		error_message("Wrong resources", 2, NULL, NULL);
 	ft_printf("Valid map!\n");
+	printf("player pos is x: %d, y: %d\n", data->map.p_x, data->map.p_y);
 	close(data->map.fd);
 }

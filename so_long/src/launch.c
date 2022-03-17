@@ -6,7 +6,7 @@
 /*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 17:17:07 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/03/17 19:17:31 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2022/03/17 20:12:40 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,17 +40,23 @@ void	draw_map(t_data *data)
 	}
 }
 
-exit_game(t_data *data)
-{
-	// do some stuff to exit the game;
-}
+// exit_game(t_data *data)
+// {
+// 	// do some stuff to exit the game;
+// }
 
 void	key_press(t_data *data, int keycode)
 {
 	// if (keycode == 53)
 	// 	exit_game(data);
-	if (keycode == 0 || keycode == 1 || keycode == 2 || keycode == 13)
-		make_move(data, keycode);
+	if (keycode == 0)
+		move_left(data, keycode);
+	else if (keycode == 1)
+		move_down(data, keycode);
+	else if (keycode == 2)
+		move_down(data, keycode);
+	else if (keycode == 3)
+		move_down(data, keycode);
 }
 
 void	launch(t_data *data)
