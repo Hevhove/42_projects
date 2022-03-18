@@ -6,7 +6,7 @@
 #    By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/29 10:33:15 by hvan-hov          #+#    #+#              #
-#    Updated: 2022/03/14 16:34:29 by hvan-hov         ###   ########.fr        #
+#    Updated: 2022/03/15 10:59:28 by hvan-hov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,10 @@ SRCS =	./ft_atoi.c		\
 	./ft_putendl_fd.c	\
 	./ft_putnbr_fd.c	\
 	./get_next_line.c	\
-	./get_next_line_utils.c
+	./get_next_line_utils.c \
+	./ft_printf.c			\
+	./ft_printf_utils.c		\
+	./ft_printf_utils2.c	\
 
 SRCSB = ./ft_lstnew.c			\
 		./ft_lstadd_front.c		\
@@ -58,7 +61,7 @@ SRCSB = ./ft_lstnew.c			\
 		./ft_lstiter.c			\
 		./ft_lstmap.c
 
-INCS	= -I./libft.h -I./get_next_line.h
+INCS	= -I./libft.h -I./get_next_line.h -I./ft_printf.h
 OBJS	= $(SRCS:c=o)
 OBJSB	= $(SRCSB:c=o)
 NAME	= libft.a

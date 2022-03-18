@@ -1,35 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_printf_utils2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/10 11:33:27 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/03/15 10:57:59 by hvan-hov         ###   ########.fr       */
+/*   Created: 2021/12/05 19:28:42 by hvan-hov          #+#    #+#             */
+/*   Updated: 2022/03/15 10:56:43 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
-# endif
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <sys/types.h>
-# include <fcntl.h>
-# include "libft.h"
+#include "ft_printf.h"
 
-struct s_i
+int	ft_putunbr(size_t i, int ret)
 {
-	long long	i;
-	long long	j;
-	long long	k;
-};
-
-char	*get_next_line(int fd);
-char	*ft_strnjoin(const char *s1, char *s2, struct s_i i);
-
-#endif
+	if (i > 9)
+	{
+		ret += ft_putunbr(i / 10, 0);
+	}
+	ft_putchar(i % 10 + '0');
+	ret++;
+	return (ret);
+}

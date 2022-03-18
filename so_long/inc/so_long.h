@@ -6,12 +6,13 @@
 /*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 12:02:54 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/03/14 18:43:35 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2022/03/18 17:40:21 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
+# define ASSET_SIZE 16
 # include <unistd.h>
 # include <mlx.h>
 # include <stdio.h>
@@ -19,19 +20,17 @@
 # include <fcntl.h>
 # include "../libft/libft.h"
 # include "../libft/get_next_line.h"
+# include "../libft/ft_printf.h"
 
-typedef struct s_data {
+typedef struct	s_img {
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
 	int		line_length;
-	int 	endian;
-}	t_data;
-
-typedef struct s_vars {
-	void	*mlx;
-	void	*win;
-}	t_vars;
+	int		endian;
+	int		height;
+	int		width;
+}	t_img;
 
 typedef struct s_map {
 	size_t	height;
@@ -39,20 +38,41 @@ typedef struct s_map {
 	size_t	e_count;
 	size_t	c_count;
 	size_t	p_count;
+	size_t	c_coll;
+	int		fd;
+	char	**content;
+	int		steps;
+	int		p_x;
+	int		p_y;
 } t_map;
 
-int	my_mlx_pixel_put(t_data *data, int x, int y, int color);
-void	draw_square(t_data *img, int posx, int posy, int length, int color);
-void	draw_circle(t_data *img, int posc, int r, int color);
-int	create_trgb(unsigned char t, unsigned char r, unsigned char g, unsigned char b);
-unsigned char	get_t(int trgb);
-unsigned char get_r(int trgb);
-unsigned char get_g(int trgb);
-unsigned char get_b(int trgb);
-int	add_shade(double distance, int color);
-int get_opposite(int color);
-int win_close(int keycode, t_vars *vars);
-int	key_hook(int keycode, t_vars *vars);
-int	mouse_hook(int mousecode, t_vars *vars);
+typedef struct s_data {
+	void	*mlx_ptr;
+	void	*win_ptr;
+	char	*map_path;
+	t_map	map;
+	int		win_width;
+	int		win_height;
+	t_img	empt;
+	t_img	wall;
+	t_img	coll;
+	t_img	exit;
+	t_img	play;
+} t_data;
+
+int		my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void	check_top_bot(char *line);
+void	line_check(char *line, char *prev_line, t_map *map, int line_count);
+void	rect_check(int fd, t_map *map);
+void	map_check(char *path, t_data *data);
+void	error_message(const char *message, int error_code, void *ptr1, void *ptr2);
+void	win_size(t_data *data);
+void	mlx_launch(t_data *data);
+void	launch(t_data *data);
+void	load_assets(t_data *data);
+void	move_left(t_data *data);
+void	move_down(t_data *data);
+void	move_right(t_data *data);
+void	move_up(t_data *data);
 
 #endif

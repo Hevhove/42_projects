@@ -1,15 +1,9 @@
-SRCS =	src/main.c		\
-		src/shapes.c	\
-		src/colors.c	\
-		src/events.c	\
-		src/hooks.c		\
-		src/loops.c
-
+SRCS =	$(wildcard src/*c)
 NAME	= so_long
 INCS	= inc/so_long.h
 OBJS	= $(SRCS:c=o)
 CC		= gcc
-CFLAGS	= -Wall -Wextra -Werror
+CFLAGS	= -Wall -Wextra -Werror #-fsanitize=address
 RM		= rm -f
 LIBFT	= libft/libft.a
 LIBFT_DIR = libft
@@ -26,6 +20,12 @@ $(NAME): $(OBJS) $(LIBFT)
 
 $(LIBFT):
 	make -C $(LIBFT_DIR) --silent
+
+debug: $(LIBFT)
+	$(CC) -g $(CFLAGS) -I$(INCS) -Imlx $(LIBFT) $(SRCS) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+
+valgrind:
+	valgrind  --show-leak-kinds=all --leak-check=full  --track-origins=yes ./$(NAME) maps/map1.ber
 
 clean:
 	$(RM) $(OBJS)

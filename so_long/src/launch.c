@@ -6,7 +6,7 @@
 /*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 17:17:07 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/03/17 20:12:40 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2022/03/18 17:40:06 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,18 @@ void	draw_map(t_data *data)
 	t_img	*tile;
 
 	row = -1;
-	printf("test\n");
 	while (++row < data->map.height)
 	{
 		col = -1;
 		while (++col < data->map.width)
 		{
-			if (data->map.content[row][col] == '0')
+		
+			if (data->map.content[row][col] == '0' || data->map.content[row][col] != '1')
+			{
 				tile = &data->empt;
-			else if (data->map.content[row][col] == '1')
+				mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, tile->img, col * ASSET_SIZE, row * ASSET_SIZE);
+			}
+			if (data->map.content[row][col] == '1')
 				tile = &data->wall;
 			else if (data->map.content[row][col] == 'C')
 				tile = &data->coll;
@@ -45,18 +48,22 @@ void	draw_map(t_data *data)
 // 	// do some stuff to exit the game;
 // }
 
-void	key_press(t_data *data, int keycode)
+int	key_press(int keycode, t_data *data)
 {
 	// if (keycode == 53)
 	// 	exit_game(data);
 	if (keycode == 0)
-		move_left(data, keycode);
+	{
+		move_left(data);
+		printf("received\n");
+	}
 	else if (keycode == 1)
-		move_down(data, keycode);
+		move_down(data);
 	else if (keycode == 2)
-		move_down(data, keycode);
-	else if (keycode == 3)
-		move_down(data, keycode);
+	 	move_right(data);
+	else if (keycode == 13)
+		move_up(data);
+	return (0);
 }
 
 void	launch(t_data *data)
@@ -67,6 +74,7 @@ void	launch(t_data *data)
 	mlx_launch(data);
 	load_assets(data);
 	draw_map(data);
-	mlx_hook(data->win_ptr, 02, 1L << 2, &key_press, data);
+	mlx_hook(data->win_ptr, 02, (1L << 2), &key_press, data);
+	printf("checker\n");
 	mlx_loop(data->mlx_ptr);
 }

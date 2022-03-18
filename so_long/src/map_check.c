@@ -6,7 +6,7 @@
 /*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 10:47:12 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/03/17 20:12:15 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2022/03/18 17:31:36 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	line_check(char *line, char *prev_line, t_map *map, int line_count)
 		{
 			map->p_count++;
 			map->p_x = i;
-			map->p_y = line_count;
+			map->p_y = line_count - 1;
 		}
 		else if (line[i] != '0' && line[i] != '1')
 			error_message("middle line middle problem\n", 2, line, prev_line);
@@ -96,6 +96,7 @@ void	map_check(char *path, t_data *data)
 	data->map.c_count = 0;
 	data->map.e_count = 0;
 	data->map.height = 1;
+	data->map.steps = 0;
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
 		error_message("Error reading file", 2, NULL, NULL);
