@@ -6,7 +6,7 @@
 /*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 10:18:28 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/03/19 18:34:48 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2022/03/21 18:31:39 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,12 @@ void	map_alloc(t_data *data)
 	char	*line;
 
 	i = 0;
-	data->map.content = ft_calloc(data->map.height, data->map.width);
+	data->map.content = ft_calloc(data->map.height, data->map.width + 1);
 	if (!data->map.content)
-		error_message("malloc error\n", 3, NULL, NULL);
+		error_message("Error: malloc error\n", 3, NULL, NULL);
 	data->map.fd = open(data->map_path, O_RDONLY);
 	if (data->map.fd < 0)
-		error_message("Problem with file descriptor", 2, data->map.content, NULL);
+		error_message("Error: Problem with fd", 2, data->map.content, NULL);
 	i = 0;
 	line = get_next_line(data->map.fd);
 	while (line)
@@ -53,17 +53,27 @@ void	map_alloc(t_data *data)
 	close(data->map.fd);
 }
 
+int	extension_check(char *input)
+{
+	while (*input)
+		input++;
+	input -= 4;
+	if (ft_strncmp(input, ".ber", 4) == 0)
+		return (1);
+	return (0);
+}
+
 int	main(int argc, char **argv)
 {
 	t_data	data;
 
 	if (argc != 2)
-		error_message("Error\n", 1, NULL, NULL);
-	// check for valid extensions .ber
+		error_message("Error: wrong number of arguments", 1, NULL, NULL);
+	if (!extension_check(argv[1]))
+		error_message("Map error: extension is not .ber", 1, NULL, NULL);
 	data.map_path = argv[1];
 	map_check(argv[1], &data);
 	map_alloc(&data);
 	launch(&data);
-	// don't forget to close all fds
 	return (0);
 }

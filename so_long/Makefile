@@ -16,16 +16,16 @@ all: $(NAME)
 	$(CC) $(CFLAGS) -Imlx -I$(INCS) -c $< -o ${<:.c=.o}
 
 $(NAME): $(OBJS) $(LIBFT)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 $(LIBFT):
 	make -C $(LIBFT_DIR) --silent
 
 debug: $(LIBFT)
-	$(CC) -g $(CFLAGS) -I$(INCS) -Imlx $(LIBFT) $(SRCS) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+	$(CC) -g $(CFLAGS) -I$(INCS) -Imlx $(LIBFT) $(SRCS) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 valgrind:
-	valgrind  --show-leak-kinds=all --leak-check=full  --track-origins=yes ./$(NAME) maps/map1.ber
+	valgrind  --show-leak-kinds=all --leak-check=full  --track-origins=yes --track-fds=yes ./$(NAME) maps/map1.ber
 
 clean:
 	$(RM) $(OBJS)
