@@ -6,7 +6,7 @@
 /*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 10:18:28 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/03/21 18:31:39 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2022/03/22 09:43:52 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	map_alloc(t_data *data)
 	char	*line;
 
 	i = 0;
-	data->map.content = ft_calloc(data->map.height, data->map.width + 1);
+	data->map.content = ft_calloc(data->map.height, sizeof(char *));
 	if (!data->map.content)
 		error_message("Error: malloc error\n", 3, NULL, NULL);
 	data->map.fd = open(data->map_path, O_RDONLY);

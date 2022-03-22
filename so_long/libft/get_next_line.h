@@ -6,7 +6,7 @@
 /*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 11:33:27 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/03/15 10:57:59 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2022/03/21 17:15:01 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
 # endif
-# include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <sys/types.h>

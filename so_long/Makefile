@@ -25,7 +25,7 @@ debug: $(LIBFT)
 	$(CC) -g $(CFLAGS) -I$(INCS) -Imlx $(LIBFT) $(SRCS) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 valgrind:
-	valgrind  --show-leak-kinds=all --leak-check=full  --track-origins=yes --track-fds=yes ./$(NAME) maps/map1.ber
+	valgrind   --show-leak-kinds=all --leak-check=full --track-origins=yes --track-fds=yes ./$(NAME) maps/map1.ber
 
 clean:
 	$(RM) $(OBJS)
@@ -33,6 +33,7 @@ clean:
 
 fclean: clean
 	$(RM) $(NAME)
+	$(RM) -R $(NAME).dSYM
 	make -s fclean -C $(LIBFT_DIR)
 
 re:	fclean all

@@ -6,7 +6,7 @@
 /*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 18:51:17 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/03/15 10:58:41 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2022/03/21 17:15:58 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 # define ULONG_MAX 18446744073709551615
 
 # include <stdarg.h>
-# include <stdio.h>
 # include <unistd.h>
 # include "libft.h"
 

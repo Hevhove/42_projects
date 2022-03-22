@@ -6,7 +6,7 @@
 /*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 17:17:07 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/03/21 18:31:57 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2022/03/22 09:35:03 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	draw_map(t_data *data, size_t row, size_t col)
 		col = -1;
 		while (++col < data->map.width)
 		{
-			//ft_printf("current tile[%d][%d] is: %c\n", row, col, data->map.content[row][col]);
 			tile = &data->empt;
 			if (data->map.content[row][col] != '1')
 				mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
@@ -43,12 +42,12 @@ void	draw_map(t_data *data, size_t row, size_t col)
 
 void	free_data(t_data *data)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	if (data->map.content != NULL)
 	{
-		while (data->map.content[i])
+		while (i < data->map.height)
 		{
 			free(data->map.content[i]);
 			i++;
