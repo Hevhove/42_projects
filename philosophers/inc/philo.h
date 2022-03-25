@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Hendrik <Hendrik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 18:12:39 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/03/23 20:33:21 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2022/03/25 17:16:34 by Hendrik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,10 @@ typedef struct s_data {
 }	t_data;
 
 typedef struct s_philo {
-	int		id;
-	int		fork;
-	char	state;
+	int			id;
+	int			fork;
+	char		state;
+	p_thread_t	th;
 }	t_philo;
 
 // FUNCTION PROTOTYPES

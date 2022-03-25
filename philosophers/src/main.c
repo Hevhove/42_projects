@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Hendrik <Hendrik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 17:57:07 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/03/23 20:42:58 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2022/03/25 17:26:03 by Hendrik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,18 +46,37 @@ void arg_check(char **argv, t_data *data, t_philo **philos)
 	}
 }
 
-void	philo(t_data *data, t_philo philos)
+
+
+void	philo(t_data *data, t_philo **philos)
 {
-	
+	int				i;
+	pthread_mutex_t	mutex;
+
+	i = 0;
+	pthread_mutex_init(&mutex, NULL);
+	while (i < data->num_phil)
+	{
+		if (pthread_create(&(*philos)[i].th, NULL, &routine, NULL) != 0)
+			return (1);
+
+	}
+}
+
+void	error_message(const char *msg, int exit_code)
+{
+	printf("%s\n", msg);
+	exit(exit_code);
 }
 
 int	main(int argc, char **argv)
 {
 	t_data data;
 	t_philo *philos;
+
 	if (argc != 5 && argc != 6)
-		printf("Not enough arguments\n");
+		error_message("Not enough arguments", 1);
 	arg_check(argv, &data, &philos);
 	philo(&data, &philos);
-	
+
 }
