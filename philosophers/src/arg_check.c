@@ -6,7 +6,7 @@
 /*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 15:32:41 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/03/26 17:06:01 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2022/03/26 19:25:57 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void arg_check(char **argv, t_data *data)
 		data->philos[i].fork.owner_id = i;
 		data->philos[i].fork.in_use = 0;
 		data->philos[i].p_state = THINKING;
+		data->philos[i].times_eaten = 0;
 		data->philos[i].data = data;
 		i++;
 	}

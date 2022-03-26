@@ -6,7 +6,7 @@
 /*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 18:12:39 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/03/26 17:06:22 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2022/03/26 20:01:49 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,26 +37,29 @@ typedef struct	s_fork {
 }	t_fork;
 
 typedef struct s_philo {
-	int				id;
-	t_fork			fork;
-	pthread_t		th;
-	struct s_data	*data;
-	t_status		p_state;
+	int					id;
+	t_fork				fork;
+	pthread_t			th;
+	struct s_data		*data;
+	t_status			p_state;
+	int					times_eaten;
+	unsigned long long	last_eaten;
 }	t_philo;
 
 typedef struct s_data {
-	int 			num_phil;
-	int 			t_die; // in microseconds
-	int 			t_eat; // in microseconds
-	int 			t_sleep; // in microseconds
-	int				must_check;
-	int 			must_num;
-	int				id_pass;
-	t_philo			*philos;
-	pthread_mutex_t	mutex;
-	int				check;
-	int				*curr_id;
-	t_status		state;
+	int 				num_phil;
+	unsigned long long 	t_die; // in milliseconds
+	unsigned long long 	t_eat; // in milliseconds
+	unsigned long long	t_sleep; // in milliseconds
+	int					must_check;
+	int 				must_num;
+	int					id_pass;
+	t_philo				*philos;
+	pthread_mutex_t		mutex;
+	int					check;
+	int					*curr_id;
+	t_status			state;
+	unsigned long long	start_time;
 }	t_data;
 
 // FUNCTION PROTOTYPES
