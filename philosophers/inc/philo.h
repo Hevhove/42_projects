@@ -6,24 +6,42 @@
 /*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 18:12:39 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/03/25 19:42:48 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2022/03/26 17:06:22 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // HEADERS
-#include <pthread.h>
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <sys/time.h>
+#ifndef PHILO_H
+# define PHILO_H
+# include <pthread.h>
+# include <stdio.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <sys/time.h>
 
 // STRUCTS
 
+typedef enum	e_status
+{
+	SLEEPING,
+	EATING,
+	THINKING,
+	RUNNING,
+	END
+}	t_status;
+
+typedef struct	s_fork {
+	int				owner_id;
+	int				in_use;
+	pthread_mutex_t	fork_mutex;
+}	t_fork;
+
 typedef struct s_philo {
-	int			id;
-	int			fork;
-	char		state;
-	pthread_t	th;
+	int				id;
+	t_fork			fork;
+	pthread_t		th;
+	struct s_data	*data;
+	t_status		p_state;
 }	t_philo;
 
 typedef struct s_data {
@@ -37,8 +55,13 @@ typedef struct s_data {
 	t_philo			*philos;
 	pthread_mutex_t	mutex;
 	int				check;
+	int				*curr_id;
+	t_status		state;
 }	t_data;
-
 
 // FUNCTION PROTOTYPES
 int	ft_atoi(const char *str);
+void arg_check(char **argv, t_data *data);
+void	error_message(const char *msg, int exit_code);
+
+#endif
