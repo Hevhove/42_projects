@@ -6,7 +6,7 @@
 /*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 15:32:41 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/03/26 19:25:57 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2022/03/28 16:35:21 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,11 @@ void arg_check(char **argv, t_data *data)
 	{
 		data->must_check = 1;
 		data->must_num = ft_atoi(argv[5]);
+	}
+	else
+	{
+		data->must_check = 0;
+		data->must_num = 0;
 	}
 	data->philos = malloc(data->num_phil * sizeof(t_philo));
 	i = 0;

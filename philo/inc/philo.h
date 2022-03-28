@@ -6,7 +6,7 @@
 /*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 18:12:39 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/03/26 20:01:49 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2022/03/28 16:55:19 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_philo {
 	t_status			p_state;
 	int					times_eaten;
 	unsigned long long	last_eaten;
+	pthread_mutex_t		death_mutex;
 }	t_philo;
 
 typedef struct s_data {
@@ -55,8 +56,6 @@ typedef struct s_data {
 	int 				must_num;
 	int					id_pass;
 	t_philo				*philos;
-	pthread_mutex_t		mutex;
-	int					check;
 	int					*curr_id;
 	t_status			state;
 	unsigned long long	start_time;
@@ -66,5 +65,16 @@ typedef struct s_data {
 int	ft_atoi(const char *str);
 void arg_check(char **argv, t_data *data);
 void	error_message(const char *msg, int exit_code);
+int	check_eaten(t_data *data);
+int	check_death(t_philo *phil);
+unsigned long long get_time_micros();
+void usleep2(unsigned long long duration);
+void	philo_eat(t_philo *phil, t_philo *next_phil);
+void	philo_sleep(t_philo *phil);
+void	philo_think(t_philo *phil, t_philo *next_phil);
+int	grab_forks(t_philo *phil, t_philo *next_phil);
+void	drop_forks(t_philo *phil, t_philo *next_phil);
+void	mutex_inits(t_data *data);
+void	mutex_destroys(t_data *data);
 
 #endif
