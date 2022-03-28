@@ -6,7 +6,7 @@
 /*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 18:12:39 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/03/28 16:55:19 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2022/03/28 18:57:44 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct s_philo {
 	t_status			p_state;
 	int					times_eaten;
 	unsigned long long	last_eaten;
-	pthread_mutex_t		death_mutex;
+	pthread_mutex_t		eat_mutex;
 }	t_philo;
 
 typedef struct s_data {
@@ -59,6 +59,9 @@ typedef struct s_data {
 	int					*curr_id;
 	t_status			state;
 	unsigned long long	start_time;
+	pthread_mutex_t		die_mutex;
+	pthread_mutex_t		eat_mutex2;
+	pthread_mutex_t		state_mutex;
 }	t_data;
 
 // FUNCTION PROTOTYPES

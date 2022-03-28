@@ -6,7 +6,7 @@
 /*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:31:18 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/03/28 16:31:28 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2022/03/28 19:02:25 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	check_eaten(t_data *data)
 
 int	check_death(t_philo *phil)
 {
+	pthread_mutex_lock(&(phil->data->eat_mutex2));
 	if (phil->times_eaten != 0)
 	{
 		// printf("phil %d: diff is %llu\n", phil->id + 1, (get_time_micros() - phil->last_eaten) / 1000);
@@ -44,5 +45,6 @@ int	check_death(t_philo *phil)
 		if (get_time_micros() - phil->data->start_time > (phil->data->t_die * 1000))
 			return (1);
 	}
+	pthread_mutex_unlock(&(phil->data->eat_mutex2));
 	return (0);
 }
