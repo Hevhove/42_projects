@@ -6,7 +6,7 @@
 /*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:28:56 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/03/28 18:56:10 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2022/03/29 12:34:29 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	philo_eat(t_philo *phil, t_philo *next_phil)
 	phil->p_state = SLEEPING;
 	if (phil->data->state != END)
 		printf("%llu %d is sleeping\n", get_time_micros() / 1000, phil->id + 1);
-	usleep(250);
+	// usleep(250);
 }
 
 void	philo_sleep(t_philo *phil)
