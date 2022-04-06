@@ -6,7 +6,7 @@
 /*   By: Hendrik <Hendrik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:28:56 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/04/04 13:02:23 by Hendrik          ###   ########.fr       */
+/*   Updated: 2022/04/06 12:23:43 by Hendrik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,22 @@
 void	philo_eat(t_philo *phil, t_philo *next_phil)
 {
 	printf("%llu %d is eating\n", get_time_micros() / 1000, phil->id + 1);
-	// printf("%llu curr time\n", phil->last_eaten);
-	// printf("%d time since last meal: %llu\n", phil->id + 1, (get_time_micros() - phil->last_eaten)/1000);
 	pthread_mutex_lock(&(phil->data->eat_mutex2));
 	phil->times_eaten++;
 	phil->last_eaten = get_time_micros();
 	pthread_mutex_unlock(&(phil->data->eat_mutex2));
-	usleep2(phil->data->t_eat * 1000); // problem with usleep?
+	usleep2(phil->data->t_eat * 1000);
 	drop_forks(phil, next_phil);
 	phil->p_state = SLEEPING;
 	pthread_mutex_lock(&(phil->data->state_mutex));
 	if (phil->data->state != END)
 		printf("%llu %d is sleeping\n", get_time_micros() / 1000, phil->id + 1);
 	pthread_mutex_unlock(&(phil->data->state_mutex));
-	// usleep(250);
 }
 
 void	philo_sleep(t_philo *phil)
 {
-	usleep2(phil->data->t_sleep * 1000); // protect from edge cases -> if dies while sleeping, what happens
+	usleep2(phil->data->t_sleep * 1000);
 	phil->p_state = THINKING;
 	pthread_mutex_lock(&(phil->data->state_mutex));
 	if (phil->data->state != END)
@@ -53,7 +50,7 @@ void	philo_think(t_philo *phil, t_philo *next_phil)
 
 int	grab_forks(t_philo *phil, t_philo *next_phil)
 {
-	int ret;
+	int	ret;
 
 	ret = 0;
 	pthread_mutex_lock(&(next_phil->fork.fork_mutex));
@@ -61,9 +58,11 @@ int	grab_forks(t_philo *phil, t_philo *next_phil)
 	if (phil->fork.in_use == 0 && next_phil->fork.in_use == 0)
 	{
 		phil->fork.in_use = 1;
-		printf("%llu %d has taken a fork\n", get_time_micros() / 1000, phil->id + 1);
+		printf("%llu %d has taken a fork\n",
+			get_time_micros() / 1000, phil->id + 1);
 		next_phil->fork.in_use = 1;
-		printf("%llu %d has taken a fork\n", get_time_micros() / 1000, phil->id + 1);
+		printf("%llu %d has taken a fork\n",
+			get_time_micros() / 1000, phil->id + 1);
 		ret = 1;
 	}
 	pthread_mutex_unlock(&(phil->fork.fork_mutex));

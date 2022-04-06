@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   time_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Hendrik <Hendrik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:30:10 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/03/28 16:30:52 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2022/04/06 12:26:05 by Hendrik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,20 @@ void	error_message(const char *msg, int exit_code)
 	exit(exit_code);
 }
 
-unsigned long long get_time_micros()
+unsigned long long	get_time_micros(void)
 {
 	struct timeval		tv;
 	unsigned long long	curtime;
 
 	gettimeofday(&tv, NULL);
 	curtime = (unsigned long long)((tv.tv_sec * 1000000 + tv.tv_usec));
-	return (curtime); // in microseconds
+	return (curtime);
 }
 
-void usleep2(unsigned long long duration)
+void	usleep2(unsigned long long duration)
 {
-	unsigned long long start;
-	
+	unsigned long long	start;
+
 	start = get_time_micros();
 	while (1)
 		if (get_time_micros() - start >= duration)
