@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Hendrik <Hendrik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 18:12:39 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/03/29 12:39:45 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2022/04/04 10:43:15 by Hendrik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,6 @@ int	grab_forks(t_philo *phil, t_philo *next_phil);
 void	drop_forks(t_philo *phil, t_philo *next_phil);
 void	mutex_inits(t_data *data);
 void	mutex_destroys(t_data *data);
+int check_data_state(t_status status);
 
 #endif

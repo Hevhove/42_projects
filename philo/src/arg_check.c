@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   arg_check.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Hendrik <Hendrik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 15:32:41 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/03/28 16:35:21 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2022/04/04 10:30:00 by Hendrik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ void arg_check(char **argv, t_data *data)
 	int i;
 
 	data->num_phil = ft_atoi(argv[1]);
-	data->t_die = ft_atoi(argv[2]);
-	data->t_eat = ft_atoi(argv[3]);
-	data->t_sleep = ft_atoi(argv[4]);
+	data->t_die = (unsigned long long)ft_atoi(argv[2]);
+	data->t_eat = (unsigned long long)ft_atoi(argv[3]);
+	data->t_sleep = (unsigned long long)ft_atoi(argv[4]);
 	if (data->num_phil < 1 || data->t_die < 1
 		|| data->t_eat < 1 || data->t_sleep < 1)
 		error_message("Inputs must be greater than 1", 4);
@@ -43,6 +43,8 @@ void arg_check(char **argv, t_data *data)
 		data->philos[i].p_state = THINKING;
 		data->philos[i].times_eaten = 0;
 		data->philos[i].data = data;
+		data->philos[i].last_eaten = data->start_time;
+		// printf("%llu phil_%d last eaten\n", data->philos[i].last_eaten, data->philos[i].id + 1);
 		i++;
 	}
 }
