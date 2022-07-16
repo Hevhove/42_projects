@@ -1,4 +1,4 @@
-![image](https://user-images.githubusercontent.com/17186736/179362680-1c47bf43-5aa5-4151-a005-79a5b8d0e04f.png)
+![image](https://user-images.githubusercontent.com/17186736/179362847-dfde088d-9791-4552-b71d-5d80c3f9ae92.png)
 
 42 is the first digital training center that is entirely free and available to students with or without degrees who are 18-years or older. Its teaching methods are based upon peer-to-peer learning: classless, teacherless, and participatory, 42 allows students to free their creativity through project learning.
 
