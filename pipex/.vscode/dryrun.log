@@ -1,0 +1,14 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory `/Users/Hendrik/Documents/Coding/42/42/pipex'
+gcc -Wall -Wextra -Werror  -Iinc/pipex.h -c src/pipex.c -o src/pipex.o
+gcc -Wall -Wextra -Werror  -Iinc/pipex.h -c src/child.c -o src/child.o
+gcc -Wall -Wextra -Werror  -Iinc/pipex.h -c src/ft_putchar_fd.c -o src/ft_putchar_fd.o
+gcc -Wall -Wextra -Werror  -Iinc/pipex.h -c src/ft_putstr_fd.c -o src/ft_putstr_fd.o
+gcc -Wall -Wextra -Werror  -Iinc/pipex.h -c src/ft_putendl_fd.c -o src/ft_putendl_fd.o
+gcc -Wall -Wextra -Werror  -Iinc/pipex.h -c src/ft_strjoin.c -o src/ft_strjoin.o
+gcc -Wall -Wextra -Werror  -Iinc/pipex.h -c src/ft_split.c -o src/ft_split.o
+gcc -Wall -Wextra -Werror  -Iinc/pipex.h -c src/ft_strncmp.c -o src/ft_strncmp.o
+make -C PRINTF --silent
+gcc -Wall -Wextra -Werror  -Iinc/pipex.h -o pipex src/pipex.o src/child.o src/ft_putchar_fd.o src/ft_putstr_fd.o src/ft_putendl_fd.o src/ft_strjoin.o src/ft_split.o src/ft_strncmp.o printf/libftprintf.a
+make: Leaving directory `/Users/Hendrik/Documents/Coding/42/42/pipex'
+ 
