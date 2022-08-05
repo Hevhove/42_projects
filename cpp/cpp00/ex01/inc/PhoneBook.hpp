@@ -3,37 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   PhoneBook.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Hendrik <Hendrik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/01 16:51:27 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/08/02 16:54:35 by hvan-hov         ###   ########.fr       */
+/*   Created: 2022/08/03 11:09:40 by hvan-hov          #+#    #+#             */
+/*   Updated: 2022/08/05 13:32:43 by Hendrik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHONEBOOK_CLASS_HPP
 # define PHONEBOOK_CLASS_HPP
 # define MAX_CONTACTS 8
-# include "Contact.hpp"
+# include "../inc/myawesomephonebook.hpp"
 
-/*
-    This class must be designed in the Orthodox Canonical Form:
-        1. A default constructor -> a constructor with either no parameters or a constructor where all parameters have default values
-        2. A copy constructor -> 
-        3. A destructor
-        4. Copy assignment operator
-*/
 
 class PhoneBook {
     private:
-        Contact         contacts[MAX_CONTACTS];
-        unsigned int    contacts_added;
+        Contact contacts[MAX_CONTACTS];
+        int     index;
+        int     numContacts;
 
     public:
-        PhoneBook(); // constructor
-        ~PhoneBook(); // destructor
-        PhoneBook operator = (PhoneBook); // copy assignment
-        void    add(void);
-        void    search(void);
+        PhoneBook();
+        ~PhoneBook();
+        void    addContact();
+        void    displayContacts();
+        void    displayInfo(int index);
 };
 
 #endif

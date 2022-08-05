@@ -3,75 +3,46 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Hendrik <Hendrik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/01 16:46:56 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/08/02 17:07:51 by hvan-hov         ###   ########.fr       */
+/*   Created: 2022/08/03 10:57:30 by hvan-hov          #+#    #+#             */
+/*   Updated: 2022/08/05 13:32:14 by Hendrik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/myawesomephonebook.hpp"
-
-void    display_welcome(void)
-{
-    std::cout << "[=================================]" << std::endl;
-    std::cout << " Welcome to the awesome phonebook! " << std::endl;
-    return ;
-}
-
-std::string    get_action(void)
-{
-    std::string buff;
-    
-    std::cout << " Actions: ADD | SEARCH | EXIT " << std::endl;
-    std::cout << "[=================================]" << std::endl;
-    std::cout << " Enter action: ";
-    std::cin >> buff;
-    std::cout << " Selected: " << buff << std::endl;
-    std::cout << "[=================================]" << std::endl;
-    return (buff);
-}
-
-std::string get_info(const std::string datapoint)
-{
-    std::string buff;
-    std::cout << datapoint << ": ";
-    std::cin >> buff;
-    std::cout << std::endl;
-    return (buff);
-}
-
-// void    add_contact(PhoneBook *phonebook)
-// {
-//     std::cout << "Please enter information: " << std::endl;
-//     phonebook.firstname = get_info("First Name");
-//     phonebook.lastname = get_info("Last Name");
-//     phonebook.nickname = get_info("Nickname");
-//     phonebook.phonenumber = get_info("Phone Number");
-//     phonebook.phonenumber = get_info("Darkest Secret");
-// }
+#include "../inc/PhoneBook.hpp"
+#include "../inc/Contact.hpp"
 
 int main(void)
 {
-    PhoneBook   phonebook;
-    std::string input;
-    
-    display_welcome();
+    PhoneBook       phonebook;
+    std::string     input;
+    int             id;
+
     while (true)
     {
-        input = get_action();
+        std::cout << "Select Option:\n[ADD] contact | [SEARCH] contact | [EXIT] program" << std::endl;
+        std::getline(std::cin, input);
         if (input.compare("ADD") == 0)
-            phonebook.add();
+            phonebook.addContact();
         else if (input.compare("SEARCH") == 0)
-            ;//phonebook.search();
-        else if (input.compare("EXIT") == 0)
         {
-            std::cout << "Thanks for using the awesome phonebook!" << std::endl;
-            break ;
+            phonebook.displayContacts();
+            std::cout << "Enter userID to receive more information" << std:: endl;
+            std::cin >> id;
+            while (std::cin.fail() || id < 1 || id > 8)
+            {
+                std::cout << "> Please provide a number between 1 and 8" << std::endl;
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
+                std::cin >> id;
+            }
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
+            phonebook.displayInfo(id);
         }
+        else if (input.compare("EXIT") == 0)
+            return (0);
         else
-            std::cout << "Please provide a valid input..." << std::endl;
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
+            std::cout << "> Please enter a valid command [ADD | SEARCH | EXIT]" << std::endl;
     }
-    return (0);
 }

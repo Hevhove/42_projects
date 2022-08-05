@@ -3,36 +3,115 @@
 /*                                                        :::      ::::::::   */
 /*   Contact.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Hendrik <Hendrik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/02 16:12:49 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/08/02 17:00:34 by hvan-hov         ###   ########.fr       */
+/*   Created: 2022/08/04 17:51:18 by Hendrik           #+#    #+#             */
+/*   Updated: 2022/08/05 13:34:59 by Hendrik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/myawesomephonebook.hpp"
+#include "../inc/PhoneBook.hpp"
 #include "../inc/Contact.hpp"
 
-Contact::Contact(){ }; // constructor does nothing
+// Constructors
+Contact::Contact(){}
+Contact::~Contact(){}
 
-Contact::~Contact(){ }; // constructor does nothing
+/*
+	SETTERS & GETTERS:
 
-void Contact::setFirstName(const std::string fn){
-    this->firstname = fn;
+	Below functions are setters and getters of the variables contained within a contact.
+	Using these functions, we can set the variables and retrieve the variables directly
+	from the PhoneBook class instance, without accessing the contacts directly.
+*/
+
+void	Contact::setFirstName(void) {
+	std::cout << "First Name:     ";
+	std::getline(std::cin, firstName);
+	while (firstName.empty())
+	{
+		std::cout << "Please enter a name..." << std::endl;
+		std::getline(std::cin, firstName);
+	}
 }
 
-void Contact::setLastName(const std::string ln){
-    this->lastname = ln;
+void	Contact::setLastName(void) {
+	std::cout << "Last Name:      ";
+	std::getline(std::cin, lastName);
+	while (lastName.empty())
+	{
+		std::cout << "Please enter a name..." << std::endl;
+		std::getline(std::cin, lastName);
+	}
 }
 
-void Contact::setNickName(const std::string nn){
-    this->nickname = nn;
+void	Contact::setNickName(void) {
+	std::cout << "Nickname:       ";
+	std::getline(std::cin, nickName);
+	while (nickName.empty())
+	{
+		std::cout << "Please enter a name..." << std::endl;
+		std::getline(std::cin, nickName);
+	}
 }
 
-void Contact::setPhoneNumber(const std::string pn){
-    this->phonenumber = pn;
+void	Contact::setPhoneNumber(void) {
+	std::cout << "Phone Number:   ";
+	std::getline(std::cin, phoneNumber);
+	while (phoneNumber.empty())
+	{
+		std::cout << "Please enter a number..." << std::endl;
+		std::getline(std::cin, phoneNumber);
+	}
 }
 
-void Contact::setSecret(const std::string s){
-    this->secret = s;
+void	Contact::setDarkSecret(void) {
+	std::cout << "Dark Secret:    ";
+	std::getline(std::cin, darkSecret);
+	while (darkSecret.empty())
+	{
+		std::cout << "Please enter your secret..." << std::endl;
+		std::getline(std::cin, darkSecret);
+	}
+}
+
+// GETTERS
+std::string Contact::getFirstName(void) {
+	return this->firstName;
+}
+
+std::string Contact::getLastName(void) {
+	return this->lastName;
+}
+
+std::string Contact::getNickName(void) {
+	return this->nickName;
+}
+
+std::string Contact::getPhoneNumber(void) {
+	return this->phoneNumber;
+}
+
+std::string Contact::getDarkSecret(void) {
+	return this->darkSecret;
+}
+
+/*
+	Other useful functions for formatting
+*/
+std::string Contact::formatContact(std::string str) {
+	int diff;
+
+	diff = 10 - str.length();
+	if (diff > 0)
+	{
+		for (int i = 0; i < diff; i++)
+			str.insert(0, " ");
+	}
+	else if (diff < 0)
+	{
+		str[9] = '.';
+		str = str.substr(0, 10);
+	}
+	return (str);
 }

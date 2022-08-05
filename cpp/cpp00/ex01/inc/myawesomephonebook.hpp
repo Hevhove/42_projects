@@ -3,21 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   myawesomephonebook.hpp                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Hendrik <Hendrik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/01 16:47:54 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/08/02 09:35:07 by hvan-hov         ###   ########.fr       */
+/*   Created: 2022/08/05 11:20:00 by Hendrik           #+#    #+#             */
+/*   Updated: 2022/08/05 13:29:40 by Hendrik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MY_AWESOME_PHONEBOOK_HPP
-# define MY_AWESOME_PHONEBOOK_HPP
+#ifndef MYAWESOMEPHONEBOOK_HPP
+# define MYAWESOMEPHONEBOOK_HPP
 
+// LIBRARIES
 # include <iostream>
-# include <limits>
-# include <ios>
 # include <string>
-# include "PhoneBook.hpp"
-# include "Contact.hpp"
+# include <limits>
+
+// CLASSES
+# include "../inc/Contact.hpp"
+# include "../inc/PhoneBook.hpp"
+
+// COLORS
+# define RESET		"\033[0m"
+
+# define BLACK		"\033[30m"
+# define RED		"\033[31m"
+# define GREEN		"\033[32m"
+# define YELLOW		"\033[33m"
+# define BLUE		"\033[34m"
+# define WHITE		"\033[37m"
+
+# define BRED		"\033[31;1m"
+# define BGREEN		"\033[32;1m"
+# define BYELLOW	"\033[33;1m"
+# define BBLUE		"\033[34;1m"
+# define BWHITE		"\033[37;1m"
 
 #endif
