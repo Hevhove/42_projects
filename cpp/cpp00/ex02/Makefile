@@ -6,12 +6,12 @@
 #    By: Hendrik <Hendrik@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/31 17:31:17 by hvan-hov          #+#    #+#              #
-#    Updated: 2022/08/05 11:29:46 by Hendrik          ###   ########.fr        #
+#    Updated: 2022/08/08 14:34:26 by Hendrik          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # VARIABLE DEFINITIONS
-NAME	= myawesomephonebook
+NAME	= tests
 SRC		= $(wildcard src/*.cpp)
 CFLAGS	= -Wall -Wextra -Werror -std=c++98 #-fsanitize=address
 INC		= -I inc

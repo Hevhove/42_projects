@@ -6,7 +6,7 @@
 /*   By: Hendrik <Hendrik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 11:02:34 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/08/05 13:23:40 by Hendrik          ###   ########.fr       */
+/*   Updated: 2022/08/08 15:18:59 by Hendrik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void    PhoneBook::displayContacts(){
 
 void    PhoneBook::displayInfo(int index){
 
-    std::cout << "| First Name:    " << contacts[index - 1].getFirstName() << std::endl;
+    std::cout << std::endl << "| First Name:    " << contacts[index - 1].getFirstName() << std::endl;
 	std::cout << "| Last Name:     " << contacts[index - 1].getLastName() << std::endl;
 	std::cout << "| Nickname:      " << contacts[index - 1].getNickName() << std::endl;
 	std::cout << "| Phone Number:  " << contacts[index - 1].getPhoneNumber() << std::endl;

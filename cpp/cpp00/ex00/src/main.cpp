@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Hendrik <Hendrik@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 19:59:10 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/08/01 16:14:00 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2022/08/08 15:23:42 by Hendrik          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/megaphone.hpp"
+
 int main(int argc, char **argv)
 {
     if (argc > 1)
