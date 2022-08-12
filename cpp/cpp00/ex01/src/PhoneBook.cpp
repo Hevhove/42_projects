@@ -24,7 +24,9 @@ PhoneBook::~PhoneBook(){
 
 void    PhoneBook::addContact(void){
     if (index >= MAX_CONTACTS)
-        index = 0;
+    {
+		index = 0;
+	}
 	std::cout << " " << std::endl;
 	contacts[index].setFirstName();
 	contacts[index].setLastName();
