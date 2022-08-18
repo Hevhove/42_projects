@@ -187,3 +187,6 @@ A reference is similar to a pointer. In many cases, a reference can be used as a
 Besides iostreams, there exist also filestreams (#include <fstream>). We can open a filestream with name 'numbers' in the following manner: `std::ifstream  ifs("numbers")`. We can then read from it: `ifs >> dst >> dst2`. Finally, we should close an fstream: `ifs.close()`.
 
 Similarly, there are output filestreams which we can call using `std::ofstream ofs("test.out")`.
+
+### Adhoc Polymorphism
+

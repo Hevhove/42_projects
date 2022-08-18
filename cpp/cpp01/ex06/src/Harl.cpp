@@ -6,7 +6,7 @@
 /*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 14:28:34 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/08/18 13:20:47 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2022/08/18 13:20:38 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@ Harl::Harl() {
     this->f[1] = &Harl::info;
     this->f[2] = &Harl::warning;
     this->f[3] = &Harl::error;
-
+    this->array[0] = "DEBUG";
+    this->array[1] = "INFO";
+    this->array[2] = "WARNING";
+    this->array[3] = "ERROR";
 }
 
 Harl::~Harl() {
