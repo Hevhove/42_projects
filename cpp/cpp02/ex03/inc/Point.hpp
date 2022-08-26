@@ -1,34 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Fixed.hpp                                          :+:      :+:    :+:   */
+/*   Point.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/18 18:42:02 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/08/26 16:37:00 by hvan-hov         ###   ########.fr       */
+/*   Created: 2022/08/26 16:36:12 by hvan-hov          #+#    #+#             */
+/*   Updated: 2022/08/26 18:01:40 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CLASS_FIXED_HPP
-# define CLASS_FIXED_HPP
+#ifndef CLASS_POINT_HPP
+# define CLASS_POINT_HPP
 # include <iostream>
+# include <cmath>
+# include "Fixed.hpp"
 
-class Fixed {
+class Point {
     private:
-        int                 _raw_bits;
-        static const int    FRAC_BITS = 8;
+        Fixed const x;
+        Fixed const y;
         
     public:
         // Canonical Constructors
-        Fixed();
-        Fixed(Fixed const & src);
-        ~Fixed();
-        Fixed& operator=(Fixed const & rhs);
+        Point();
+        Point(Fixed const x, Fixed const y);
+        Point(float const x, float const y);
+        Point(Point const & src);
+        ~Point();
+        Point operator=(Point const &rhs);
 
         // Member functions
-        int     getRawBits(void) const;
-        void    setRawBits(int const raw);
+        float getX(void) const;
+        float getY(void) const;
 };
 
 #endif
