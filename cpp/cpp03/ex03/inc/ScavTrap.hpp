@@ -6,7 +6,7 @@
 /*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 12:35:32 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/08/28 17:49:41 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2022/08/29 17:03:55 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,20 @@
 # define CLASS_SCAVTRAP_HPP
 # include <ClapTrap.hpp>
 
-class ScavTrap : public virtual ClapTrap {
+class ScavTrap : virtual public ClapTrap {
     private:
         
     public:
         // Constructors
         ScavTrap();
-        ScavTrap(std::string name, unsigned int hp = 100, unsigned int ep = 50, unsigned int ad = 20);
+        ScavTrap(std::string name);
         ScavTrap(ScavTrap const &src);
-        ~ScavTrap();
+        virtual ~ScavTrap();
         ScavTrap& operator=(ScavTrap const & rhs);
 
         // Member functions
-        void    guardGate();
+        virtual void    attack(const std::string& target);
+        void            guardGate();
 };
 
 #endif

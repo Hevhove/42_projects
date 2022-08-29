@@ -6,7 +6,7 @@
 /*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 12:35:10 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/08/28 16:12:25 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2022/08/29 17:10:20 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,9 @@ ScavTrap::ScavTrap() {
     std::cout << "ScavTrap Constructor has been called!" << std::endl;
 }
 
-ScavTrap::ScavTrap(std::string name, unsigned int hp, unsigned int ep, unsigned int ad) {
+ScavTrap::ScavTrap(std::string name) {
     std::cout << "ScavTrap " << name << " was initialized by constructor!" << std::endl;
     this->name = name;
-    this->hp = hp;
-    this->ep = ep;
-    this->ad = ad;
 }
 
 ScavTrap::ScavTrap(ScavTrap const &src) : ClapTrap(src.name) {
@@ -41,6 +38,22 @@ ScavTrap& ScavTrap::operator=(ScavTrap const & rhs) {
     this->ep = rhs.ep;
     this->ad = rhs.ad;
     return *this;
+}
+
+void            ScavTrap::attack(const std::string& target) {
+    if (this->ep > 0 && this->hp > 0)
+    {
+        this->ep--;
+        std::cout << "ScavTrap " << this->name << "  attacks " << target << " for " << this->ad << " attack damage" << std::endl; 
+    }
+    else if (this->hp <= 0)
+    {
+        std::cout << "ScavTrap " << this->name << "  is dead and cannot attack!" << std::endl;
+    }
+    else if (this->ep <= 0)
+    {
+        std::cout << "ScavTrap " << this->name << "  is out of energy and cannot attack!" << std::endl;
+    }
 }
 
 void    ScavTrap::guardGate() {

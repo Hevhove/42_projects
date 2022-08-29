@@ -6,19 +6,19 @@
 /*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 12:16:25 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/08/28 16:40:07 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2022/08/29 17:22:17 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <../inc/ScavTrap.hpp>
-#include <../inc/FragTrap.hpp>
+#include "../inc/DiamondTrap.hpp"
 
 int main(void)
 {
-    ClapTrap trap1("Trappy the Trap", 10, 10, 2);
+    ClapTrap trap1("Trappy the Trap");
     ScavTrap scav1("Davy Crockett");
     FragTrap frag1("Zenedict Dumbercatch");
-
+    DiamondTrap diamond1("Blackie");
+    
     // Trap 1 : Takes damage and dies
     trap1.attack("Pesky Rival");
     trap1.takeDamage(9);
@@ -31,5 +31,8 @@ int main(void)
 
     // FragTrap : 
     frag1.highFivesGuys();
+
+    // DiamondTrap:
+    diamond1.whoAmI();
     return (0);
 }

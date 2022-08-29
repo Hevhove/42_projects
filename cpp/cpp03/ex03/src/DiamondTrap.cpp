@@ -5,44 +5,49 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/28 16:49:25 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/08/28 17:52:23 by hvan-hov         ###   ########.fr       */
+/*   Created: 2022/08/29 16:00:39 by hvan-hov          #+#    #+#             */
+/*   Updated: 2022/08/29 17:09:45 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/DiamondTrap.hpp"
 
 DiamondTrap::DiamondTrap() {
-    std::cout << "DiamondTrap Constructor has been called!" << std::endl;;
+    this->name = "NULL";
+    ClapTrap::name =  (this->name + "_clap_name");
+    std::cout << "DiamondTrap: Default constructor called" << std::endl;
 }
 
-DiamondTrap::DiamondTrap(std::string name, unsigned int hp, unsigned int ep, unsigned int ad) {
-    std::cout << "DiamondTrap " << name << " was initialized by constructor!" << std::endl;
-    this->name = name;
-    this->hp = hp;
-    this->ep = ep;
-    this->ad = ad;
+DiamondTrap::DiamondTrap(std::string name) {
+    this->hp    = FragTrap::hp;
+    this->ep    = ScavTrap::ep;
+    this->ad    = FragTrap::ad;
+    this->name  = name;
+    ClapTrap::name =  (this->name + "_clap_name");
 }
 
-DiamondTrap::DiamondTrap(DiamondTrap const &src) : ClapTrap(src.name) {
-    this->name = src.name;
-    this->hp = src.hp;
-    this->ep = src.ep;
-    this->ad = src.ad;
+DiamondTrap::DiamondTrap(const DiamondTrap &src) : ClapTrap(src.name), FragTrap(src.name), ScavTrap(src.name) {
+   *this = src;
 }
 
 DiamondTrap::~DiamondTrap() {
-    std::cout << "DiamondTrap Destructor has been called!" << std::endl;
+    std::cout << "Diamond destructor called" << std::endl;
 }
 
-DiamondTrap& DiamondTrap::operator=(DiamondTrap const & rhs) {
+DiamondTrap &DiamondTrap::operator=(const DiamondTrap &rhs) {
     this->name = rhs.name;
+    this->ClapTrap::name = rhs.ClapTrap::name;
     this->hp = rhs.hp;
     this->ep = rhs.ep;
     this->ad = rhs.ad;
-    return *this;
+    return (*this);
 }
 
-void    DiamondTrap::DiamondTrap(void) {
-    std::cout << "My name is: " << DiamondTrap::name << " and my ClapTrap name is : " << ClapTrap::name << std::endl; 
+void    DiamondTrap::attack(const std::string& target) {
+    ScavTrap::attack(target);
+}
+
+void    DiamondTrap::whoAmI(void) {
+    std::cout << "My ClapTrap Name is: " << ClapTrap::name << std::endl;
+    std::cout << "My DiamondTrap Name is: " << DiamondTrap::name << std::endl;
 }

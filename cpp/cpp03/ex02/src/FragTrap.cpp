@@ -6,11 +6,11 @@
 /*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 16:26:54 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/08/28 16:34:54 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2022/08/29 15:23:26 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <../inc/FragTrap.hpp>
+#include "../inc/FragTrap.hpp"
 
 FragTrap::FragTrap() {
     std::cout << "FragTrap Constructor has been called!" << std::endl;;

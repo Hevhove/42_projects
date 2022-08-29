@@ -6,7 +6,7 @@
 /*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 11:55:14 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/08/28 16:04:47 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2022/08/29 17:13:02 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,9 @@ ClapTrap::ClapTrap() {
     std::cout << "ClapTrap Constructor has been called!" << std::endl;
 }
 
-ClapTrap::ClapTrap(std::string name) {
+ClapTrap::ClapTrap(std::string name) : name(name) {
     std::cout << "ClapTrap Constructor has been called!" << std::endl;
     this->name = name;
-}
-
-ClapTrap::ClapTrap(std::string name, unsigned int hp, unsigned int ep, unsigned int ad) {
-    this->name = name;
-    this->hp = hp;
-    this->ep = ep;
-    this->ad = ad;
-    std::cout << "ClapTrap Constructor has been called!" << std::endl;
 }
 
 ClapTrap::ClapTrap(ClapTrap const & src) {
@@ -50,6 +42,10 @@ ClapTrap& ClapTrap::operator=(ClapTrap const & src) {
 }
 
 // Member functions
+std::string     ClapTrap::getName() {
+    return (name);
+}
+
 void            ClapTrap::attack(const std::string& target) {
     if (this->ep > 0 && this->hp > 0)
     {
@@ -65,6 +61,7 @@ void            ClapTrap::attack(const std::string& target) {
         std::cout << "ClapTrap " << this->name << "  is out of energy and cannot attack!" << std::endl;
     }
 }
+
 void            ClapTrap::takeDamage(unsigned int amount) {
     if (this->hp > 0)
     {
@@ -98,5 +95,4 @@ void            ClapTrap::beRepaired(unsigned int amount) {
     {
         std::cout << "ClapTrap " << this->name << "  does not have the energy to repair itself!" << std::endl;
     }
-    
 }

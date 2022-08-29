@@ -6,12 +6,12 @@
 /*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 12:16:25 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/08/28 16:40:07 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2022/08/29 15:23:37 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <../inc/ScavTrap.hpp>
-#include <../inc/FragTrap.hpp>
+#include "../inc/ScavTrap.hpp"
+#include "../inc/FragTrap.hpp"
 
 int main(void)
 {

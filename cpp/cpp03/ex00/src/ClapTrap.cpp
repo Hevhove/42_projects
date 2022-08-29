@@ -6,11 +6,11 @@
 /*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 11:55:14 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/08/28 12:30:54 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2022/08/29 15:24:27 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <../inc/ClapTrap.hpp>
+#include "../inc/ClapTrap.hpp"
 
 // Constructors
 ClapTrap::ClapTrap() {

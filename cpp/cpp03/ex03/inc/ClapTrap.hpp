@@ -6,7 +6,7 @@
 /*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 11:48:42 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/08/28 16:04:23 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2022/08/29 17:13:58 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,15 @@ class ClapTrap {
         // Constructors
         ClapTrap();
         ClapTrap(std::string name);
-        ClapTrap(std::string name, unsigned int hp, unsigned int ep, unsigned int ad);
-        ClapTrap(ClapTrap const &src);
-        ~ClapTrap();
-        ClapTrap& operator=(ClapTrap const & rhs);
+        ClapTrap(const ClapTrap& src);
+        virtual ~ClapTrap();
+        ClapTrap& operator=(const ClapTrap& rhs);
 
         // Member functions
-        void            attack(const std::string& target);
+        std::string     getName();
+        virtual void    attack(const std::string& target);
         void            takeDamage(unsigned int amount);
         void            beRepaired(unsigned int amount);
-
-        // Getters
-        unsigned int    get_hp(void);
-        unsigned int    get_ep(void);
-        unsigned int    get_ad(void);
 };
 
 #endif

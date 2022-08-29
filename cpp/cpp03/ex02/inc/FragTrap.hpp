@@ -6,13 +6,13 @@
 /*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 16:17:23 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/08/28 16:27:37 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2022/08/29 15:23:08 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CLASS_FRAGTRAP_HPP
 # define CLASS_FRAGTRAP_HPP
-# include <ClapTrap.hpp>
+# include "ClapTrap.hpp"
 
 class FragTrap : public ClapTrap {
     private:

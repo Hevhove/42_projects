@@ -6,14 +6,14 @@
 #    By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/31 17:31:17 by hvan-hov          #+#    #+#              #
-#    Updated: 2022/08/28 16:35:10 by hvan-hov         ###   ########.fr        #
+#    Updated: 2022/08/29 17:15:47 by hvan-hov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # VARIABLE DEFINITIONS
-NAME	= fragtrap
+NAME	= diamondtrap
 SRC		= $(wildcard src/*.cpp)
-CFLAGS	= -Wall -Wextra -Werror -std=c++98 #-fsanitize=address
+CFLAGS	= -Wall -Wextra -Werror -std=c++98 -fsanitize=address -Wshadow -Wno-shadow
 INC		= -I inc
 OBJS_D	= obj
 OBJ		= $(SRC:src/%.cpp=$(OBJS_D)/%.o)
