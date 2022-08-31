@@ -6,7 +6,7 @@
 /*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 13:27:20 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/08/30 17:57:01 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2022/08/31 13:58:31 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,12 @@ class Ice : public AMateria {
     public:
         // Constructors
         Ice();
-        Ice(std::string type);
         virtual ~Ice();
         Ice(const Ice & src);
         Ice& operator=(const Ice &rhs);
 
         // Member functions
-        AMateria* clone() const;
+        Ice* clone() const;
         void use(ICharacter& target);
 };
 

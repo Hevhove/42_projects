@@ -6,7 +6,7 @@
 /*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 14:02:31 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/08/30 19:10:59 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2022/08/31 14:02:24 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,23 +42,33 @@ Character::Character(const Character & src) {
     {
         if (src.inventory[i]->getType() == "Ice")
         {
-            Ice *   newIce = new Ice("Ice");
+            Ice *   newIce = new Ice();
             this->inventory[i] = newIce;
         }
         else if (src.inventory[i]->getType() == "Cure")
         {
-            Cure *   newCure = new Cure("Cure");
+            Cure *   newCure = new Cure();
             this->inventory[i] = newCure;
         }
-
     }
-    // TODO: copy inventory elements
     std::cout << "Character copy constructor called" << std::endl;
 }
 
 Character& Character::operator=(const Character &rhs) {
     this->weaponCount = rhs.weaponCount;
-    // TODO: assign inventory elements (deep copies)
+        for (int i = 0; i < (int)rhs.weaponCount; i++)
+    {
+        if (rhs.inventory[i]->getType() == "Ice")
+        {
+            Ice *   newIce = new Ice();
+            this->inventory[i] = newIce;
+        }
+        else if (rhs.inventory[i]->getType() == "Cure")
+        {
+            Cure *   newCure = new Cure();
+            this->inventory[i] = newCure;
+        }
+    }
     std::cout << "Character copy assignment called" << std::endl;
     return (*this);
 }
@@ -69,7 +79,7 @@ std::string const & Character::getName() const {
 }
 
 void Character::equip(AMateria* m) {
-    
+    std::cout << this->name << " equipped " << m->getType() << " in slot " << this->weaponCount << std::endl;
     if (this->weaponCount < 4)
     {
         inventory[weaponCount] = m;
@@ -85,4 +95,8 @@ void Character::unequip(int idx) {
 void Character::use(int idx, ICharacter& target) {
     if (idx < (int)this->weaponCount)
         this->inventory[idx]->use(target);
+}
+
+std::string const * Character::getInventoryItemAddress(int idx) const {
+    return &(this->inventory[idx]->getType());
 }

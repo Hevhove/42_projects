@@ -6,19 +6,15 @@
 /*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 13:51:10 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/08/30 18:04:53 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2022/08/31 13:58:46 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/Cure.hpp"
 
 Cure::Cure() {
+    this->type = "Cure";
     std::cout << "Cure constructor called" << std::endl;
-}
-
-Cure::Cure(std::string type) {
-    this->type = type;
-    std::cout << "Cure parametrical constructor called" << std::endl;
 }
 
 Cure::~Cure() {
@@ -40,6 +36,6 @@ void    Cure::use(ICharacter& target) {
     std::cout << "* heals " << target.getName() << "'s wounds *" << std::endl;
 }
 
-AMateria* Cure::clone(void) const { 
-    return (new Cure(type));
+Cure* Cure::clone(void) const { 
+    return (new Cure());
 }

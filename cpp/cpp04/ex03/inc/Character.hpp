@@ -6,7 +6,7 @@
 /*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 14:02:35 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/08/30 18:50:37 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2022/08/31 12:09:27 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ class Character : public ICharacter {
 
         // Member functions
         virtual std::string const & getName() const;
+        virtual std::string const * getInventoryItemAddress(int idx) const;
         virtual void equip(AMateria* m);
         virtual void unequip(int idx);
         virtual void use(int idx, ICharacter& target);

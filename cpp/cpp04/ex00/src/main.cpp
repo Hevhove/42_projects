@@ -6,7 +6,7 @@
 /*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 09:52:01 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/08/30 11:11:47 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2022/08/31 12:20:02 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,12 @@ int main()
     j2->makeSound();
     meta2->makeSound();
     
+    delete meta;
+    delete j;
+    delete i;
+    delete meta2;
+    delete j2;
+    delete i2;
     return (0);
 }
 

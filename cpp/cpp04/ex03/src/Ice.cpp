@@ -6,19 +6,15 @@
 /*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 13:59:17 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/08/30 18:55:02 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2022/08/31 13:58:23 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/Ice.hpp"
 
 Ice::Ice() {
+    this->type = "Ice";
     std::cout << "Ice constructor called" << std::endl;
-}
-
-Ice::Ice(std::string type) {
-    this->type = type;
-    std::cout << "Ice parametrical constructor called" << std::endl;
 }
 
 Ice::~Ice() {
@@ -40,6 +36,7 @@ void    Ice::use(ICharacter& target) {
     std::cout << "* shoots an icebolt at " << target.getName() << std::endl;
 }
 
-AMateria* Ice::clone(void) const { 
-    return (new Ice(type));
+Ice* Ice::clone(void) const {
+    std::cout << this->getType() << " has been cloned! " << std::endl;
+    return (new Ice());
 }

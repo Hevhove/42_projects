@@ -6,7 +6,7 @@
 /*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 13:32:13 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/08/30 19:13:04 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2022/08/31 11:44:13 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ AMateria::AMateria() {
 }
 
 AMateria::AMateria(std::string const & type) {
-    this->type = type; 
+    this->type = type;
     std::cout << "AMateria constructor called" << std::endl;
 }
 
@@ -42,4 +42,4 @@ void    AMateria::use(ICharacter& target) {
 
 std::string const & AMateria::getType(void) const {
     return this->type;
-} 
+}
