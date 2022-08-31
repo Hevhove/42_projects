@@ -189,4 +189,149 @@ Besides iostreams, there exist also filestreams (#include <fstream>). We can ope
 Similarly, there are output filestreams which we can call using `std::ofstream ofs("test.out")`.
 
 ### Adhoc Polymorphism
+Adhoc Polymorphism means the ability to take on many forms. In terms of functions in C++, this means we can define a function with a particular name, but change for example the type of the arguments `func1(float f)` vs `func1(int i)`, without any problem. This is also known as function overloading.
 
+### Canonical Form
+The canonical form of a class means a class has explicitly defined 4 constructors:
+
+1. Default constructor with empty arguments or all arguments with a default value `Class();`
+2. Default destructor `~Class()`
+3. Copy constructor `Class(Class const &src)`
+4. Copy assignment constructor `Class& operator=(Class const & rhs)`
+
+### Const Keyword Usage
+[Interesting Article on Const Usage](https://www.cprogramming.com/tutorial/const_correctness.html). Another quick review on const here! Const allows us to define whether or not a specific variable is modifiable. It can be used to prevent modifications to variables, and const pointers and const references prevent changing the data pointed to.
+
+This gives us the ability to document our code better and prevent coding mistakes. Users of a function with a const argument do not need to worry about modifying the underlying object. Similarly, we use const in getter functions and other similar functions to make sure nothing gets changed.
+
+#### Const variable
+For constant variables, the positioning of const does not make a difference:
+`int const x = 5;` is equivalent to `const int x = 5;`.
+
+Note that we have to make x const in the declaration and cannot do it later.
+
+#### Const pointers
+References are pretty natural. By definition, they cannot change the data they point to. When making a reference const, you're only making the data referred to const. Pointers on the other hand, have 2 ways to be used: you can change the data pointed to or change the pointer itself. Because of this, there are 2 ways of declaring a const pointer. One that prevents you from changing what is pointed to, and one that prevents you from changing the data pointed to.
+
+Pointer to constant data:
+`const int *p_int` -> *p_int is a const int. The pointer may be changeable, but you cannot change what p_int points to.
+
+Constant pointer:
+`int x`
+`int * const p_int = &x` -> The address stored in the pointer is now const, the const comes after the * symbol. Note that we had to declare what it points to immediately, because we cannot change the pointer later! For example, the address would be 0x000FA930A, and would have to remain so. The data at this memory address can be changed however. Generally, the first definition (pointer to const data) is used as "const pointer" in terminology.
+
+#### Const functions
+Of course, in classes we can also decide to make functions const by declaring const behind the function prototype. Once a variable is const, it cannot be assigned a non-const reference throughout the program, which is necessary to enforce const-ness. Const functions are the only functions that can be called on a const object. Non-const functions are not allowed. 
+
+Note that just because a function is declared const that doesn't prohibit non-const functions from using it; the rule is this:  
+1. Const functions can always be called. 
+2. Non-const functions can only be called by non-const objects
+
+### Inheritance
+In C++, classes can inherit behaviour (variables and methods) from parent classes. A Car for example, could have as a parent class "Vehicle". The notation is as follows:
+
+```
+class Vehicle {
+    private:
+        int     wheels;
+    public:
+        void    drive(void);
+}
+
+class Truck : public Vehicle {
+    private: 
+        int     load_capacity;
+    public:
+        void    emergency_brake();
+}
+```
+
+In the above example, the Truck inherits publicly from the vehicle class. Meaning, it has access to all of the public members of the class Vehicle. Here are all the modes of inheritance in C++:
+
+1. Public inheritance: makes public members of the base class public in the derived class, and the protected members of the base class remain protected in the derived class.
+2. Protected inheritance: makes the public and protected members of the base class protected in the derived class.
+3. Private inheritance: makes the public and protected members of the base class private in the derived class.
+
+Additionally, we can define protected members of a class, meaning they will only be accessable by children of the parent, but otherwise private.
+
+When instantiating a child, the parent class will be instantiated before it, so its constructor will be called before the constructor of the child class. But upon going out of scope, the child is destructed first.
+
+#### Solving the Diamond Problem with Virtual Inheritance
+Multiple inheritance in C++ can often lead to problems. [link to resource](https://www.cprogramming.com/tutorial/virtual_inheritance.html) shows us how 2 children can inherit from the same parent class, but then a subclass of the children could inherit from both child classes, creating a diamond inheritance. If the grandchild now wants to call a method defined in its grandparent, this call is ambiguous. The grandparent class will be duplicated inside of the grandchild class. We can solve this using virtual inheritance. 
+
+```
+class transmitter: public virtual storable 
+{
+        public:
+        void read();
+        ...
+} 
+ 
+class receiver: public virtual storable
+{
+        public:
+        void read();
+        ...
+} 
+```
+
+When using virtual inheritance, we guarantee to only receive a single instance of the common base class. This instance of the base class, is then shared by both children. 
+
+### Virtual Functions
+If we have a parent and a child class, see [link](https://stackoverflow.com/questions/2391679/why-do-we-need-virtual-functions-in-c), and both the parent and child class have the implementation of a function `foo()`, then we need the keyword `virtual` if we want to call the method `foo` from the subclass instead of from the superclass. For example, if we would have Animal and Cat, calling foo(cat) gives us the correct behaviour but if we nest foo() inside of another function, we get the foo() behaviour from the parent class. To prevent this we can use the virtual keyword.
+
+### Virtual Destructors
+Virtual destructors are useful when you might potentially delete an instance of a derived class through a pointer to base class:
+```
+class Base 
+{
+    // some virtual methods
+};
+
+class Derived : public Base
+{
+    ~Derived()
+    {
+        // Do some important cleanup
+    }
+};
+```
+Here, you'll notice that I didn't declare Base's destructor to be virtual. Now, let's have a look at the following snippet:
+```
+Base *b = new Derived();
+// use b
+delete b; // Here's the problem!
+```
+Since Base's destructor is not virtual and b is a Base* pointing to a Derived object, delete b has undefined behaviour. The destructor in the base class must always be virtual to avoid this. 
+
+### Shadowing (name hiding) in C++
+Each block in C++ defines its own scope region. So what happens when we have a variable inside a nested block that has the same name as a variable in an outer block? When this happens, the nested variable hides the outer variable in areas where they are both in scope. This is called shadowing or name hiding. Generally this should be avoided, and we can for example use the -Wshadow flag to avoid this.
+
+### Sub-typing polymorphism
+Most of the video on this subject is explained under the Virtual section.
+
+### Abstract Classes and Interfaces
+```
+class ACharacter {
+    public:
+        virtual void     attack(std::string const & target) = 0;
+}
+```
+In the above code, attack is a "pure" method. This means we cannot IMPLEMENT this function. There is no definition of what this method do. This also means we cannot instantiate this class. In other words, this class is abstract. We generally prefix a capital 'A' to an abstract class.
+
+In the above example, a character itself does not have an attack. The subclasses will have the attack method implemented. If the method is not instantiated in the subclass either, that subclass cannot be instantiated either.
+
+We can also implement a class that has only abstract behaviours. This is what we call an "Interface". We generally prefix this Class with a capital 'I'.
+
+### Shallow vs Deep Copies C++
+In general, creating a copy of an object means to create an exact replica, having the same literal values, types and resources.
+
+Depending on the dynamic memory held by an object, we need to perform either a deep or a shallow copy. If an object has data defined in the heap section, a copy can either be a deep or shallow copy.
+
+1. A shallow copy is a copy where the dynamically-allocated data is shared (same memory address) as the object from which it is copied.
+2. A deep copy, creates a copy on the heap of the dynamically-allocated data. Therefore, changes to the original object after copying are not reflected in the copied object.
+
+### Nested Classes
+You can nest classes inside of class definitions. If we would instantiate a Leg class inside of a Cat class, we can then instantiate a class of Cat::Leg in the main. 
+
+### Exceptions

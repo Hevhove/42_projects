@@ -6,7 +6,7 @@
 /*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 18:42:07 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/08/26 18:02:15 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2022/08/26 18:21:44 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ float area(Point a, Point b, Point c) {
     float x3 = c.getX();
     float y3 = c.getY();
 
-    return (abs((x1*(y2-y3) + x2*(y3-y1)+ x3*(y1-y2))/2.0));
+    return (std::abs((x1*(y2-y3) + x2*(y3-y1)+ x3*(y1-y2))/2.0));
 }
 
 bool bsp(Point const a, Point const b, Point const c, Point const p) {

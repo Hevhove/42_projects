@@ -6,14 +6,14 @@
 #    By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/31 17:31:17 by hvan-hov          #+#    #+#              #
-#    Updated: 2022/08/31 12:40:09 by hvan-hov         ###   ########.fr        #
+#    Updated: 2022/08/30 11:24:46 by hvan-hov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # VARIABLE DEFINITIONS
-NAME	= diamondtrap
+NAME	= poly
 SRC		= $(wildcard src/*.cpp)
-CFLAGS	= -Wall -Wextra -Werror -std=c++98 -fsanitize=address -Wshadow -Wno-shadow
+CFLAGS	= -Wall -Wextra -Werror -std=c++98 -fsanitize=address
 INC		= -I inc
 OBJS_D	= obj
 OBJ		= $(SRC:src/%.cpp=$(OBJS_D)/%.o)
