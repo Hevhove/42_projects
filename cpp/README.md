@@ -335,3 +335,29 @@ Depending on the dynamic memory held by an object, we need to perform either a d
 You can nest classes inside of class definitions. If we would instantiate a Leg class inside of a Cat class, we can then instantiate a class of Cat::Leg in the main. 
 
 ### Exceptions
+Exceptions are runtime anomalies that a program encounters during its execution. There are two types of exceptions:
+1. Synchronous
+2. Asynchronous (beyond program control such as disk failure, keyboard interrupt)
+
+To handle exceptions, C++ provides us with `try` and `catch` keywords. Within a try block we will put a piece of code that can throw an exception. The catch block is executed only when the try block has thrown an exception. 
+
+The main advantages of using exceptions are:
+1. Separation of Error Handling Code from normal code. In traditional error-handling, there are always if-else conditions to handle errors. These conditions and the code to handle errors get mixed up with the normal flow. This makes the code less readable and maintainable. With try/catch blocks, the code for error handling becomes separate from the normal flow.
+
+2. Functions and methods can handle only the exceptions they choose. A function can throw many exceptions, but may choose to handle some of them. The other exceptions, which are thrown but not caught, can be handled by the caller. If the caller chooses not to catch them, then the exceptions are handled by the caller of the caller. In C++, a function can specify the exceptions that it throws using the throw keyword. The caller of this function must handle the exception in some way (either by specifying it again or catching it).
+
+3. Grouping of Error Types: In C++, both basic types and objects can be thrown as exceptions. We can create a hierarchy of exception objects, groupe exceptions in namespaces or classes and categorize them according to their types.
+
+Errors can occur because of:
+1. Coding error made by programmer
+2. Wrong input error
+3. Other unforeseeable things
+
+Normally, execution will stop and an error message is generated. The technical term for this, C++ throws an exception (error).
+
+#### C++ Try and catch
+*try* : the try statement allows us to define a block of code to be tested for errors
+*throw* : the throw keyword throws an exception when a problem is detected
+*catch* : the catch statement allows you to define a block of code to be executed if an error occurs in the try block. 
+
+std::exception::what aka `virtual const char* what() const throw();` is going to return a pointer with a description of the related exception. If we want to give pointer on an excepton subclass that we made, we must overload this function in our child class.
