@@ -78,17 +78,13 @@ void Bureaucrat::decrementGrade(void)
 
 void Bureaucrat::signForm(Form & form)
 {
-    if (form.signedStatus == true)
-        throw Form::AlreadySignedException();
-    else if (this->grade > signingGradeRequired && form.signedStatus == false)
-    {
-        std::cout << *this << " has signed the form " <<  form << std::endl;
-        form.signedStatus = true;
+    try {
+        form.beSigned(*this);
+        std::cout << this->name << " signed the form " << form.getName() << std::endl;
     }
-
-    else
-        throw Bureaucrat::GradeTooLowException();
-    
+    catch (std::exception& e) {
+        std::cerr << this->name << "could not sign " << form.getName() << ". " << e.what() << std::endl;
+    }
 }
 
 const char * Bureaucrat::GradeTooHighException::what() const throw ()

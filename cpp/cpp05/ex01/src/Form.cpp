@@ -41,10 +41,50 @@ Form::Form(Form const & src) : name(src.name), signingGradeRequired(src.signingG
     this->signedStatus = src.signedStatus;
 }
 
+const std::string Form::getName(void) const
+{
+    return (this->name);
+}
+
+bool Form::getSignedStatus(void) const
+{
+    return (this->signedStatus);
+}
+
+int Form::getSigningGradeRequired(void) const
+{
+    return (this->signingGradeRequired);
+}
+
+int Form::getExecutingGradeRequired(void) const
+{
+    return (this->executingGradeRequired);
+}
+
+void Form::beSigned(const Bureaucrat & bur)
+{
+    if (this->signedStatus)
+        throw Form::AlreadySignedException();
+    else if (bur.getGrade() <= this->signingGradeRequired)
+        this->signedStatus = true;
+    else
+        throw Form::GradeTooLowException();
+}
+
+// Exceptions
+const char * Bureaucrat::GradeTooLowException::what() const throw ()
+{   
+    return ("Grade too low");
+}
+
+const char * Bureaucrat::GradeTooHighException::what() const throw ()
+{   
+    return ("Grade too high");
+}
 
 // Outside of class
 std::ostream & operator<<(std::ostream &stdout, const Form &form)
 {
-    stdout << form.getName() << ", grade: " << form.getGrade();
+    stdout << form.getName() << ", signing grade required: " << form.getSigningGradeRequired();
     return (stdout);
 }

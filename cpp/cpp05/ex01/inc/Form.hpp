@@ -13,7 +13,7 @@
 #ifndef CLASS_FORM_HPP
 # define CLASS_FORM_HPP
 # include <iostream>
-# include "../inc/Bureaucrat.hpp"
+# include "Bureaucrat.hpp"
 
 class Bureaucrat;
 
@@ -34,10 +34,10 @@ class Form {
         Form& operator=(Form const & rhs);
         
         // Member functions
-        const std::string   getName(void);
-        bool                getSignedStatus(void);
-        int                 getSigningGradeRequired(void);
-        int                 getExecutingGradeRequired(void);
+        const std::string   getName(void) const;
+        bool                getSignedStatus(void) const;
+        int                 getSigningGradeRequired(void) const;
+        int                 getExecutingGradeRequired(void) const;
         void                beSigned(const Bureaucrat & bur);
 
         // Exceptions
@@ -53,6 +53,7 @@ class Form {
             const char * what () const throw ();
         };
 };
+
 
 std::ostream & operator<<(std::ostream &stdout, const Form &form);
 
