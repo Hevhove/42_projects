@@ -6,7 +6,7 @@
 /*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 13:25:50 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/09/01 14:34:40 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2022/09/01 18:43:36 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,15 @@ class Form {
         void                beSigned(const Bureaucrat & bur);
 
         // Exceptions
+        class GradeTooLowException : public std::exception {
+            const char * what () const throw ();
+        };
+
         class GradeTooHighException : public std::exception {
             const char * what () const throw ();
         };
 
-        class GradeTooLowException : public std::exception {
+        class SigningGradeTooLowException : public std::exception {
             const char * what () const throw ();
         };
 
@@ -53,7 +57,6 @@ class Form {
             const char * what () const throw ();
         };
 };
-
 
 std::ostream & operator<<(std::ostream &stdout, const Form &form);
 

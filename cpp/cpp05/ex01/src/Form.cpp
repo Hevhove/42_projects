@@ -6,7 +6,7 @@
 /*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 14:02:20 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/09/01 14:36:54 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2022/09/01 18:08:15 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,18 +68,28 @@ void Form::beSigned(const Bureaucrat & bur)
     else if (bur.getGrade() <= this->signingGradeRequired)
         this->signedStatus = true;
     else
-        throw Form::GradeTooLowException();
+        throw Form::SigningGradeTooLowException();
 }
 
 // Exceptions
-const char * Bureaucrat::GradeTooLowException::what() const throw ()
-{   
-    return ("Grade too low");
+const char * Form::SigningGradeTooLowException::what() const throw ()
+{
+    return ("Need higher grade to sign this document");
 }
 
-const char * Bureaucrat::GradeTooHighException::what() const throw ()
-{   
-    return ("Grade too high");
+const char * Form::GradeTooLowException::what() const throw ()
+{
+    return ("A grade needs to be between 1 and 150");
+}
+
+const char * Form::GradeTooHighException::what() const throw ()
+{
+    return ("A grade needs to be between 1 and 150");
+}
+
+const char * Form::AlreadySignedException::what() const throw ()
+{
+    return ("This form has already been signed");
 }
 
 // Outside of class

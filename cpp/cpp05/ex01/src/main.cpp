@@ -6,7 +6,7 @@
 /*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 12:51:33 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/09/01 13:15:44 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2022/09/01 17:42:18 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,44 +14,31 @@
 
 int main(void)
 {
-    // 3 bureaucrats -> no problem!
-    Bureaucrat  bur1("George", 5);
-    Bureaucrat  bur2("William", 1);
-    Bureaucrat  bur3("Margaret", 150);
-
-    // 2 bureaucrats that cannot be created
-    try
-    {
-        Bureaucrat bur4("Daniel", -1);
-        Bureaucrat bur5("Harry", 160); // this will not be executed
-    }
-    catch (std::exception& e)
-    {
-        std::cout << e.what() << std::endl;
-    }
+    // Create bureaucrats and forms
+    Bureaucrat  bur1("George", 1);
+    Bureaucrat  bur2("William", 20);
+    Form        form1("Random Form", 10, 100);
+    Form        form2("Important Form", 5, 100);
     
-    // Let's increment and decrement a bit...
-    bur1.decrementGrade();
-    std::cout << bur1 << std::endl; // showcasing the << overload
-    bur1.incrementGrade();
-    std::cout << bur1 << std::endl;
-    // This will fail...
-    try
-    {
-        bur2.incrementGrade();
-    }
-    catch (std::exception& e)
-    {
+    // Create a wrong Form    
+    try {
+        Form        form2("Another random Form", -1, 150);
+    } catch (std::exception& e) {
         std::cout << e.what() << std::endl;
     }
 
-    // This too...
-    try
-    {
-        bur3.decrementGrade();
+    // George can sign the form, no problem
+    try {
+        bur1.signForm(form1);
+        bur2.signForm(form1); // has already been signed -> exception, even if bur2's grade is too low!
+    } catch (std::exception& e) {
+        std::cout << e.what() << std::endl;
     }
-    catch (std::exception& e)
-    {
+
+    // Bur2 really wants to sign a document... Will he succeed?
+    try {
+        bur2.signForm(form2);
+    } catch (std::exception& e) {
         std::cout << e.what() << std::endl;
     }
 

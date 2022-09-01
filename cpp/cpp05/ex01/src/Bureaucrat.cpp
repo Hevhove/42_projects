@@ -6,7 +6,7 @@
 /*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:45:36 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/09/01 16:16:15 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2022/09/01 18:07:01 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void Bureaucrat::signForm(Form & form)
         std::cout << this->name << " signed the form " << form.getName() << std::endl;
     }
     catch (std::exception& e) {
-        std::cerr << this->name << "could not sign " << form.getName() << ". " << e.what() << std::endl;
+        std::cerr << this->name << " could not sign " << form.getName() << ". " << e.what() << std::endl;
     }
 }
 
