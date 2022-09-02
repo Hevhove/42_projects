@@ -32,7 +32,6 @@ endif
 
 # RULES
 $(OBJS_D)/%.o:src/%.cpp
-	@printf "[$(C_YELLOW)=====COMPILING=====$(C_END)]\n"
 	@mkdir -p $(OBJS_D)
 	$(CC) $(CFLAGS) $(INC) -o $@ -c $<
 	
@@ -40,8 +39,11 @@ $(NAME):	$(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
 	@printf "[$(C_GREEN)======SUCCESS======$(C_END)] \n"
 
-all:	$(NAME)
+all:	msg $(NAME)
 
+msg:
+	@printf "[$(C_YELLOW)=====COMPILING=====$(C_END)]\n"
+	
 clean:
 	@printf "[$(C_RED)===DELETING OBJS===$(C_END)]\n"
 	$(RM) $(OBJS_D)
