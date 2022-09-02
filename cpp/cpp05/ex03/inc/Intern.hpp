@@ -6,7 +6,7 @@
 /*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 15:53:13 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/09/02 16:33:52 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2022/09/02 17:45:38 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ class Intern {
 
         // Member functions
         Form*  makeForm(std::string name, std::string target);
-        Form* 	Intern::makeShrubberyCreation(const std::string &target);
-        Form* 	Intern::makeRobotomyRequest(const std::string &target);
-        Form* 	Intern::makePresidentialPardon(const std::string &target);
+        Form* 	makeShrubberyCreation(const std::string &target);
+        Form* 	makeRobotomyRequest(const std::string &target);
+        Form* 	makePresidentialPardon(const std::string &target);
 
         // Exceptions
         class FormNameDoesNotExist : public std::exception {

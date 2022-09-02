@@ -6,7 +6,7 @@
 /*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:04:12 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/09/02 16:33:30 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2022/09/02 17:48:50 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ Intern& Intern::operator=(const Intern & rhs)
 Form* Intern::makeForm(std::string name, std::string target)
 {
     std::string availableForms[3] = {"Shrubbery Creation", "Robotomy Request", "Presidential Pardon"};
-    Form* (Intern::*forms[3])(const std::string) = {&Intern::makeShrubberyCreation, &Intern::makeRobotomyRequest, &Intern::makeShrubberyCreation};
+    Form* (Intern::*forms[3])(std::string) = {&Intern::makeShrubberyCreation, &Intern::makeRobotomyRequest, &Intern::makeShrubberyCreation}; // forms is an array of pointer to member variables
     int i;
     for (i = 0; i < 3; i++)
     {
