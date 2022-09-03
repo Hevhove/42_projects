@@ -29,7 +29,7 @@ class Form {
         Form();
         Form(std::string name);
         Form(std::string name, const int signingGradeRequired, const int executingGradeRequired);
-        ~Form();
+        virtual ~Form();
         Form(Form const & src);
         Form& operator=(Form const & rhs);
         

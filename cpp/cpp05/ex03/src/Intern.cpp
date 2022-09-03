@@ -37,8 +37,9 @@ Intern& Intern::operator=(const Intern & rhs)
 // Member functions
 Form* Intern::makeForm(std::string name, std::string target)
 {
-    std::string availableForms[3] = {"Shrubbery Creation", "Robotomy Request", "Presidential Pardon"};
-    Form* (Intern::*forms[3])(std::string) = {&Intern::makeShrubberyCreation, &Intern::makeRobotomyRequest, &Intern::makeShrubberyCreation}; // forms is an array of pointer to member variables
+    std::string availableForms[3] = {"shrubbery creation", "robotomy request", "presidential pardon"};
+    // The below line creates an array of 3 pointers to member functions
+    Form* (Intern::*forms[3])(const std::string&) = {&Intern::makeShrubberyCreation, &Intern::makeRobotomyRequest, &Intern::makeShrubberyCreation};
     int i;
     for (i = 0; i < 3; i++)
     {
@@ -46,12 +47,14 @@ Form* Intern::makeForm(std::string name, std::string target)
             break ;
     }
     try {
-            if (index < 3)
-                return (this->*forms[i])(target);
+            if (i < 3)
+                return ((this->*(forms[i]))(target));
             else
                 throw Intern::FormNameDoesNotExist();
-    } catch (std::exception& e) {
+    } 
+    catch (std::exception& e) {
         std::cerr << e.what() << std::endl;
+        return (0);
     }
 }
 

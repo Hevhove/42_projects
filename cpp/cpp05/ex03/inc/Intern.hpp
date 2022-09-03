@@ -28,7 +28,7 @@ class Intern {
         Intern& operator=(const Intern & rhs);
 
         // Member functions
-        Form*  makeForm(std::string name, std::string target);
+        Form*  makeForm(const std::string name, const std::string target);
         Form* 	makeShrubberyCreation(const std::string &target);
         Form* 	makeRobotomyRequest(const std::string &target);
         Form* 	makePresidentialPardon(const std::string &target);

@@ -14,35 +14,31 @@
 #include "../inc/PresidentialPardonForm.hpp"
 #include "../inc/RobotomyRequestForm.hpp"
 #include "../inc/ShrubberyCreationForm.hpp"
+#include "../inc/Intern.hpp"
 
-int main(void)
+int	main(void)
 {
-    // Create bureaucrats
-    Bureaucrat  bur1("George", 1);
-    Bureaucrat  bur2("William", 100);
+	Intern someRandomIntern;
+	Form* form;
+    Bureaucrat bur1("Harry", 1);
 
-    // Create forms to be signed
-    ShrubberyCreationForm   form1("My garden"); // (Sign: 145       Exec: 137)
-    RobotomyRequestForm     form2("Toaster");   // (Sign: 72        Exec: 45)
-    PresidentialPardonForm  form3("Hendrik");   // (Sign: 25        Exec: 5)
+	form = someRandomIntern.makeForm("presidential pardon", "Bender");
+    bur1.signForm(*form);
+    bur1.executeForm(*form);
+	delete form;
+	
+	form = someRandomIntern.makeForm("robotomy request", "Bender");
+    bur1.signForm(*form);
+    bur1.executeForm(*form);
+	delete form;
 
-    // Sign forms
-    std::cout << "[SIGNING FORMS]" << std::endl;
-    bur1.signForm(form1);
-    bur1.signForm(form2);
-    bur2.signForm(form3); // fails -> signing level too low
-    
-    // Execute forms
-    std::cout << std::endl << "[EXECUTING FORMS]" << std::endl;
-    bur1.executeForm(form1);
-    bur2.executeForm(form2); // fails -> executing level too low
-    bur1.executeForm(form3); // fails -> has not been signed
-    
-    // Let's try again
-    std::cout << std::endl << "[RETRYING]" << std::endl;
-    bur1.executeForm(form2);
-    bur1.signForm(form3);
-    bur1.executeForm(form3);
-    
-    return (0);
+	form = someRandomIntern.makeForm("shrubbery creation", "Bender");
+    bur1.signForm(*form);
+    bur1.executeForm(*form);
+	delete form;
+
+	form = someRandomIntern.makeForm("earth destruction request form", "Bender");
+    delete form;
+
+	return (0);
 }
