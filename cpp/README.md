@@ -361,3 +361,161 @@ Normally, execution will stop and an error message is generated. The technical t
 *catch* : the catch statement allows you to define a block of code to be executed if an error occurs in the try block. 
 
 std::exception::what aka `virtual const char* what() const throw();` is going to return a pointer with a description of the related exception. If we want to give pointer on an excepton subclass that we made, we must overload this function in our child class.
+
+### Casting in C
+In C, there is both implicit and explicit casting. Often we have been doing implicit casts but we have not noticed it because they have happened automatically. Both of these casts can have behave differently. 
+
+#### Conversion
+```
+void    dump_32bits_integer(int const n);
+void    dump_64bits_integer(double const z);
+
+int main(void) {
+    int     a = 42;
+
+    double  b = a;          // implicit conversion cast
+    double  c = (double)a;  // explicit conversion cast
+
+    double  d = a;          // Ok no problem -> converting to a more precise type
+    int     e = d;          // Loss of precision happens here. Hazardous!
+    int     f = (int)d;     // Instead of the above, we better do this. In this way, we signal to the compiler that we absolutely accept the loss of precision.
+
+    dump_32bits_integer(a);
+
+    dump_64bits_integer(b);
+    dump_64bits_integer(c);
+
+    dump_64bits_integer(d);
+    dump_32bits_integer(e);
+    dump_32bits_integer(f);
+}
+```
+
+In the above example, we see a conversion between integers and doubles. A double has a very different internal representation. Both b and c have the same underlying bit values.
+
+Additionally, there is a hierarchy in types of numbers. When we convert into a more precise type, generally there is no problem, but what happens when we convert to a less precise type? We can have precision loss in this case. When cascading calculations in this way, margins of errors can increase exponentially when having many numbers with precision loss. 
+
+If we want to avoid precision loss, we can use the flag -Wnoconversion which will prohibit implicit casts when precision is lost. 
+
+#### C type reinterpretation
+Above conversions change the bit layouts of the underlying number, but keep the number the same. There is also a way to keep the bit layout when converting a number. We call this reinterpreting a number. In the below example, we are making use of void pointers because they are type-agnostic. They can point to an address of any type.
+
+```
+int main(void){
+    float a =       420.042f;
+
+    void* b =       &a;         // Implicit reinterpretation cast
+    void* c =       (void*)&a;  // Explicit reinterpretation cast
+
+    void* d =       &a;
+    int*  e =       d;
+    int*  f =       (int *)d;
+
+    printf("%p, %f\n", &a, a);
+
+    printf("%p\n", b);
+    printf("%p\n", c);
+
+    printf("%p\n", d);
+    printf("%p, %d\n", e, *e);
+    printf("%p, %d\n", f, *f);
+}
+```
+
+#### Type qualifier reinterpretation
+Here we will cast ints into const ints. The two type qualifiers this applies to is const and volatile. 
+
+```
+int main(void){
+    int         a =       420.042f;
+
+    int const * b =       &a;         // Implicit reinterpretation cast
+    int const * c =       (void*)&a;  // Explicit reinterpretation cast
+
+    int const * d =       &a;
+    int*        e =       d;
+    int*        f =       (int *)d;
+
+    printf("%p, %f\n", &a, a);
+
+    printf("%p\n", b);
+    printf("%p\n", c);
+
+    printf("%p\n", d);
+    printf("%p, %d\n", e, *e);
+    printf("%p, %d\n", f, *f);
+}
+```
+
+### Casting in C++
+#### Upcasting and downcasting
+We can reinterpret casts as well with classes in C++. For example, we can cast the address of a child into an address of the parent type. A parent is a less specialized type of a child and a child is a more specialized type of a parent class. 
+
+Similarly to the above explanations in C, we can downcast a parent into a type of child, but we have to do it explicitly!
+
+A problem can arise when we upcast a Child1 to a Parent, then downcast the parent back to a subclass which is not Child1 but for example Child2. This will compile but will cause problems upon executing.
+
+#### Static Casts
+
+There are 5 types of casts:
+1. Conversion
+2. Reinterpretation
+3. Change of type qualifier
+4. Downcasts
+5. Upcasts
+
+C-style casts cannot do safe downcasting. The new casting in C++ is introduced to make it very clear to the compiler what the programmer wants to do.
+
+Static cast is the simplest type of cast that can be used. It is a compile time cast. It does things like implicit conversions between types and it can also can explicit conversion functions.
+
+```
+int     a = 42;
+double  b = a;                      // OK
+int     c = b;                      // No, loss of precision
+int     d = static_cast<int>(b);    // Ok, compiler obeys
+```
+
+The above can also be done with classes:
+```
+int main(void)
+{
+    Child1      a;
+
+    Parent*     b = &a;                         // OK
+    Child1*     c = b;                          // not allowed
+    Child2*     d = static_cast<Child2 *>(b);   // explicitly, ok compiler obeys
+}
+```
+
+In the above code, if we replace Child2 on the 4th statement with an unrelated class (no inherited child/parent class), the compiler will complain. 
+
+#### Dynamic casts
+A dynamic cast in C++ is mainly used for safe downcasting at run time. To work on dynamic_cast there must be one virtual function in the base class. A dynamic_cast works only on polymorphic base classes because it uses this information to decide safe downcasting.
+
+Dynamic casting will take place at execution instead of at compilation! A program can compile but the dynamic cast can fail during execution. This means when working with dynamic casts, we need to make sure in our code the failsafes are in place. 
+
+```
+int main(void)
+{
+    Child1      a;
+    Parent*     b = &a;
+
+    // Explicit downcast
+    Child1* c = dynamic_cast<Child1 *>(b);
+    if (c == NULL) {
+        std::cout << "Conversion is NOT Ok" << std::endl;
+    } else {
+        std::cout << "Conversion is OK" << std::endl; 
+    }
+
+    // ALTERNATIVE
+    try {
+        Child2&     d = dynamic_cast<Child2 &>(*b); // Child2 here, this will fail!
+        std::cout << "Conversion is Ok" << std::endl;
+    } catc (std::bad_cast &bc) {
+        std::cout << "Conversion is not OK" << bc.what() << std::endl;
+        return (0);
+    }
+
+}
+```
