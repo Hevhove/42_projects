@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/04 17:12:22 by Hendrik           #+#    #+#             */
-/*   Updated: 2022/09/06 10:53:06 by hvan-hov         ###   ########.fr       */
+/*   Created: 2022/09/07 15:41:17 by hvan-hov          #+#    #+#             */
+/*   Updated: 2022/09/07 19:04:44 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,11 @@
 
 int main(int argc, char* argv[])
 {
-	if (argc != 2)
-	{
-		std::cout << "Please provide 1 argument to the program" << std::endl;
-		return (-1);
-	}
-	Conversion conversion(argv[1]);
-	conversion.printConversions();
-	return (0);
+    if (argc != 2)
+    {
+        std::cout << "USAGE: ./convert {user string}" << std::endl;
+        return (0);
+    }
+    Conversion conversion = Conversion(argv[1]);
+    conversion.print();
 }

@@ -5,307 +5,296 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/06 10:28:25 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/09/06 15:00:12 by hvan-hov         ###   ########.fr       */
+/*   Created: 2022/09/07 15:50:34 by hvan-hov          #+#    #+#             */
+/*   Updated: 2022/09/07 19:16:50 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/Conversion.hpp"
 
-// Constructors
-Conversion::Conversion(const char *s) : str(s), isConverted(false), c(0), i(0), f(0.0f), d(0.0), ld(0.0) {
-    // Step 1: detect the type of literal passed as a parameter
-    // Char:    value between 32 and 126 of length 1
-    // Int:     string of numbers without decimal
-    // Float:   string of numbers with decimal and ending in f
-    // Double:  string of numbers with decimal
-    type_t type = typeDetect(str);
-    executeConversions(type);
+// Parametrical Constructors
+Conversion::Conversion(){
+
 }
 
-Conversion::~Conversion()
+Conversion::Conversion(std::string input){
+    for (int i = 0; i < 4; i++)
+        conversion_table[i].status = NOT_CONVERTED;
+    
+    conversion_table[T_CHAR].conversionFunction = &Conversion::convertToChar;
+    conversion_table[T_INT].conversionFunction = &Conversion::convertToInt;
+    conversion_table[T_FLOAT].conversionFunction = &Conversion::convertToFloat;
+    conversion_table[T_DOUBLE].conversionFunction = &Conversion::convertToDouble;
+    conversion_table[T_NONE].conversionFunction = &Conversion::allImpossible;
+
+    (this->*(conversion_table[getType(input)].conversionFunction))(input);
+}
+
+Conversion::~Conversion(){
+    
+}
+
+Conversion::Conversion(const Conversion & src) {
+    for (size_t i = 0; i < NB_TYPE_CONVERSIONS; i++)
+		conversion_table[i].status = src.conversion_table[i].status;
+	converted = src.converted;
+}
+
+Conversion& Conversion::operator=(const Conversion & rhs) {
+    for (size_t i = 0; i < NB_TYPE_CONVERSIONS; i++)
+		conversion_table[i].status = rhs.conversion_table[i].status;
+	converted = rhs.converted;
+    return (*this);    
+}
+
+Conversion::t_types    Conversion::getType(const std::string &str)
 {
-    
-}
-
-// Conversions
-void    Conversion::executeConversions(type_t type) {
-    switch (type)
-    {
-        case (CHAR):
-            toChar();
-            charConversions();
-            break;
-        case (INT):
-            toLongDouble();
-            toInt();
-            intConversions();
-            break;
-        case (FLOAT):
-            toFloat();
-            floatConversions();            
-            break;
-        case (DOUBLE):
-            toDouble();
-            doubleConversions();
-            break ;
-        case (NONE):
-            this->isConverted = false;
-            break;
-    }
-}
-
-void    Conversion::toLongDouble(void) {
-    int minus = (str[0] == '-') ? -1 : 1;
-    int minus_check = (minus == -1) ? 1 : 0;
-    int predecimal_count = str.find(".");
-    int dot = 0;
-    
-    for (std::string::size_type i = minus_check; i < str.size(); i++)
-    {
-        if (str[i] == '.')
-        {
-            dot = 1;
-            continue ;
-        }
-        this->ld += (static_cast<long double>((this->str)[i]) - 48) * static_cast<long double>(pow(10, predecimal_count - (int)i + dot - 1));
-    }
-    this->ld *= minus;
-    std::cout << "LONG DOUBLE IS: " << this->ld << std::endl;
-}
-
-void    Conversion::toChar(void) {
-    this->c = (this->str)[0];
-}
-
-void    Conversion::toInt(void) {
-    int minus = (str[0] == '-') ? -1 : 1;
-
-    if (minus == -1)
-    {
-        for (std::string::size_type i = 1; i < str.size(); i++)
-            this->i += (static_cast<int>((this->str)[i]) - 48) * pow(10, str.size() - i - 1);
-        this->i *= minus;
-        return ;
-    }
-    for (std::string::size_type i = 0; i < str.size(); i++)
-        this->i += (static_cast<int>((this->str)[i]) - 48) * pow(10, str.size() - i - 1);
-    this->i *= minus;
-}
-
-void    Conversion::toFloat(void) {
-    int minus = (str[0] == '-') ? -1 : 1;
-    int minus_check = (minus == -1) ? 1 : 0;
-    int predecimal_count = str.find(".");
-    int dot = 0;
-
-    for (std::string::size_type i = minus_check; i < str.size() - 1; i++)
-    {
-        if (str[i] == '.')
-        {
-            dot = 1;
-            continue ;
-        }
-        this->f += (static_cast<float>((this->str)[i]) - 48) * pow(10, predecimal_count - (int)i + dot - 1);
-    }
-    this->f *= minus;
-}
-
-void	Conversion::toDouble(void) {
-    int minus = (str[0] == '-') ? -1 : 1;
-    int minus_check = (minus == -1) ? 1 : 0;
-    int predecimal_count = str.find(".");
-    int dot = 0;
-    
-    for (std::string::size_type i = minus_check; i < str.size(); i++)
-    {
-        if (str[i] == '.')
-        {
-            dot = 1;
-            continue ;
-        }
-        this->d += (static_cast<double>(((this->str)[i]) - 48) * pow(10, predecimal_count - (int)i + dot - 1));
-    }
-    this->d *= minus;
-}
-
-void    Conversion::charConversions(void) {
-    this->i = static_cast<int>(this->c);
-    this->f = static_cast<float>(this->c);
-    this->d = static_cast<double>(this->c);
-    this->isConverted = true;
-}
-
-void    Conversion::intConversions(void) {
-    this->c = static_cast<char>(this->i);
-    this->f = static_cast<float>(this->i);
-    this->d = static_cast<double>(this->i);
-    this->isConverted = true;
-}
-
-void    Conversion::floatConversions(void) {
-    this->c = static_cast<char>(this->f);
-    this->i = static_cast<int>(this->f);
-    this->d = static_cast<double>(this->f);
-    this->isConverted = true;
-}
-
-void    Conversion::doubleConversions(void) {
-    this->c = static_cast<char>(this->d);
-    this->i = static_cast<int>(this->d);
-    this->f = static_cast<float>(this->d);
-    this->isConverted = true;
-}
-
-// Type Detection
-Conversion::type_t     Conversion::typeDetect(std::string str) {
     if (isChar(str))
-        return (CHAR);
+        return (T_CHAR);
     else if (isInt(str))
-         return (INT);
+        return (T_INT);
     else if (isFloat(str))
-    {
-        return (FLOAT);
-    }
+        return (T_FLOAT);
     else if (isDouble(str))
-        return (DOUBLE);
-    else 
-        return (NONE);
+        return (T_DOUBLE);
+    else
+        return (T_NONE);   
 }
 
-bool    Conversion::isChar(std::string str) {
-    /*
-        We have a character if the string is:
-            1. Length = 1
-            2. Between range 0 and 127 (CHAR Range)
-            3. We handle displayability later
-    */
-    if (str.length() == 1 && (str[0] < 48 || str[0] > 57))
-    {
+bool    Conversion::isChar(const std::string &str) {
+    if (str.length() == 1 && !std::isdigit(str[0]))
         return (true);
-    }
     else
         return (false);
 }
 
-bool    Conversion::isInt(std::string str) {
-    /*
-        We have an int if the string is:
-            1. a sequence of all numbers
-            2. Can be prefixed by a minus
-    */
-    for (std::string::size_type i = 0; i < str.size(); i++)
+bool    Conversion::isInt(const std::string &str) {
+    int len = str.length();
+    int i;
+
+    if (str[0] == '-')
+        i = 1;
+    else
+        i = 0;
+    if (len == i)
+        return (false);
+    for (; i < len; i++)
     {
-        if ((str[i] >= 48 && str[i] <= 57))
-            continue ;
-        else if (i == 0 && str[i] == '-')
-            continue ;
-        else
+        if (!std::isdigit(str[i]))
             return (false);
     }
     return (true);
 }
 
-bool    Conversion::isFloat(std::string str) {
-    /*
-        We have a float if the string is:
-            1. a sequence of all numbers with maximum 1 decimal
-            2. ending in the letter 'f';original string
-    */
-    int decimals = 0;
-    
-    for (std::string::size_type i = 0; i < str.size(); i++)
+bool Conversion::isFloat(const std::string &str) {
+    size_t i = 0;
+
+    if (str == "-inff" || str == "+inff" || str == "nanf")
+        return (true);
+    if (str[0] == '-')
+        i++;
+    while (std::isdigit(str[i]))
+        i++;
+    if (i + 1 == str.length() && str[i] == 'f')
+        return (true);
+    if (i + 1 != str.length() && str[i] != '.')
+        return (false);
+    else
+        i++;
+    while (std::isdigit(str[i]))
+        i++;
+    if (i + 1 != str.length() || str[i] != 'f')
+        return (false);
+    return (true);
+}
+
+bool Conversion::isDouble(const std::string &str) {
+    size_t i = 0;
+
+    if (str == "-inf" || str == "+inf" || str == "nan")
+        return (true);
+    if (str[0] == '-')
+        i++;
+    while (std::isdigit(str[i]))
+        i++;
+    if (str[i] != '.')
+        return (false);
+    i++;
+    while (std::isdigit(str[i]))
+        i++;
+    if (i != str.length())
+        return (false);
+    return (true);
+}
+
+Conversion::t_status    Conversion::setCharStatus(const char &c)
+{
+    if (std::isprint(c))
+        return (CONVERTED);
+    else
+        return (NON_DISPLAYABLE);
+}
+
+std::string Conversion::convertToString(int integer)
+{
+    std::string         convertedString;
+    std::stringstream   stringstream;
+
+    stringstream << integer;
+    stringstream >> convertedString;
+
+    return (convertedString);
+}
+
+void    Conversion::convertToChar(const std::string &str)
+{
+    // Converting char
+    std::stringstream stringstream(str);
+    stringstream >> converted.c;
+    conversion_table[T_CHAR].status = setCharStatus(converted.c);
+
+    // Converting the other types explicitly
+    converted.i = static_cast<int>(converted.c);
+    conversion_table[T_INT].status = CONVERTED;
+    converted.f = static_cast<float>(converted.c);
+    conversion_table[T_FLOAT].status = CONVERTED;
+    converted.d = static_cast<double>(converted.c);
+    conversion_table[T_DOUBLE].status = CONVERTED;
+}
+
+void    Conversion::convertToInt(const std::string &str) {
+    // Converting Int
+    std::stringstream stringstream(str);
+    stringstream >> converted.i;
+    if (convertToString(converted.i) != str)
+        allImpossible(str);
+    else
     {
-        if (str[str.size() - 1] != 'f')
-            return (false) ;
-        if (str[i] >= 48 && str[i] <= 57)
-            continue ;
-        else if (i == 0 && str[i] == '-')
-            continue ;
-        else if (str[i] == '.' && i != (str.size() - 2))
-        {
-            decimals++;
-            if (decimals > 1)
-                return (false);
-            continue ;
-        }
-        else if (i != str.size() - 1)
+        conversion_table[T_INT].status = CONVERTED;
+
+        converted.c = static_cast<char>(converted.i);
+        conversion_table[T_CHAR].status = setCharStatus(converted.c);
+        converted.f = static_cast<float>(converted.i);
+        conversion_table[T_FLOAT].status = CONVERTED;
+        converted.d = static_cast<double>(converted.i);
+        conversion_table[T_DOUBLE].status = CONVERTED;
+
+    }
+}
+
+void    Conversion::convertToFloat(const std::string &str)
+{
+    if ( str == "+inff")
+        converted.f = 1.0 / 0.0 ;
+    else if (str == "-inff")
+        converted.f = -1.0 / 0.0 ;
+    else if (str == "nanf")
+        converted.f = std::numeric_limits<float>::quiet_NaN();
+    else
+        converted.f = setFloat(str);
+    conversion_table[T_FLOAT].status = CONVERTED;
+
+    // Explicitly converting the other types
+    converted.i = static_cast<int>(converted.f);
+    if (converted.i != static_cast<long long>(converted.f))
+    {
+        conversion_table[T_INT].status = IMPOSSIBLE;
+        converted.c = static_cast<char>(converted.f);
+        conversion_table[T_CHAR].status = setCharStatus(converted.c);
+    }
+    converted.d = static_cast<double>(converted.f);
+    conversion_table[T_DOUBLE].status = CONVERTED;
+}
+
+float   Conversion::setFloat(const std::string &str)
+{
+    std::stringstream   stringstream(str);
+    double              tmp;
+
+    stringstream >> tmp;
+    if (tmp > std::numeric_limits<float>::max())
+        return (1./0.);
+    else
+        return ((float)tmp);
+}
+
+double Conversion::setDouble(const std::string &str)
+{
+    std::stringstream   stringstream(str);
+    long double         tmp;
+
+    stringstream >> tmp;
+    if (tmp > std::numeric_limits<double>::max())
+        return (1.0 / 0.0);
+    else
+        return ((double)tmp);
+}
+
+void    Conversion::convertToDouble(const std::string &str)
+{
+    // Converting double
+    if (str == "+inf")
+        converted.d = 1.0 / 0.0;
+    else if (str == "-inf")
+        converted.d = -1.0 / 0.0;
+    else if (str == "nan")
+        converted.d = std::numeric_limits<double>::quiet_NaN();
+    else
+        converted.d = setDouble(str);
+    conversion_table[T_DOUBLE].status = CONVERTED;
+
+    // Explicitly converting
+    converted.i = static_cast<int>(converted.d);
+    if (converted.i != static_cast <long long>(converted.d))
+    {
+        conversion_table[T_INT].status = IMPOSSIBLE;
+        conversion_table[T_CHAR].status = IMPOSSIBLE;
+    }
+    else
+    {
+        conversion_table[T_INT].status = CONVERTED;
+        converted.c = static_cast<char>(converted.d);
+        conversion_table[T_CHAR].status = setCharStatus(converted.c);
+    }
+    converted.f = static_cast<float>(converted.d);
+    conversion_table[T_FLOAT].status = CONVERTED;
+}
+
+void    Conversion::allImpossible(const std::string &str)
+{
+    (void)str;  
+    for (size_t i = 0; i < NB_TYPE_CONVERSIONS; i++)
+        conversion_table[i].status = IMPOSSIBLE;
+}
+
+void    Conversion::print(void) const
+{
+    std::cout << "char: ";
+    if (!printError(conversion_table[T_CHAR].status))
+        std::cout << "'" << converted.c << "'" << std::endl;
+    std::cout << "int: ";
+    if (!printError(conversion_table[T_INT].status))
+        std::cout << converted.i << std::endl;
+    std::cout << "float: ";
+    if (!printError(conversion_table[T_FLOAT].status))
+        std::cout << std::fixed << std::setprecision(1) << converted.f << "f" << std::endl;
+    std::cout << "double: ";
+    if (!printError(conversion_table[T_DOUBLE].status))
+        std::cout << std::fixed << std::setprecision(1) << converted.d << std::endl;
+
+}
+
+bool    Conversion::printError(int status) const
+{
+    switch (status)
+    {
+        case IMPOSSIBLE:
+            std::cout << "Impossible" << std::endl;
+            return (true);
+        case NON_DISPLAYABLE:
+            std::cout << "Non displayable" << std::endl;
+            return (true);
+        default:
             return (false);
-    }
-    if (decimals != 1)
-        return (false);
-    return (true);
-}
-
-bool Conversion::isDouble(std::string str) {
-    /*
-        We have a double if the string has maximum one decimal
-    */
-    int decimals = 0;
-    
-    for (std::string::size_type i = 0; i < str.size(); i++)
-    {
-        if (str[i] >= 48 && str[i] <= 57)
-            continue ;
-        else if (i == 0 && str[i] == '-')
-            continue ;
-        else if (str[i] == '.' && i != (str.size() - 1))
-        {
-            decimals++;
-            if (decimals > 1)
-                return (false);
-            continue ;
-        }
-    }
-    if (decimals != 1)
-        return (false);
-    return (true);
-}
-
-void    Conversion::printConversions(void) const {
-    if (isConverted)
-    {
-        // CHAR FORMATTING
-        if (this->c >= 32 && this->c <= 126)
-            std::cout << "char: '" << this->c << "'" << std::endl;
-        else
-            std::cout << "char: Non displayable" << std::endl;
-        
-        // INT
-        std::cout << "int: " << this->i << std::endl;
-         
-        // FLOAT FORMATTING
-        if (static_cast<int>(this->f) == this->f)
-            std::cout << "float: " << this->f << ".0f" << std::endl;
-        else
-            std::cout << "float: " << this->f << "f" << std::endl;            
-
-        // DOUBLE FORMATTING
-        if (static_cast<int>(this->d) == this->d)
-            std::cout << "double: " << this->d << ".0" << std::endl;
-        else
-            std::cout << "double: " << this->d << std::endl;
-
-    }
-    else if (str.compare("nan") == 0)
-    {
-        std::cout << "char: impossible" << std::endl;
-        std::cout << "int: impossible" << std::endl; 
-        std::cout << "float: nanf" << std::endl; 
-        std::cout << "double: nan" << std::endl; 
-    }
-    else if (str.compare("+inf") == 0 || str.compare("+inff") == 0)
-    {
-        std::cout << "char: impossible" << std::endl;
-        std::cout << "int: impossible" << std::endl;
-        std::cout << "float: +inff" << std::endl;
-        std::cout << "double: +inf" << std::endl;
-    }
-    else if (str.compare("-inf") || str.compare("-inff") == 0)
-    {
-        std::cout << "char: impossible" << std::endl;
-        std::cout << "int: impossible" << std::endl; 
-        std::cout << "float: -inff" << std::endl; 
-        std::cout << "double: -inf" << std::endl;
     }
 }

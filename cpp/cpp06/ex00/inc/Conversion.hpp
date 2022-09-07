@@ -5,75 +5,93 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/04 17:26:08 by Hendrik           #+#    #+#             */
-/*   Updated: 2022/09/06 14:43:47 by hvan-hov         ###   ########.fr       */
+/*   Created: 2022/09/07 15:44:06 by hvan-hov          #+#    #+#             */
+/*   Updated: 2022/09/07 19:04:44 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CLASS_CONVERSION_CPP
-# define CLASS_CONVERSION_CPP
+#ifndef CLASS_CONVERSION_HPP
+# define CLASS_CONVERSION_HPP
 # include <iostream>
+# include <iomanip>
 # include <string>
-# include <cmath>
+# include <cstdlib>
 # include <climits>
-# include <cfloat>
+# include <limits>
+# include <sstream>
+# define NB_TYPE_CONVERSIONS 4
 
 class Conversion {
-	private:
-		// input string
-		std::string str;
-		
-		// status check
-		bool	isConverted;
+    private:
+        // Typedefs
+        typedef enum e_status
+        {
+            NOT_CONVERTED,
+            IMPOSSIBLE,
+            NON_DISPLAYABLE,
+            CONVERTED
+        }   t_status;
 
-		// Converted values
-		char	c;
-		int		i;
-		float	f;
-		double	d;
+        typedef enum e_types
+        {
+            T_CHAR,
+            T_INT,
+            T_DOUBLE,
+            T_FLOAT,
+            T_NONE
+        }   t_types;
 
-		// Helper values for ranges
-		long int	li;
-		long double	ld;
+        typedef struct s_conversion_table
+        {
+            t_status    status;
+            void        (Conversion::*conversionFunction)(const std::string&);
+        }   t_conversion_table;
 
-		// Type detection
-		typedef enum Types {CHAR, INT, FLOAT, DOUBLE, NONE} type_t; 
-		type_t	typeDetect(std::string str);
-		
-		bool	isChar(std::string str);
-		bool	isInt(std::string str);
-		bool	isFloat(std::string str);
-		bool	isDouble(std::string str);
+        typedef struct s_conversion
+        {
+            char    c;
+            int     i;
+            float   f;
+            double  d;
+        }   t_conversion;
 
-		// Conversion functions
-		void	executeConversions(type_t type);
-		
-		void	toChar();
-		void	toInt();
-		void	toFloat();
-		void	toDouble();
-		void	toLongDouble();
-		
-		void	charConversions();
-		void	intConversions();
-		void	floatConversions();
-		void	doubleConversions();
+        // Variables
+        t_conversion_table  conversion_table[NB_TYPE_CONVERSIONS + 1];
+        t_conversion        converted;
 
-		// Range checking
-		bool	intOutOfRange();
-		bool	floatOutOfRange();
-		bool	doubleOutOfRange();
+        // Type Detection
+        t_types     getType(const std::string& input);
+        bool        isChar(const std::string& input);
+        bool        isInt(const std::string& input);
+        bool        isFloat(const std::string& input);
+        bool        isDouble(const std::string& input);
 
-	public:
-		// Constructors
-		Conversion();
-		Conversion(const char *);
-		~Conversion();
-		Conversion(const Conversion & src);
-		Conversion& operator=(const Conversion &rhs);
+        // Limits checks for conversions
+        t_status    setCharStatus(const char &c);
+        std::string convertToString(int i);
+        float       setFloat(const std::string &str);
+        double      setDouble(const std::string &str);
 
-		// Printing functions
-		void	printConversions(void) const;
+        // Conversion functions
+        void        convertToChar(const std::string &str);
+        void        convertToInt(const std::string &str);
+        void        convertToFloat(const std::string &str);
+        void        convertToDouble(const std::string &str);
+        void        allImpossible(const std::string &str);
+
+        // Printing errors
+        bool        printError(int status) const;
+
+    public:
+        // Constructors
+        Conversion();
+        Conversion(std::string input);
+        ~Conversion();
+        Conversion(const Conversion & src);
+        Conversion& operator=(Conversion const & rhs);
+
+        // Printing
+        void    print() const;
 };
 
 #endif
