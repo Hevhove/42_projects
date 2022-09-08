@@ -6,7 +6,7 @@
 /*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 15:50:34 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/09/07 19:16:50 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2022/09/08 15:59:22 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,7 +213,7 @@ float   Conversion::setFloat(const std::string &str)
 
     stringstream >> tmp;
     if (tmp > std::numeric_limits<float>::max())
-        return (1./0.);
+        return (1.0 / 0.0);
     else
         return ((float)tmp);
 }
@@ -267,8 +267,10 @@ void    Conversion::allImpossible(const std::string &str)
         conversion_table[i].status = IMPOSSIBLE;
 }
 
-void    Conversion::print(void) const
-{
+void    Conversion::print(void) co    std::stringstream stringstream(str);
+    stringstream >> converted.c;
+    conversion_table[T_CHAR].status = setCharStatus(converted.c);
+
     std::cout << "char: ";
     if (!printError(conversion_table[T_CHAR].status))
         std::cout << "'" << converted.c << "'" << std::endl;
@@ -277,7 +279,7 @@ void    Conversion::print(void) const
         std::cout << converted.i << std::endl;
     std::cout << "float: ";
     if (!printError(conversion_table[T_FLOAT].status))
-        std::cout << std::fixed << std::setprecision(1) << converted.f << "f" << std::endl;
+        std::cout << std::fixed << std::setprecision(setCharStatu1) << converted.f << "f" << std::endl;
     std::cout << "double: ";
     if (!printError(conversion_table[T_DOUBLE].status))
         std::cout << std::fixed << std::setprecision(1) << converted.d << std::endl;
