@@ -6,29 +6,41 @@
 /*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 18:29:50 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/09/08 18:42:24 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2022/09/09 17:44:31 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/whatever.hpp"
+#include "../inc/Awesome.hpp"
 
-int main(void)
+int main( void ) 
 {
-    int a = 7;
-    int b = 9;
-
+    int a = 2;
+    int b = 3;
     
-    std::cout << "Max of " << a << " and " << b << " is ";
-    std::cout << max<int>(a, b) << std::endl;
+    ::swap( a, b );
+    std::cout << "a = " << a << ", b = " << b << std::endl;
+    std::cout << "min( a, b ) = " << ::min( a, b ) << std::endl;
+    std::cout << "max( a, b ) = " << ::max( a, b ) << std::endl;
     
-    std::cout << "Min of " << a << " and " << b << " is ";
-    std::cout << min<int>(a, b) << std::endl;
-
-    std::cout << "a is now: " << a << std::endl;
-    std::cout << "b is now: " << b << std::endl;
-    swap<int>(a, b);
-    std::cout << "a is now: " << a << std::endl;
-    std::cout << "b is now: " << b << std::endl;
-
-    return (0);
+    std::string c = "chaine1";
+    std::string d = "chaine2";
+    
+    ::swap(c, d);
+    std::cout << "c = " << c << ", d = " << d << std::endl;
+    std::cout << "min( c, d ) = " << ::min( c, d ) << std::endl;
+    std::cout << "max( c, d ) = " << ::max( c, d ) << std::endl;
+    
+    return 0;
 }
+
+
+// int main(void)
+// {
+//     Awesome a(2), b(4);
+//     swap(a, b);
+//     std::cout << a << " " << b << std::endl;
+//     std::cout << max(a, b) << std::endl;
+//     std::cout << min(a, b) << std::endl;
+//     return (0);
+// }
