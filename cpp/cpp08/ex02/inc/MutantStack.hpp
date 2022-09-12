@@ -6,7 +6,7 @@
 /*   By: hvan-hov <hvan-hov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 21:33:01 by hvan-hov          #+#    #+#             */
-/*   Updated: 2022/09/12 21:57:03 by hvan-hov         ###   ########.fr       */
+/*   Updated: 2022/09/12 22:15:18 by hvan-hov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ template <typename T> class MutantStack : public std::stack<T> {
     private:
         
     public:
-        // Constructors
+        // Constructors 
         MutantStack(){}
         ~MutantStack(){}
         MutantStack(MutantStack const & src){(*this = src);}
