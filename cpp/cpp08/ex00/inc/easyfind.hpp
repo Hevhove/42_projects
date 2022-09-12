@@ -15,7 +15,6 @@
 # include <iostream>
 # include <vector>
 # include <deque>
-# include <array>
 # include <algorithm>
 
 /*
@@ -33,9 +32,23 @@
 	to loop over the iterators!
 */
 
-template <typename T> typename T::const_iterator easyfind(T container, int i)
+class NumberNotFoundException : public std::exception {
+	virtual const char * what() const throw() {
+		return "Number was not found in array";
+	}
+};
+
+template <typename T> int easyfind(T container, int i)
 {
-	return (find(container.begin(), container.end(), i));
+	typename T::iterator it;
+	typename T::iterator end = container.end();
+
+	it = std::find(container.begin(), container.end(), i);
+	if (it == end) {
+		throw NumberNotFoundException();
+		return (-1);
+	}
+	return (it - container.begin());
 }
 
 template <typename T> void	printElement(T el)

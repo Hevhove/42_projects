@@ -18,7 +18,7 @@ int main(void)
 	int					to_find = 0;
 	srand(time(NULL));
 
-	std::cout << "[VECTOR TEST]" << std::endl;
+	std::cout << "[VECTOR TEST INT]" << std::endl;
 	for(int i = 0; i < 10; i++)
 		v1.push_back(rand() % 10);
 
@@ -26,14 +26,10 @@ int main(void)
 	std::for_each(v1.begin(), v1.end(), &printElement<int>);
 	std::cout << std::endl;
 
-	std::vector<int>::const_iterator it1 = easyfind(v1, to_find);
-	if (it1 != end(v1))
-	{
-		std::cout << &it1 << std::endl;
-		std::cout << &v1.end() << std::endl;
-		std::cout << "The number to find has been found " << std::endl;
+	try {
+		int return_val = easyfind(v1, to_find);
+		std::cout << "Number:		" << to_find << std::endl << "Found at index:	" << return_val << std::endl;
+	} catch (std::exception &e) {
+		std::cout << e.what() << std::endl;
 	}
-	else
-		std::cout << "The number has not been found " << std::endl;
-
 }
