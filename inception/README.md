@@ -138,3 +138,12 @@ Resource: https://mariadb.com/kb/en/beginner-mariadb-articles/
 ## NGINX
 
 ## WordPress
+
+## Project Guide
+Let's go ahead now and dive into what needs to be done to get this project completed!
+
+### Virtual Machine Set-up
+
+
+### Set-up
+Resource: https://www.digitalocean.com/community/tutorials/how-to-install-wordpress-with-lemp-nginx-mariadb-and-php-on-debian-10
