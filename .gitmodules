@@ -1,0 +1,6 @@
+[submodule "42_04_cub3d"]
+	path = 42_04_cub3d
+	url = https://github.com/arieivs/42_04_cub3d.git
+[submodule "minishell"]
+	path = minishell
+	url = https://github.com/Hevhove/minishell.git
