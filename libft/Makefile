@@ -18,6 +18,11 @@ SRCS 		= $(wildcard $(SRCS_DIR)/*c)
 OBJS		= ${SRCS:.c=.o}
 OBJS_DIR	= objs
 
+BONUS_DIR	= bonus
+BONUS_SRCS  = $(wildcard $(BONUS_DIR)/*c)
+OBJS_B		= ${BONUS_SRCS:.c=.o}
+OBJS_B_DIR  = objs_bonus
+
 INCS		= includes
 LIBS		=
 
@@ -38,12 +43,12 @@ $(NAME):	$(OBJS)
 	ar rc $(NAME) $(OBJS)
 	ranlib $(NAME)
 
-bonus: $(NAME) $(OBJSB)
-	ar rc $(NAME) $(OBJSB)
+bonus: $(NAME) $(OBJS_B)
+	ar rc $(NAME) $(OBJS_B)
 	ranlib $(NAME)
 
 clean:
-	$(RM) $(OBJS) $(OBJSB)
+	$(RM) $(OBJS) $(OBJS_B)
 
 fclean: clean
 		$(RM) $(NAME)
