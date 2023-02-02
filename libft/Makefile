@@ -43,7 +43,7 @@ $(NAME):	$(OBJS)
 	ar rc $(NAME) $(OBJS)
 	ranlib $(NAME)
 
-bonus: $(NAME) $(OBJS_B)
+bonus: $(OBJS_B)
 	ar rc $(NAME) $(OBJS_B)
 	ranlib $(NAME)
 
