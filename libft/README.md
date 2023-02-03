@@ -1,6 +1,6 @@
 # LIBFT: Your very own first library
 
-![Score](extras/score.png){width=300 height=300}
+![Score](extras/score.png)
 
 ![Example GIF](extras/libft.gif)
 
