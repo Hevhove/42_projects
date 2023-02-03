@@ -1,4 +1,9 @@
-# GET_NEXT_LINE: Learning to use static Variables
+# GET_NEXT_LINE: An exploration of static variables
+
+![Score](extras/score.png)
+
+![Example GIF](extras/gnl.gif)
+
 ## Project Goal
 In this project the goal is to write a function that takes a file descriptor (int) and returns the first string before the first newline character or EOF. An example of this, let's say an open file descriptor points to a file with contents: "hello\nthere\ndude". Calling the get_next_line function the first time yields "hello", while consequent runs yield "there" and "dude". Finally, if there is no content remaining in the file, (null) will be returned.
 
