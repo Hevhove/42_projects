@@ -3,4 +3,4 @@
 	url = https://github.com/arieivs/42_04_cub3d.git
 [submodule "minishell"]
 	path = minishell
-	url = https://github.com/Hevhove/minishell.git
+	url = https://github.com/Hevhove/minishell
