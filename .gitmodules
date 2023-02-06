@@ -4,3 +4,6 @@
 [submodule "minishell"]
 	path = minishell
 	url = https://github.com/Hevhove/minishell
+[submodule "webserv"]
+	path = webserv
+	url = https://github.com/Hevhove/webserv
