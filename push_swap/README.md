@@ -1,5 +1,9 @@
 # Push Swap
 
+![Score](extras/score.png)
+
+![Example GIF](extras/libft.gif)
+
 ## Project
 The Push_swap project is a very simple and highly effective algorithm project: data will need to be sorted. You have at your disposal a set of int values, 2 stacks and a set of instructions to manipulate both stacks.
 Your goal ? Write a program in C called push_swap which calculates and displays on the standard output the smallest program using Push_swap instruction language that sorts the integer arguments received.
@@ -53,3 +57,13 @@ To sort stacks bigger than 3 numbers, I used the following algorithm:
 	- The cost_a array calculates for all elements currently in s_b, what is the cost to rotate the element in cost_a which is the closest to every element of s_b to the top of s_a.
 	- An example: given 2 stacks a:[2 1 4] and b:[3 0 7], we calculate cost_b as [0 1 -1], where positive numbers stand for an upward rotation (ra/rb) while negatives are representing reverse rotations (rra/rrb). For cost_a, the calculation is a bit more complex: for elements [3 0 7], we need to check, which element in cost_a do we need to rotate to the top to push element [3] in the correct position? In this case, we need [4] to be on top, hence the the first element of cost_a is -1. Using the same logic for [0 7], we find cost_a to be [-1 1 1]
 4. Once we have calculated all costs for s_b to be pushed into the correct position, we execute these operations, push to s_a and repeat for all elements. The program is working similar to a selection sort. Computation times are not optimized for speed (as this is of complexity Oˆ2), but for coming up with the optimal instructions for the stack operations. I'm using the this python visualizer to show the operations performed: [push_swap_visualizer](https://github.com/o-reo/push_swap_visualizer). I also created multiple scripts (test5.sh (credits to @pulgamecanica), test100.sh and test500.sh, to be executed in bash to check the performance of the algorithm)
+
+### Key Learnings
+I'm definitely not claiming the above is the most optimal approach, but it handles the assignment with a very good score (5/5 stars for stacks under 500 in size and 4/5 stars for above).
+The reason for this deterioration is the fact that when calculating the cost arrays, it is costly to calculate for every element in stack B, what is the optimal element in stack A to be on top.
+So much so, that with increasing stack-size, the calculation cost increases of a size more than O(n).
+The assignment does not ask for stacks to be sorted above 500 in size, but if it would do so, this algorithm would take a very long time to find what the optimal rotations are.
+
+In hindsight, our algorithm is similar to a selection sort, where we look at all elements in stack B and check the most optimal element (in terms of rotations needed), 
+to keep a sorted stack A in place. Quite a few classmates ended up choosing a radix-sort approach. While this is definitely cooler, it did not seem to complete this assignment with fewer rotations, often above 1000, while my algorithm solves even stacks of 500 under 700 rotations (4/5 stars).
+In that sense, there is a trade-off between cost of calculating the optimal rotations versus the actual rotations needed to sort the stack.
