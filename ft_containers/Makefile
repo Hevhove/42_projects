@@ -1,11 +1,13 @@
 # VARIABLE DEFINITIONS
-NAME			= containers
+NAME			= ft_containers
 
 SRCS_DIR		= srcs
 SRCS			:= $(shell find $(SRCS_DIR) -name "*.cpp")
 
 OBJS_DIR		= objs
 OBJS			:= $(SRCS:$(SRCS_DIR)/%.cpp=$(OBJS_DIR)/%.o)
+OBJS_SUB_DIR	:= $(shell find $(SRCS_DIR) -mindepth 1 -type d)
+OBJS_SUB_DIR	:= $(OBJS_SUB_DIR:$(SRCS_DIR)/%=$(OBJS_DIR)/%)
 
 CFLAGS			= -Wall -Wextra -Werror -std=c++98 -fsanitize=address #-g
 INCLUDES		= -Iincludes
@@ -26,6 +28,7 @@ endif
 # RULES
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.cpp
 	@mkdir -p $(OBJS_DIR)
+	@mkdir -p $(OBJS_SUB_DIR)
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 $(NAME): $(OBJS)

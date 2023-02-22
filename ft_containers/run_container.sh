@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-set -e 
+set -e
 
-CONTAINER_NAME="containers"
+CONTAINER_NAME="ft_containers"
 
 if [[ $(docker ps | grep tester) ]]; then
     docker kill $CONTAINER_NAME
 fi
 
-docker build -t containers .
-docker run --name $CONTAINER_NAME containers
+docker build -t ft_containers .
+docker run -it --rm --name $CONTAINER_NAME ft_containers ./ft_containers
