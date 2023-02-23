@@ -22,6 +22,8 @@ static void setOptions(std::map<std::string, void(*)()>& tests)
 {
     tests["vectorAll"] = &vectorAll;
     tests["vectorConstructor"] = &vectorConstructor;
+    tests["iteratorAll"] = &iteratorAll;
+    tests["iteratorConstructor"] = &iteratorConstructor;
 }
 
 int main(void) {

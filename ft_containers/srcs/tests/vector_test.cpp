@@ -13,7 +13,7 @@ void vectorConstructor() {
 	{
 		std::cout << std::endl << "- Default Vector Constructor Tests:" << std::endl;
 
-		std::cout << std::endl << "  [FUNCTION CALLS]  " << std::endl;
+		std::cout << std::endl << "  [CODE]  " << std::endl;
 		std::cout << "    ft::vector<int>			ftVector;" << std::endl;
 		std::cout << "    std::vector<int>		stdVector;" << std::endl;
 		ft::vector<int>		ftVector;
@@ -29,7 +29,7 @@ void vectorConstructor() {
 	{
 		std::cout << std::endl << "- Fill Vector Constructor Tests:" << std::endl;
 
-		std::cout << std::endl << "  [FUNCTION CALLS]  " << std::endl;
+		std::cout << std::endl << "  [CODE]  " << std::endl;
 		std::cout << "    ft::vector<int>   ftVector(10);" << std::endl;
 		std::cout << "    std::vector<int>  stdVector(10);" << std::endl;
 		ft::vector<int>		ftVector(10);
@@ -45,7 +45,7 @@ void vectorConstructor() {
 	{
 		std::cout << std::endl << "- Range Vector Constructor Tests:" << std::endl;
 
-		std::cout << std::endl << "  [FT FUNCTION CALLS]  " << std::endl;
+		std::cout << std::endl << "  [FT CODE]  " << std::endl;
         std:: cout << "ft::vector<int>            ftVector(5, 42);" << std::endl;
         std:: cout << "ft::vector<int>::iterator  ftFirst = ftVector.begin();" << std::endl;
         std:: cout << "ft::vector<int>::iterator  ftLast = ftVector.end();" << std::endl;
@@ -65,7 +65,7 @@ void vectorConstructor() {
             std::cout << " " << *ftFirst;
         std::cout << std::endl << std::endl;
 
-		std::cout << std::endl << "  [STD FUNCTION CALLS]  " << std::endl;
+		std::cout << std::endl << "  [STD CODE]  " << std::endl;
         std:: cout << "std::vector<int>            stdVector(5, 42);" << std::endl;
         std:: cout << "std::vector<int>::iterator  stdFirst = stdVector.begin();" << std::endl;
         std:: cout << "std::vector<int>::iterator  stdLast = stdVector.end();" << std::endl;
