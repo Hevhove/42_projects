@@ -1,4 +1,13 @@
+# Mac
 .DS_Store
+
+# Executables
+so_long
+webserv
+pipex
+philo
+
+# Testers
 printfTester/
 gnlTester/
 libftTester/
@@ -45,6 +54,9 @@ libftTester/
 *.su
 *.idb
 *.pdb
+
+# Compile commands
+compile_commands.json
 
 # Kernel Module Compile Results
 *.mod*
