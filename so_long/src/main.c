@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-/* 
+/*
 // ERROR_CODES
 // 01: Input error
 // 02: Map error
@@ -19,7 +19,7 @@
 // 05: Assets error
 */
 
-#include "../inc/so_long.h"
+#include "../includes/so_long.h"
 
 void	error_message(const char *msg, int error_code, void *ptr1, void *ptr2)
 {

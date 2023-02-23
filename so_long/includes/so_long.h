@@ -14,7 +14,7 @@
 # define SO_LONG_H
 # define ASSET_SIZE 64
 # include <unistd.h>
-# include <mlx.h>
+# include "mlx.h"
 # include <math.h>
 # include <fcntl.h>
 # include "../libft/libft.h"

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/so_long.h"
+#include "../includes/so_long.h"
 
 void	check_top_bot(char *line)
 {
@@ -91,6 +91,7 @@ void	map_check(char *path, t_data *data)
 	data->map.p_count = 0;
 	data->map.c_count = 0;
 	data->map.e_count = 0;
+    data->map.c_coll = 0;
 	data->map.height = 1;
 	data->map.steps = 0;
 	data->map.fd = open(path, O_RDONLY);

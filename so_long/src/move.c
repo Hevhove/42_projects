@@ -10,14 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/so_long.h"
+#include "../includes/so_long.h"
 
 int	valid_move(t_data *data, char next_tile)
 {
 	if (next_tile == '1')
 		return (0);
 	if (next_tile == 'E' && data->map.c_coll != data->map.c_count)
+    {
+        ft_printf("invalid move\n");
 		return (0);
+    }
 	ft_printf("Current steps: %d\n", data->map.steps + 1);
 	return (1);
 }
