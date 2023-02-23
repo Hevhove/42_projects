@@ -1,12 +1,6 @@
 # Mac
 .DS_Store
 
-# Executables
-so_long
-webserv
-pipex
-philo
-
 # Testers
 printfTester/
 gnlTester/
