@@ -1,0 +1,35 @@
+version: '3.7'
+services:
+    nginx:
+        build: ./requirements/nginx
+        container_name: nginx
+        restart: always
+        depends_on:
+            - wordpress
+        ports:
+            -8443:443
+        environment:
+            SCHOOL_USERNAME: ${USERNAME}
+            NGINX_WORDPRESS_CONTAINER_NAME: ${NGINX_WORDPRESS_CONTAINER_NAME}
+            NGINX_WORDPRESS_PORT: ${NGINX_WORDPRESS_PORT}
+        networks:
+            - inception-network
+    wordpress:
+        build: ./requirements/wordpress
+        container_name: wordpress
+        restart: always
+        depends_on:
+            - mariadb
+        expose:
+            - 9000
+        environment:
+            MYSQL_DATABASE: ${MYSQL_DATABASE}
+            MYSQL_USER: ${MYSQL_USER}
+            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+            MYSQL_DB_HOST: ${MYSQL_DB_HOST}
+        networks:
+            -inception-network
+
+networks:
+    inception-network:
+        driver: bridge
