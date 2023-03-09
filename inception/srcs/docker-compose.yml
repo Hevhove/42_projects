@@ -7,9 +7,9 @@ services:
         depends_on:
             - wordpress
         ports:
-            -8443:443
+            - 8443:443
         environment:
-            SCHOOL_USERNAME: ${USERNAME}
+            SCHOOL_USERNAME: ${USER}
             NGINX_WORDPRESS_CONTAINER_NAME: ${NGINX_WORDPRESS_CONTAINER_NAME}
             NGINX_WORDPRESS_PORT: ${NGINX_WORDPRESS_PORT}
         networks:
@@ -18,8 +18,6 @@ services:
         build: ./requirements/wordpress
         container_name: wordpress
         restart: always
-        depends_on:
-            - mariadb
         expose:
             - 9000
         environment:
@@ -28,7 +26,19 @@ services:
             MYSQL_PASSWORD: ${MYSQL_PASSWORD}
             MYSQL_DB_HOST: ${MYSQL_DB_HOST}
         networks:
-            -inception-network
+            - inception-network
+    mariadb:
+        build: ./requirements/mariadb
+        container_name: mariadb
+        restart: always
+        expose:
+            - 3306
+        environment:
+            MYSQL_USER: ${MYSQL_USER}
+            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+            MYSQL_DATABASE: ${MYSQL_DATABASE}
+        networks:
+            - inception-network
 
 networks:
     inception-network:
