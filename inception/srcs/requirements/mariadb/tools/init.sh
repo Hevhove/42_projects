@@ -1,24 +1,27 @@
-# Add the port number
-sed -ie 's/#port/port/g' /etc/mysql/mariadb.conf.d/50-server.cnf
+#!/bin/bash
 
-# Launch MySQL
+# Start MariaDB server
 service mysql start
 
-# Create databases
-if [ -d /var/lib/mysql/$MYSQL_DATABASE ]; then 
-    echo "Database $MYSQL_DATABASE has already been created!"
+# Check if database already exists
+if [ -z "$(mysql -u root -p$MYSQL_PASSWORD -se "SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME='$MYSQL_DATABASE'")" ]; then
+  # Create the database
+  mysql -u root -p$MYSQL_PASSWORD -e "CREATE DATABASE $MYSQL_DATABASE"
+  echo "Database $MYSQL_DATABASE created."
 else
-    mysql -e "CREATE DATABASE ${MYSQL_DATABASE} /*\!40100 DEFAULT CHARACTER SET utf8 */;"
-    mysql -e "CREATE USER ${MYSQL_USER}@localhost IDENTIFIED BY '${MYSQL_PASSWORD}';"
-    mysql -e "GRANT ALL PRIVILEGES ON ${MYSQL_DATABASE}.* TO '${MYSQL_USER}'@'localhost';"
-    mysql -e "GRANT ALL PRIVILEGES ON *.* TO '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}' WITH GRANT OPTION;"    
-    mysql -e "FLUSH PRIVILEGES;"
-
-    mysql -u ${MYSQL_USER} -p${MYSQL_PASSWORD} wordpress_db < /tmp/wordpress.sql
-
-    mysql -uroot -p${MYSQL_PASSWORD} -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${MYSQL_PASSWORD}';"
-
+  echo "Database $MYSQL_DATABASE already exists."
 fi
 
-service mysql stop
-mysqld
+# Create user and grant privileges
+mysql -u root -p"$MYSQL_PASSWORD" -e "CREATE USER '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASSWORD'"
+mysql -u root -p"$MYSQL_PASSWORD" -e "GRANT ALL PRIVILEGES ON $MYSQL_DATABASE.* TO '$MYSQL_USER'@'%'"
+echo "User $MYSQL_USER created and granted all privileges on $MYSQL_DATABASE."
+
+# Apply changes
+mysql -u root -p"$MYSQL_PASSWORD" -e "FLUSH PRIVILEGES"
+
+# Set root password
+#mysql -u root -p"$MYSQL_PASSWORD" -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '$MYSQL_PASSWORD'"
+
+# Keep the container running
+tail -f /dev/null
