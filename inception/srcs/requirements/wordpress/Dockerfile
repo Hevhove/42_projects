@@ -18,6 +18,7 @@ RUN ln -sf /usr/share/zoneinfo/Europe/Lisbon /etc/localtime
 
 # Copy the init script
 COPY /tools/ /tmp/
+RUN chmod +x /tmp/*
 
 # Wordpress set-up
 RUN mkdir /var/www

@@ -31,7 +31,6 @@ else
 
     # Grant the user all privileges on the database tables
     mysql -e "GRANT ALL PRIVILEGES ON ${MYSQL_DATABASE}.* TO '${MYSQL_USER}'@'localhost';"
-    sleep 1
     mysql -e "GRANT ALL PRIVILEGES ON *.* TO '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_USER_PASSWORD}' WITH GRANT OPTION;"    
     sleep 1
     if [ $? -eq 0 ]; then
@@ -41,13 +40,12 @@ else
     fi
     # Flush privileges
     mysql -e "FLUSH PRIVILEGES;"
-    sleep 1
     if [ $? -eq 0 ]; then
         echo "Priviliges Flushed!"
     else
         echo "Failed to flush privileges!"
     fi
-
+    sleep 1
     # Change root password
     #mysql -u root -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}';"
 mysql --user=root <<EOF
@@ -64,6 +62,6 @@ fi
 
 mysqladmin -u root -p${MYSQL_ROOT_PASSWORD} shutdown;
 echo "shutdown completed"
-sleep 2
+sleep 1
 echo "launching daemon"
 mysqld;
