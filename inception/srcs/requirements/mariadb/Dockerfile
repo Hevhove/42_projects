@@ -14,13 +14,9 @@ RUN apt-get clean
 # Set the date
 RUN ln -sf /usr/share/zoneinfo/Europe/Lisbon /etc/localtime
 
-# TEMPORARY
-#ENV MYSQL_ROOT_PASSWORD=rootpw
-#ENV MYSQL_USER=hvan-hov
-#ENV MYSQL_USER_PASSWORD=userpw
-#ENV MYSQL_DATABASE=wordpress_db
-#ENV MYSQL_DB_HOST=mariadb
+# NEEDED FOR MYSQL ROOTPW
 ENV MYSQL_PWD=""
+
 # Copy the init script to location
 COPY /tools/ /tmp/
 RUN chmod +x /tmp/*

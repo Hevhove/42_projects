@@ -37,9 +37,4 @@ RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.ph
 	--output-document=/usr/local/bin/wp \
     && chmod +x /usr/local/bin/wp
 
-#ENV MYSQL_DATABASE=wordpress_db
-#ENV MYSQL_USER=hvan-hov
-#ENV MYSQL_PASSWORD=password123
-#ENV MYSQL_DB_HOST=mariadb
-
-ENTRYPOINT ["sh","-c", "/bin/bash /tmp/init.sh;"]
+ENTRYPOINT ["sh", "/tmp/init.sh"]

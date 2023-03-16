@@ -54,10 +54,6 @@ UPDATE mysql.user SET plugin='mysql_native_password' WHERE user='root' AND host=
 FLUSH PRIVILEGES;
 EOF
     sleep 1
-    #echo "executed"
-    #tail -f /dev/null
-    #echo "not executed"
-    #echo "root changed"
 fi
 
 mysqladmin -u root -p${MYSQL_ROOT_PASSWORD} shutdown;

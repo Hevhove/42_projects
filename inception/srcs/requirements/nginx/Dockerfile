@@ -10,6 +10,7 @@ RUN apt-get install vim -yq
 RUN apt-get install openssl -yq
 RUN apt-get install -y procps
 RUN apt-get install -y systemd
+RUN apt-get install -y netcat
 
 # Set the date
 RUN ln -sf /usr/share/zoneinfo/Europe/Lisbon /etc/localtime
@@ -30,4 +31,4 @@ RUN openssl req -newkey rsa:4096 \
 COPY /tools/ /tmp/
 COPY /conf/nginx.conf /etc/nginx/
 
-ENTRYPOINT ["sh","-c", "/bin/bash /tmp/init.sh;"]
+ENTRYPOINT ["sh", "/tmp/init.sh"]

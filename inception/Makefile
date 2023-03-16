@@ -3,7 +3,7 @@ all: up
 up: create_volumes
 	@if [ -f srcs/.env ]; then \
 		sudo echo "Up!"; \
-		docker network create inception-network || true; \
+		docker network create inception-network 2>/dev/null || true; \
 		cd srcs && docker-compose up --build -d; \
 		cd .. && sudo bash ./srcs/requirements/tools/hosts.sh add; \
 	else \
@@ -27,7 +27,7 @@ clean: delete_volumes
 	@echo "Cleaning files..."
 	@cd srcs && docker-compose down
 	@sudo bash ./srcs/requirements/tools/hosts.sh delete
-	@docker network prune --filter "dangling=true"
+	@docker network prune
 	@docker volume rm $$(docker volume ls -qf "dangling="true"") || true
 
 fclean: delete_volumes clean
