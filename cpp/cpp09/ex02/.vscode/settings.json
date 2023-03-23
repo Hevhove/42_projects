@@ -1,0 +1,8 @@
+{
+    "C_Cpp.default.includePath": [
+        "${workspaceFolder}/**",
+        "/usr/include/**",
+        "/usr/local/include/**",
+        "${workspaceFolder}/includes/**"
+   ]
+}

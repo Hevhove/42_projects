@@ -20,17 +20,14 @@ int main(int argc, char** argv) {
 
     // Create container classes
     std::vector<int> vector;
-    std::deque<int> list;
+    std::list<int> list;
 
     // Assign sequences into them
     for (int i = 0; i < argc; i++)
         vector.push_back(atoi(argv[i]));
     for (int i = 0; i < argc; i++)
         list.push_back(atoi(argv[i]));
-    PMergeMe<std::vector<int> > vectorClass;
-    vectorClass.setContainer(vector);
-    PMergeMe<std::deque<int> > listClass;
-    listClass.setContainer(list);
+    PMergeMe(vector, list);
 
     // Printing sequences
     std::cout << "Before: ";
