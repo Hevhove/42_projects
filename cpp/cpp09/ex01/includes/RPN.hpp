@@ -4,6 +4,7 @@
 # include <iostream>
 # include <stack>
 # include <sstream>
+# include <cstdlib>
 
 class RPN {
     private:
