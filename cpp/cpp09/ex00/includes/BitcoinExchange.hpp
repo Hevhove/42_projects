@@ -7,8 +7,8 @@
 #include <sstream>
 #include <exception>
 #include <stdexcept>
-#include <regex>
 #include <string>
+#include <cstdlib>
 
 class BitcoinExchange {
     private:
