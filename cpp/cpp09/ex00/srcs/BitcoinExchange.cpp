@@ -154,7 +154,7 @@ void    BitcoinExchange::viewTransactions(const char* inputFileName) {
 
         std::map<std::string, double>::iterator it = _price_chart.lower_bound(date_str);
         if (it != _price_chart.begin())
-            it = std::prev(it);
+            --it;
         double transactionValue = amount * it->second;
         std::cout << date_str << "=>" << amount_str << " = " << transactionValue << std::endl;
     }
