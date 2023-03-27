@@ -30,6 +30,11 @@ RPN::RPN(std::string eqStr) {
     {
         if (token == "+" || token == "-" || token == "*" || token == "/")
         {
+            if (RPNStack.size() < 1)
+            {
+                std::cout << "Error" << std::endl;
+                exit(-1);
+            }
             // operator
             double op2 = RPNStack.top();
             RPNStack.pop();
