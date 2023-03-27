@@ -19,41 +19,64 @@ BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& rhs) {
 }
 
 // Helper functions
-static bool isValidDateString(const std::string &dateString) {
-    std::regex regex("^\\d{4}-\\d{2}-\\d{2}$");
 
-    // Check if the input string matches the "YYYY-MM-DD" format
-    if (!std::regex_match(dateString, regex)) {
-      return false;
-    }
+bool isValidDateString(const std::string& dateString) {
+  if (dateString.length() != 10) {
+    // Invalid string length
+    return false;
+  }
 
-    int year = std::stoi(dateString.substr(0, 4));
-    int month = std::stoi(dateString.substr(5, 2));
-    int day = std::stoi(dateString.substr(8, 2));
-
-    // Invalid month value
-    if (month < 1 || month > 12) {
-      return false;
-    }
-
-    // Check for leap year
-    int daysInMonth = 31;
-    if (month == 2) {
-      if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0) {
-        daysInMonth = 29;
-      } else {
-        daysInMonth = 28;
+  // Extract year, month, and day from the input string
+  int year = 0, month = 0, day = 0;
+  for (int i = 0; i < 10; i++) {
+    char c = dateString[i];
+    if (i == 4 || i == 7) {
+      // Separator character should be a hyphen
+      if (c != '-') {
+        return false;
       }
-    } else if (month == 4 || month == 6 || month == 9 || month == 11) {
-      daysInMonth = 30;
-    }
-
-    // Invalid day value
-    if (day < 1 || day > daysInMonth) {
+    } else if (c >= '0' && c <= '9') {
+      // Accumulate digits
+      int digit = c - '0';
+      if (i < 4) {
+        year = year * 10 + digit;
+      } else if (i < 7) {
+        month = month * 10 + digit;
+      } else {
+        day = day * 10 + digit;
+      }
+    } else {
+      // Invalid character
       return false;
     }
+  }
 
-    return true;
+  // Invalid year range
+  if (year < 1900 || year > 9999) {
+    return false;
+  }
+
+  // Invalid month range
+  if (month < 1 || month > 12) {
+    return false;
+  }
+
+  // Check for leap year
+  int daysInMonth = 31;
+  if (month == 2) {
+    bool isLeapYear = (year % 4 == 0 && year % 100 != 0) || year % 400 == 0;
+    daysInMonth = isLeapYear ? 29 : 28;
+  } else if (month == 4 || month == 6 || month == 9 || month == 11) {
+    daysInMonth = 30;
+  }
+
+  // Invalid day range
+  if (day < 1 || day > daysInMonth) {
+    return false;
+  }
+
+  // Valid date string
+  return true;
 }
 
 static std::string trimTrailingSpace(const std::string& str) {
@@ -85,7 +108,7 @@ void    BitcoinExchange::parsePriceChart(const char* inputFileName) {
 
         // Amount String
         std::getline(ss, price_str);
-        double price = std::stod(price_str);
+        double price = std::atof(price_str.c_str());
         _price_chart[date_str] = price;
 
         count++;
@@ -117,7 +140,7 @@ void    BitcoinExchange::viewTransactions(const char* inputFileName) {
 
         // Amount String
         std::getline(ss, amount_str);
-        double amount = std::stod(amount_str);
+        double amount = std::atof(amount_str.c_str());
         if (amount < 0)
         {
             std::cout << "Error: not a positive number." << std::endl;
