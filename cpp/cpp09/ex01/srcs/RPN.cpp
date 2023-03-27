@@ -30,7 +30,7 @@ RPN::RPN(std::string eqStr) {
     {
         if (token == "+" || token == "-" || token == "*" || token == "/")
         {
-            if (RPNStack.size() < 1)
+            if (RPNStack.size() <= 1)
             {
                 std::cout << "Error" << std::endl;
                 exit(-1);
