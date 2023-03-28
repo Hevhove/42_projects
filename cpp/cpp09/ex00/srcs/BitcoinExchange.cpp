@@ -140,8 +140,13 @@ void    BitcoinExchange::viewTransactions(const char* inputFileName) {
 
         // Amount String
         std::getline(ss, amount_str);
+        if (amount_str.empty())
+        {
+            std::cout << "Error: empty amount." << std::endl;
+            continue ;
+        }
         double amount = std::atof(amount_str.c_str());
-        if (amount < 0)
+        if (amount < 0 || (amount == 0 && amount_str != "0"))
         {
             std::cout << "Error: not a positive number." << std::endl;
             continue ;
