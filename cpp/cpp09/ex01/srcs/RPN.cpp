@@ -62,7 +62,13 @@ RPN::RPN(std::string eqStr) {
             exit (-1);
         }
     }
-    _result = (RPNStack.top());
+    if (RPNStack.size() == 1)
+        _result = (RPNStack.top());
+    else
+    {
+        std::cout << "Error: Non-empty stack" << std::endl;
+        exit(-1);
+    }
 }
 
 RPN::~RPN() {
