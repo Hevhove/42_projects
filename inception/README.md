@@ -1,9 +1,16 @@
-# Inception Project Guide
-Hello fellow 42 student! Welcome to my inception guide! Before diving into specifics, below I touch on some basics of Docker/MariaDB/NginX/Wordpress. For this, I used the following sources:
-- [Docker Tutorial](https://www.youtube.com/watch?v=fqMOX6JJhGo&ab_channel=freeCodeCamp.org)
-- [MariaDB Beginner Articles](https://mariadb.com/kb/en/beginner-mariadb-articles/)
-- [NginX]()
-- [WordPress]()
+# Inception
+
+![Score](extras/score.png)
+
+This project is a little bit out of the ordinary and focuses on spinning up several docker containers rather than writing a project ourselves. We set up a small infrastructure composed of different services under specific rules. The whole project has to be done in a virtual machine and we spin up the containers using docker-compose.
+
+## Project Setup Requirements
+- A Docker container that contains NGINX with TLSv1.2 or TLSv1.3 only.
+- A Docker container that contains WordPress + php-fpm (it must be installed and configured) only without nginx.
+- A Docker container that contains MariaDB only without nginx.
+- A volume that contains your WordPress database.
+- A second volume that contains your WordPress website files.
+- A docker-network that establishes the connection between your containers.
 
 ## Docker
 ### What is Docker?
@@ -132,18 +139,19 @@ Note that there are 3 different versions of the `.yml` files. To indicate the ve
 
 Version 3 introduces support for Docker Swarm, which I won't go into here.
 ## MariaDB
+MariaDB is a database forked from MySQL that supports a high number of connections and is known for its speed and performance. In this project, we're setting up a very minimal MariaDB container. We make the storage of this container persistent. This makes sure once we shut down the database, all of the information is saved on the host machine. Once we restart the container, it can access the database information from a folder we specify.
+
+The main part of the database is making sure that privileges are set up correctly. We set up both a user_name and a root user.
 
 Resource: https://mariadb.com/kb/en/beginner-mariadb-articles/
 
 ## NGINX
+Nginx is a web server that can also be used as a reverse proxy, load balancer, mail proxy and HTTP cache. In our case we use it as a web server, which clients can connect into. Once we spin up the Nginx container, we can use docker network inspect container_name to view it's local IP address (usually starting with 172.x.x.x) for docker containers and we can navigate to it from the host machine. Containers are available to the host machine and to each other over the bridge network of docker.
+
+In Nginx, we can set up TLS/SSL (Transport Layer Security/Secure Sockets Layer). In a nutshell, this makes sure the traffic to and from the webserver is encrypted (HTTPS instead of HTTP).
 
 ## WordPress
-
-## Project Guide
-Let's go ahead now and dive into what needs to be done to get this project completed!
-
-### Virtual Machine Set-up
-
+Wordpress is a content-management software which we'll use here in conjunction with Nginx and MariaDB. It will take care of us of any front-end for the blogpost we're about to make, and if we give it access to MariaDB, we can manage the blog entirely via the wordpress administrator GUI.
 
 ### Set-up
 Resource: https://www.digitalocean.com/community/tutorials/how-to-install-wordpress-with-lemp-nginx-mariadb-and-php-on-debian-10
