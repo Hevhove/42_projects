@@ -1,6 +1,7 @@
 # Inception
 
 ![Score](extras/score.png)
+![Demo](extras/Inception.gif)
 
 This project is a little bit out of the ordinary and focuses on spinning up several docker containers rather than writing a project ourselves. We set up a small infrastructure composed of different services under specific rules. The whole project has to be done in a virtual machine and we spin up the containers using docker-compose.
 
@@ -11,6 +12,8 @@ This project is a little bit out of the ordinary and focuses on spinning up seve
 - A volume that contains your WordPress database.
 - A second volume that contains your WordPress website files.
 - A docker-network that establishes the connection between your containers.
+
+![Project-Layout](extras/layout.png)
 
 ## Docker
 ### What is Docker?
